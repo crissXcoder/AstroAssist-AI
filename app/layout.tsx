@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -15,9 +15,53 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#0b0f19",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
-  title: "AstroAssist AI - Equipo de Astronomía",
-  description: "Asistente inteligente para la tienda líder en telescopios, astrofotografía y equipos de observación.",
+  title: {
+    default: "AstroAssist AI | Equipamiento Astronómico Premium",
+    template: "%s | AstroAssist AI"
+  },
+  description: "Explora el universo con nuestro hardware óptico de élite. Descubre telescopios, monturas ecuatoriales y astrofotografía impulsados por el primer Asistente de IA astronómico.",
+  keywords: ["astronomía", "telescopios", "astrofotografía", "comprar telescopio", "AstroAssist", "ZWO", "Celestron", "cielo profundo"],
+  authors: [{ name: "AstroAssist Team" }],
+  creator: "AstroAssist Technologies",
+  openGraph: {
+    type: "website",
+    locale: "es_ES",
+    url: "https://astroassist.vercel.app",
+    title: "AstroAssist AI | Tu Ventana al Cosmos",
+    description: "Equipamiento óptico de alta gama respaldado por una Inteligencia Artificial especializada en astronomía.",
+    siteName: "AstroAssist AI",
+    images: [{
+      url: "https://images.unsplash.com/photo-1543722530-d2c3201371e7?q=80&w=1600&auto=format&fit=crop",
+      width: 1200,
+      height: 630,
+      alt: "AstroAssist AI - Equipamiento Astronómico"
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AstroAssist AI | Equipamiento Astronómico",
+    description: "Hardware óptico validado por inteligencia artificial.",
+    creator: "@AstroAssistApp",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
