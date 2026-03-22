@@ -3,6 +3,7 @@
 import * as React from "react";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { EASING, ANIMATION } from "@/lib/motion";
 
 interface SectionProps extends HTMLMotionProps<"section"> {
   children: React.ReactNode;
@@ -19,16 +20,17 @@ export function SectionContainer({
 }: SectionProps) {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
       transition={{ 
-        duration: 0.6, 
-        ease: [0.22, 1, 0.36, 1],
+        duration: ANIMATION.duration.slow, 
+        ease: EASING.spring,
         delay 
       }}
       className={cn(
         "relative w-full overflow-hidden",
-        glass && "glass-panel rounded-x3 p-6 md:p-10",
+        glass && "glass-panel rounded-[2rem] p-6 md:p-10 border border-white/5 shadow-2xl",
         className
       )}
       {...props}

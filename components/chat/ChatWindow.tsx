@@ -1,70 +1,79 @@
 "use client";
 
-import { useChat } from "@/hooks/useChat";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { useRef, useEffect } from "react";
+import { Bot, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { ChatMessage } from "./ChatMessage";
 import { MessageInput } from "./MessageInput";
-import { Bot, Sparkles } from "lucide-react";
+import { useChat } from "@/hooks/useChat";
 
 export function ChatWindow() {
-  const { messages, isLoading, sendMessage, clearHistory } = useChat();
+  const { messages, input, setInput, sendMessage, isLoading, clearHistory } = useChat();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll logic
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages, isLoading]);
 
   return (
-    <div className="flex flex-col h-full w-full">
+    <div className="flex flex-col h-full w-full bg-background/50 backdrop-blur-md">
       {/* Header */}
-      <div className="h-16 flex items-center justify-between px-6 border-b border-border/50 bg-card/80 rounded-t-2xl z-20">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-card/40 backdrop-blur-md shrink-0">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-primary/20 rounded-full relative">
+          <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 relative">
             <Bot className="w-5 h-5 text-primary" />
-            <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-background rounded-full"></span>
+            <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-background" />
           </div>
           <div>
-            <h2 className="font-semibold text-foreground text-sm">Astro Asistente</h2>
-            <p className="text-xs text-muted-foreground">Especialista en Equipos</p>
+            <h3 className="font-semibold text-foreground tracking-tight">AstroAssist AI</h3>
+            <p className="text-xs text-green-400 font-medium tracking-wide">En línea</p>
           </div>
         </div>
-        <button 
+        
+        <Button 
+          variant="ghost" 
+          size="icon" 
           onClick={clearHistory}
-          className="text-xs text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-secondary/50"
+          title="Borrar historial"
+          className="text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
         >
-          Limpiar chat
-        </button>
+          <Trash2 className="w-4 h-4" />
+        </Button>
       </div>
 
-      {/* Messages */}
-      <ScrollArea className="flex-1 p-4 z-10">
-        <div className="flex flex-col gap-5">
-          {messages.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center opacity-60 py-16 px-4">
-              <div className="w-16 h-16 rounded-full bg-secondary/50 flex items-center justify-center mb-4">
-                <Sparkles className="w-8 h-8 text-primary" />
-              </div>
-              <p className="text-sm font-medium text-foreground">¡Hola Explorador!</p>
-              <p className="text-xs mt-2 max-w-[250px]">
-                Soy tu asistente astronómico. ¿Buscas tu primer telescopio o necesitas ayuda con accesorios de astrofotografía?
-              </p>
-            </div>
-          ) : (
-            messages.map((msg, idx) => (
-              <ChatMessage key={msg.id || idx} message={msg} />
-            ))
-          )}
+      {/* Messages Area - Native overflow scroll for reliable scrollTop manipulation */}
+      <div className="flex-1 p-6 overflow-y-auto" ref={scrollRef}>
+        <div className="flex flex-col gap-6 pb-4 min-h-full justify-end">
+          {messages.map((message) => (
+            <ChatMessage key={message.id} message={message} />
+          ))}
+          
           {isLoading && (
-            <div className="flex w-full gap-3 justify-start items-center p-2 opacity-70">
-              <div className="w-8 h-8 rounded-full border border-primary/20 bg-primary/5 flex items-center justify-center">
+            <div className="flex w-full justify-start gap-3 animate-in fade-in duration-300">
+              <div className="w-8 h-8 rounded-full border border-primary/20 bg-primary/10 mt-1 flex items-center justify-center shrink-0">
                 <Bot className="w-4 h-4 text-primary" />
               </div>
-              <div className="text-xs text-muted-foreground flex gap-1 items-center">
-                Escribiendo<span className="animate-bounce">.</span><span className="animate-bounce delay-75">.</span><span className="animate-bounce delay-150">.</span>
+              <div className="bg-secondary/70 px-4 py-4 rounded-2xl rounded-tl-sm border border-border/30 flex items-center gap-1.5 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "0ms" }} />
+                <span className="w-2 h-2 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "150ms" }} />
+                <span className="w-2 h-2 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "300ms" }} />
               </div>
             </div>
           )}
         </div>
-      </ScrollArea>
+      </div>
 
-      {/* Input */}
-      <div className="p-4 border-t border-border/50 bg-card/80 rounded-b-2xl z-20">
-        <MessageInput onSendMessage={sendMessage} isLoading={isLoading} />
+      {/* Input Area */}
+      <div className="p-4 bg-card/40 border-t border-white/5 backdrop-blur-md shrink-0">
+        <MessageInput 
+          input={input}
+          setInput={setInput}
+          onSubmit={sendMessage}
+          isLoading={isLoading}
+        />
       </div>
     </div>
   );

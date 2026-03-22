@@ -1,67 +1,121 @@
-"use client";
+import { useState, useEffect } from 'react';
 
-import { useState, useEffect } from "react";
-import type { Message } from "@/components/chat/ChatMessage";
+export type Message = {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  createdAt: Date;
+};
 
 export function useChat() {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // Load from LocalStorage on mount
+  // Load from LocalStorage
   useEffect(() => {
-    const saved = localStorage.getItem("astroassist_chat");
+    const saved = localStorage.getItem('astroassist_chat');
     if (saved) {
       try {
-        setMessages(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        setMessages(parsed.map((m: any) => ({ ...m, createdAt: new Date(m.createdAt) })));
       } catch (e) {
-        console.error("Error parsing chat history:", e);
+        console.error("Failed to parse chat history");
       }
+    } else {
+      setMessages([
+        {
+          id: '1',
+          role: 'assistant',
+          content: '¡Hola! Soy AstroAssist. ¿En qué puedo ayudarte a explorar el universo hoy?',
+          createdAt: new Date(),
+        }
+      ]);
     }
-    setIsInitialized(true);
   }, []);
 
-  // Save to LocalStorage whenever messages change
+  // Save to LocalStorage
   useEffect(() => {
-    if (isInitialized) {
-      localStorage.setItem("astroassist_chat", JSON.stringify(messages));
+    if (messages.length > 0) {
+      localStorage.setItem('astroassist_chat', JSON.stringify(messages));
     }
-  }, [messages, isInitialized]);
+  }, [messages]);
 
-  const clearHistory = () => {
-    setMessages([]);
-    localStorage.removeItem("astroassist_chat");
-  };
+  const sendMessage = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!input.trim() || isLoading) return;
 
-  const sendMessage = async (content: string) => {
     const userMessage: Message = {
       id: Date.now().toString(),
-      role: "user",
-      content,
-      timestamp: new Date().toISOString()
+      role: 'user',
+      content: input,
+      createdAt: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    setMessages(prev => [...prev, userMessage]);
+    setInput('');
     setIsLoading(true);
+    setError(null);
 
     try {
-      // TODO: Replace with real fetch to /api/chat in the future
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content })) 
+        }),
+      });
+
+      // Si el servidor falla, tratamos de extraer el error preciso
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.details || errorData.error || 'Error desconocido del servidor (500)');
+      }
+
+      const data = await response.json();
       
-      const botMessage: Message = {
+      const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: "¡Señal recibida! 🚀 Esta es una respuesta temporal simulada mientras habilitamos la integración real con OpenAI en nuestra ruta API.",
-        timestamp: new Date().toISOString()
+        role: 'assistant',
+        content: data.content,
+        createdAt: new Date(),
       };
+
+      setMessages(prev => [...prev, assistantMessage]);
+    } catch (err: any) {
+      const errorMessage = err.message || 'Error de conexión';
+      setError(errorMessage);
+      console.error("🔴 AI Chat Error:", err);
       
-      setMessages((prev) => [...prev, botMessage]);
-    } catch (error) {
-      console.error(error);
+      setMessages(prev => [...prev, {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: `Lo siento, ocurrió un error crítico:\n\`${errorMessage}\`\n\nPor favor revisa la consola o reinicia el servidor.`,
+        createdAt: new Date()
+      }]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { messages, isLoading, sendMessage, clearHistory };
+  const clearHistory = () => {
+    localStorage.removeItem('astroassist_chat');
+    setMessages([{
+      id: Date.now().toString(),
+      role: 'assistant',
+      content: 'Memoria restablecida. Sistema listo para una nueva conversación estelar. 🚀',
+      createdAt: new Date(),
+    }]);
+  };
+
+  return {
+    messages,
+    input,
+    setInput,
+    isLoading,
+    error,
+    sendMessage,
+    clearHistory
+  };
 }

@@ -164,3 +164,29 @@
     box-shadow: 0 0 20px hsl(var(--primary) / 0.6);
   }
 }
+
+/* Custom Operating System Overrides */
+::-webkit-scrollbar { 
+  width: 8px; 
+}
+::-webkit-scrollbar-track { 
+  background: var(--background); 
+}
+::-webkit-scrollbar-thumb { 
+  background: hsl(217 33% 30%); 
+  border-radius: 8px; 
+}
+::-webkit-scrollbar-thumb:hover { 
+  background: hsl(var(--primary) / 0.8); 
+}
+
+::selection {
+  background: hsl(var(--primary) / 0.3);
+  color: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
