@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { GoogleGenAI } from '@google/genai';
 
 const localFAQs = [
   { keywords: ['envio', 'envío', 'tiempo', 'tarda', 'llegar'], response: 'Nuestros envíos terrestres y aéreos tardan entre 3 y 5 días hábiles a nivel mundial. Utilizamos logística asegurada especial para no comprometer la calibración óptica.' },
@@ -10,14 +10,13 @@ const localFAQs = [
 
 export async function POST(req: Request) {
   try {
-    if (!process.env.OPENAI_API_KEY) {
-      console.error("\n❌ [AstroAssist] ERROR: OPENAI_API_KEY no está definida.\n");
-      return NextResponse.json({ error: 'El servidor necesita ser reiniciado para absorber la API Key.' }, { status: 500 });
+    if (!process.env.GEMINI_API_KEY) {
+      console.error("\n❌ [AstroAssist] ERROR: GEMINI_API_KEY no está definida en .env.local\n");
+      throw new Error("Missing API Key");
     }
 
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
+    // Initialize the official Google Gen AI SDK
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
     const body = await req.json();
     const { messages } = body;
@@ -28,54 +27,61 @@ export async function POST(req: Request) {
 
     const lastUserMessage = messages[messages.length - 1].content.toLowerCase();
 
-    // 1. Capa Local de Intercepción (Ahorro del 100% de Tokens en conversaciones comunes)
+    // 1. Capa Local de Intercepción (Ahorro de API + Respuestas instantáneas)
     for (const faq of localFAQs) {
       const isMatch = faq.keywords.some(keyword => {
-        // Validación exacta de la palabra dentro del string buscando separar signos o espacios
         const regex = new RegExp(`\\b${keyword}\\b`, 'i');
         return regex.test(lastUserMessage) || lastUserMessage.includes(keyword);
       });
 
       if (isMatch) {
-        // Simulamos un tiempo natural de "escritura" para que pase nativamente como el LLM
         await new Promise(resolve => setTimeout(resolve, 800)); 
         return NextResponse.json({ role: 'assistant', content: faq.response });
       }
     }
 
-    // 2. Capa LLM Estricta y Ultra-Económica
-    // gpt-4o-mini es por amplia diferencia el modelo moderno más rápido y barato de OpenAI (mucho más rentable que gpt-3.5)
-    const systemPrompt = `
+    // 2. Mapear historial de UI (role: 'user' | 'assistant') a roles estrictos de Gemini (role: 'user' | 'model')
+    const contents = messages.map((m: any) => ({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.content }]
+    }));
+
+    // 3. Reglas Estrictas de Comportamiento (System Instructions)
+    const systemInstruction = `
 Eres AstroAssist, el asistente virtual oficial de una tienda premium de astronomía y astrofotografía. 
 
 TUS REGLAS ESTRICTAS DE COMPORTAMIENTO (PRIORIDAD MÁXIMA):
-1. Eres extremadamente CONCISO. Tus respuestas rara vez deben superar 1 o 2 párrafos cortos (esto ahorra tokens y recursos).
+1. Eres extremadamente CONCISO pero SIEMPRE terminas tus oraciones y pensamientos. Tus respuestas rara vez deben superar 1 o 2 párrafos cortos.
 2. NUNCA respondas preguntas de programación, política, historia ajena al cosmos, recetas de cocina, matemáticas, o cualquier tema que no sea ESTRICTAMENTE Astronomía, Astrofotografía o nuestros productos.
 3. Si un usuario te pregunta algo fuera de tu ámbito astronómico, DEBES declinar cortésmente usando exactamente esta frase: "Como agente de AstroAssist, mi base de conocimiento es exclusiva para equipamiento óptico y exploración del cosmos. ¿Hay algún telescopio o detalle del cielo que te interese?".
 4. No inventes precios exactos de modelos no registrados, sugiere visitar nuestro catálogo.
 5. Mantén un tono elegante y premium corporativo, empleando formato markdown si es requerido.
 `;
 
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini', 
-      messages: [{ role: 'system', content: systemPrompt }, ...messages],
-      temperature: 0.2, // Muy baja temperatura = El modelo es muy conservador, robótico, y no alucinará ni improvisará respuestas fuera de tema.
-      max_tokens: 150, // Límite estricto de generación. Cortará respuestas largas asegurando que un prompt malicioso nunca drene la cuota de la tarjeta de crédito generando un pergamino.
-      presence_penalty: 0.0,
-      frequency_penalty: 0.0,
+    // 4. Generar contenido vía Gemini 2.5 Flash
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: contents,
+      config: {
+        systemInstruction: systemInstruction,
+        temperature: 0.2, // Muy conservador
+        maxOutputTokens: 600, // Límite holgado para no cortar oraciones a mitad, pero seguro financieramente
+      }
     });
 
-    if (!response.choices || response.choices.length === 0) {
-      throw new Error("Respuesta corrupta desde la central de OpenAI");
+    if (!response.text) {
+      throw new Error("Respuesta corrupta desde la central de Gemini");
     }
 
-    return NextResponse.json(response.choices[0].message);
+    return NextResponse.json({ role: 'assistant', content: response.text });
   } catch (error: any) {
-    console.error("\n❌ [AstroAssist OpenAI Error]:", error.message || error);
+    // 5. Fallback Silencioso: Si algo falla (Límites, Conexión, API Key inválida), no explotamos la UI. 
+    // Devolvemos un mensaje de contingencia impecable con estado 200 OK.
+    console.error("\n🌌 [AstroAssist] Fallback Triggered. Original Error:", error.message || error);
     
     return NextResponse.json({ 
-      error: 'Error interno de IA',
-      details: error.message || String(error)
-    }, { status: 500 });
+      role: 'assistant', 
+      content: 'Mis sistemas de red profunda están estabilizándose, pero la tienda sigue operativa 🚀. Si buscas iniciarte, te recomiendo nuestro famoso refractor *Celestron NexStar 130SLT*.  ¿Deseas consultar nuestras políticas de *envío* o *garantía* mientras tanto?'
+    }); // El status implícito aquí es 200, por lo que el cliente renderizará la burbuja normalmente
   }
 }
