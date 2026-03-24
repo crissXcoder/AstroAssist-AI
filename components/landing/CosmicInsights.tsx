@@ -53,8 +53,8 @@ export function CosmicInsights() {
         
         {/* Minimalist Header */}
         <div className="flex flex-col items-center sm:items-start text-center sm:text-left mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.02] border border-white/5 w-fit mb-6 backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5 text-neutral-500" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/30 dark:bg-white/2 border border-border/50 dark:border-white/5 w-fit mb-6 backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5 text-primary" />
             <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-neutral-400">Bitácora Estelar</span>
           </div>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between w-full gap-8">
@@ -62,7 +62,7 @@ export function CosmicInsights() {
               Maravillas del <br className="hidden md:block"/>
               <span className="text-neutral-600">Universo Profundo.</span>
             </h2>
-            <p className="text-base text-neutral-500 font-light leading-relaxed max-w-sm lg:text-right tracking-wide">
+            <p className="max-w-[700px] text-neutral-600 dark:text-neutral-400 md:text-xl font-light leading-relaxed mb-12">
               Anomalías registradas y catalogadas por nuestra red de telemetría IA.
             </p>
           </div>
@@ -85,7 +85,7 @@ export function CosmicInsights() {
                 transition={{ 
                   flex: { type: "spring", stiffness: 180, damping: 25, mass: 0.8 },
                 }}
-                className={`relative rounded-[2rem] overflow-hidden cursor-pointer group bg-[#0A0D14] border ${isActive ? 'border-white/[0.08] shadow-[0_30px_60px_rgba(0,0,0,0.6)] z-10' : 'border-white/[0.02] z-0'} transition-all duration-700 will-change-transform`}
+                className={`relative rounded-4xl overflow-hidden cursor-pointer group bg-background border ${isActive ? 'border-primary/50 dark:border-white/8 shadow-[0_30px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_60px_rgba(0,0,0,0.6)] z-10' : 'border-border/50 dark:border-white/2 z-0'} transition-all duration-700 will-change-transform`}
               >
                 {/* Background Image Parallax layer */}
                 <motion.div 
@@ -110,7 +110,7 @@ export function CosmicInsights() {
                 <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8 lg:p-10 z-10 pointer-events-none">
                   
                   {/* Minimal Absolute Floating Icon */}
-                  <div className={`absolute top-6 right-6 lg:top-8 lg:right-8 w-10 h-10 rounded-full border bg-black/20 backdrop-blur-xl flex items-center justify-center transition-all duration-700 overflow-hidden shrink-0 ${isActive ? 'border-white/10 opacity-100 scale-100' : 'border-white/0 opacity-0 scale-75'}`}>
+                  <div className={`absolute top-6 right-6 lg:top-8 lg:right-8 w-10 h-10 rounded-full border bg-white/80 dark:bg-black/20 backdrop-blur-xl flex items-center justify-center transition-all duration-700 overflow-hidden shrink-0 ${isActive ? 'border-border/50 dark:border-white/10 opacity-100 scale-100' : 'border-transparent opacity-0 scale-75'}`}>
                     {item.icon}
                   </div>
 
@@ -136,6 +136,7 @@ export function CosmicInsights() {
                         className="flex flex-col gap-1 max-w-[400px]"
                       >
                         <h4 className="text-[10px] uppercase tracking-[0.25em] text-neutral-400 font-medium mb-2">{item.subtitle}</h4>
+                        <p className="text-secondary-foreground dark:text-white text-3xl font-black tracking-widest whitespace-nowrap">{`0${item.id}`}</p>
                         <h3 className="text-3xl md:text-5xl font-medium tracking-[-0.02em] text-white mb-4">
                           {item.title}
                         </h3>
@@ -143,7 +144,7 @@ export function CosmicInsights() {
                           {item.description}
                         </p>
                         
-                        <div className="mt-6 flex items-center gap-2 text-[11px] font-medium tracking-widest uppercase text-white group/btn w-fit pointer-events-auto cursor-pointer border-b border-transparent hover:border-white/30 pb-1 transition-all duration-300">
+                        <div className="mt-6 flex items-center gap-2 text-[11px] font-medium tracking-widest uppercase text-foreground dark:text-white group/btn w-fit pointer-events-auto cursor-pointer border-b border-transparent hover:border-black/30 dark:hover:border-white/30 pb-1 transition-all duration-300">
                           Explorar <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
                         </div>
                       </motion.div>

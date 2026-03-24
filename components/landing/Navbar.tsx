@@ -5,6 +5,7 @@ import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { Telescope, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Navbar() {
   const { scrollY } = useScroll();
@@ -25,7 +26,7 @@ export function Navbar() {
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
           isScrolled 
-            ? "bg-background/60 backdrop-blur-2xl border-b border-white/5 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)]" 
+            ? "bg-background/80 dark:bg-background/60 backdrop-blur-2xl border-b border-border/50 dark:border-white/5 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.5)]" 
             : "bg-transparent py-6"
         }`}
       >
@@ -38,33 +39,26 @@ export function Navbar() {
           </Link>
           
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/catalogo" className="text-sm font-medium text-muted-foreground hover:text-white transition-colors tracking-wide relative group">
-              Catálogo
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full" />
-            </Link>
-            {['Galería', 'Comunidad', 'IA Asistente'].map((item) => (
-              <Link key={item} href="#" className="text-sm font-medium text-muted-foreground hover:text-white transition-colors tracking-wide relative group">
-                {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full" />
-              </Link>
-            ))}
+            <Link href="/" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">Inicio</Link>
+            <Link href="#features" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">Tecnología</Link>
+            <Link href="/catalogo" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">Sistema Óptico</Link>
+            <Link href="#community" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">Comunidad</Link>
           </nav>
           
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" className="text-muted-foreground hover:text-white">Acceder</Button>
-            <Button variant={isScrolled ? "default" : "glass"} className="rounded-full px-6 shadow-[0_0_20px_rgba(var(--primary),0.2)]">
-              Probar AstroAssist
-            </Button>
+            <ThemeToggle />
           </div>
 
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="md:hidden" 
-            onClick={() => setMobileMenuOpen(true)}
-          >
-             <Menu className="w-6 h-6" />
-          </Button>
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setMobileMenuOpen(true)}
+            >
+               <Menu className="w-6 h-6" />
+            </Button>
+          </div>
         </div>
       </motion.header>
 
@@ -75,7 +69,7 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[60] bg-background/95 backdrop-blur-3xl flex flex-col p-6 border-l border-white/10"
+            className="fixed inset-0 z-60 bg-background/95 backdrop-blur-3xl flex flex-col p-6 border-l border-border/50 dark:border-white/10"
           >
             <div className="flex justify-between items-center mb-12">
                <span className="text-xl font-bold tracking-tight text-glow">AstroAssist AI</span>
@@ -92,7 +86,7 @@ export function Navbar() {
                    animate={{ opacity: 1, x: 0 }}
                    transition={{ delay: i * 0.1 }}
                  >
-                   <Link href="#" className="hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>{item}</Link>
+                   <Link href="#" className="p-2 -mr-2 text-foreground dark:text-white hover:bg-black/5 dark:hover:bg-white/5 rounded-lg transition-colors" onClick={() => setMobileMenuOpen(false)}>{item}</Link>
                  </motion.div>
               ))}
             </nav>

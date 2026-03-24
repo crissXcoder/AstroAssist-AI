@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, ShieldCheck } from "lucide-react";
+import { ArrowRight, Sparkles, Telescope, ShieldCheck, Zap, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -17,7 +17,7 @@ export function CtaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative rounded-[2rem] overflow-hidden border border-white/5 bg-white/[0.02] backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
+          className="relative rounded-[2rem] overflow-hidden border border-border/50 dark:border-white/5 bg-secondary/30 dark:bg-white/2 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
         >
           {/* Internal gradient sweep */}
           <div className="absolute inset-0 bg-linear-to-br from-indigo-500/5 via-transparent to-purple-500/5 opacity-50 pointer-events-none" />
@@ -25,8 +25,8 @@ export function CtaSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 relative z-10">
             {/* Left Content (Text & Typography) */}
             <div className="p-10 md:p-16 lg:p-20 flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.05] w-fit mb-8 shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-neutral-400" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 dark:bg-white/3 border border-border/50 dark:border-white/5 w-fit mb-8 shadow-sm">
+                <Sparkles className="w-3.5 h-3.5 text-primary" />
                 <span className="text-[10px] sm:text-[11px] font-medium tracking-[0.2em] uppercase text-neutral-300">Exploración Ilimitada</span>
               </div>
               
@@ -35,7 +35,7 @@ export function CtaSection() {
                 <span className="text-neutral-500">observación.</span>
               </h2>
               
-              <p className="text-base md:text-lg text-neutral-400 font-light leading-relaxed max-w-md mb-10">
+              <p className="text-lg text-neutral-600 dark:text-neutral-400 font-light leading-relaxed max-w-xl mb-10">
                 Lleva la óptica con grado de observatorio a tu jardín. Equipamiento garantizado, calibrado y respaldado estructuralmente por nuestra inteligencia artificial.
               </p>
               
@@ -53,7 +53,7 @@ export function CtaSection() {
             </div>
 
             {/* Right Visual Ecosystem (Cinematic Image + Floating UI) */}
-            <div className="relative min-h-[400px] lg:min-h-full overflow-hidden border-t lg:border-t-0 lg:border-l border-white/5 bg-[#0b0f19]/30">
+            <div className="relative min-h-[400px] lg:min-h-full overflow-hidden border-t lg:border-t-0 lg:border-l border-white/5 bg-background/30">
                {/* Astrophotography background slice */}
                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center mix-blend-screen opacity-50 scale-105" />
                <div className="absolute inset-0 bg-linear-to-r from-[#0A0D14] via-[#0A0D14]/70 to-transparent opacity-90 hidden lg:block" />
@@ -64,17 +64,17 @@ export function CtaSection() {
                  <motion.div 
                    animate={{ y: [-8, 8, -8] }}
                    transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
-                   className="relative w-full max-w-[300px] rounded-2xl border border-white/10 bg-[#0A0D14]/70 backdrop-blur-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                   className="relative w-full max-w-[300px] rounded-2xl border border-border/50 dark:border-white/10 bg-background/80 dark:bg-background/70 backdrop-blur-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
                  >
                    <div className="flex items-center justify-between mb-8">
-                     <div className="w-10 h-10 rounded-full bg-white/[0.05] flex items-center justify-center border border-white/10">
-                       <Sparkles className="w-4 h-4 text-neutral-300" />
+                     <div className="w-10 h-10 rounded-full bg-secondary dark:bg-white/5 flex items-center justify-center border border-border/50 dark:border-white/10">
+                       <Camera className="w-5 h-5 text-primary" />
                      </div>
                      <span className="text-[10px] font-medium text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full border border-emerald-400/20 tracking-wider">AstroAssist Ready</span>
                    </div>
                    
                    <div className="space-y-4 mb-2">
-                     <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                     <div className="h-1.5 w-full bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
                        <motion.div 
                          className="h-full bg-indigo-500 rounded-full" 
                          initial={{ width: "0%" }}
@@ -82,11 +82,11 @@ export function CtaSection() {
                          transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
                        />
                      </div>
-                     <div className="h-1.5 w-4/5 bg-white/5 rounded-full" />
-                     <div className="h-1.5 w-2/3 bg-white/5 rounded-full" />
+                     <div className="h-1.5 w-4/5 bg-black/5 dark:bg-white/5 rounded-full" />
+                     <div className="h-1.5 w-2/3 bg-black/5 dark:bg-white/5 rounded-full" />
                    </div>
                    
-                   <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
+                   <div className="mt-8 pt-6 border-t border-border/50 dark:border-white/5 flex items-center justify-between">
                      <span className="text-xs font-semibold text-neutral-200">Enlace Óptico</span>
                      <span className="text-[10px] font-light text-neutral-500">100% Estabilizado</span>
                    </div>

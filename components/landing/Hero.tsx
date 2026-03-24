@@ -25,7 +25,7 @@ export function Hero() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full min-h-[120vh] md:min-h-[140vh] flex flex-col items-center pt-32 md:pt-44 overflow-hidden perspective-[1200px] bg-[#0A0D14]"
+      className="relative w-full min-h-[120vh] md:min-h-[140vh] flex flex-col items-center pt-32 md:pt-44 overflow-hidden perspective-distant"
     >
       {/* 1. Ultra-clean Deep Space Background */}
       <motion.div 
@@ -48,9 +48,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.05] backdrop-blur-xl mb-10"
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 dark:bg-white/3 border border-border/50 dark:border-white/5 backdrop-blur-xl mb-10"
         >
-          <Sparkles className="w-3.5 h-3.5 text-neutral-400" />
+          <Sparkles className="w-4 h-4 text-primary" />
           <span className="text-[10px] sm:text-[11px] font-medium tracking-[0.2em] uppercase text-neutral-300">AstroAssist Online</span>
         </motion.div>
 
@@ -86,7 +86,7 @@ export function Hero() {
                Explorar catálogo
             </Button>
           </Link>
-          <Button size="lg" variant="ghost" className="h-12 px-8 rounded-full text-neutral-400 hover:text-white hover:bg-white/5 transition-colors w-full sm:w-auto text-sm font-medium border border-transparent hover:border-white/10">
+          <Button size="lg" variant="ghost" className="h-12 px-8 rounded-full text-foreground/70 hover:text-foreground hover:bg-secondary/50 dark:hover:bg-white/5 transition-colors w-full sm:w-auto text-sm font-medium border border-transparent hover:border-border/50 dark:hover:border-white/10">
             Conocer la IA
           </Button>
         </motion.div>
@@ -100,10 +100,10 @@ export function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="relative rounded-xl md:rounded-[2rem] border border-white/5 bg-[#0A0D14]/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,0,0,0.4)] overflow-hidden aspect-[16/10] md:aspect-[21/9]">
+        <div className="relative rounded-xl md:rounded-4xl border border-border/50 dark:border-white/5 bg-background/60 dark:bg-background/40 backdrop-blur-2xl shadow-2xl dark:shadow-[0_0_50px_rgba(0,0,0,0.4)] overflow-hidden aspect-16/10 md:aspect-21/9">
           
           {/* Subtle OS Header */}
-          <div className="absolute top-0 w-full h-10 bg-white/[0.02] border-b border-white/[0.02] flex items-center px-5 gap-2 z-20">
+          <div className="absolute top-0 w-full h-10 bg-secondary/30 dark:bg-white/2 border-b border-border/30 dark:border-white/2 flex items-center px-5 gap-2 z-20">
             <div className="w-2.5 h-2.5 rounded-full bg-neutral-700/50" />
             <div className="w-2.5 h-2.5 rounded-full bg-neutral-700/50" />
             <div className="w-2.5 h-2.5 rounded-full bg-neutral-700/50" />
@@ -115,11 +115,11 @@ export function Hero() {
 
           {/* Ultra-clean AI Insight Card */}
           <motion.div 
-            className="absolute bottom-6 left-6 md:bottom-8 md:right-8 md:left-auto bg-[#0A0D14]/80 backdrop-blur-3xl border border-white/5 rounded-xl p-4 max-w-[260px] flex items-start gap-4"
+            className="absolute bottom-6 left-6 md:bottom-8 md:right-8 md:left-auto bg-background/90 dark:bg-background/80 backdrop-blur-3xl border border-border/50 dark:border-white/5 rounded-xl p-4 max-w-[260px] flex items-start gap-4"
             animate={{ y: [0, -6, 0] }}
             transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
           >
-            <div className="w-8 h-8 rounded-full bg-white/[0.05] flex items-center justify-center shrink-0 border border-white/5">
+            <div className="w-8 h-8 rounded-full bg-secondary dark:bg-white/5 flex items-center justify-center shrink-0 border border-border/50 dark:border-white/5">
               <Bot className="w-4 h-4 text-neutral-400" />
             </div>
             <div className="flex flex-col gap-1">

@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 
 export function Footer() {
   return (
-    <footer className="relative bg-background border-t border-white/5 pt-20 pb-10 overflow-hidden">
+    <footer className="relative border-t border-border/50 dark:border-white/5 pt-20 pb-10 overflow-hidden">
       {/* Decorative glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[radial-gradient(ellipse_at_top,rgba(var(--primary),0.12),transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
       
@@ -24,13 +24,13 @@ export function Footer() {
               El ecosistema definitivo para la iteración óptica y astrofotografía premium, potenciado por telemetría e Inteligencia Artificial.
             </p>
             <div className="flex items-center gap-4 pt-2">
-               <a href="#" className="w-10 h-10 rounded-full bg-secondary/80 border border-white/5 flex items-center justify-center text-muted-foreground hover:text-white hover:border-primary/50 hover:bg-primary/20 hover:shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-all">
+               <a href="#" className="w-10 h-10 rounded-full bg-secondary dark:bg-secondary/80 border border-border/50 dark:border-white/5 flex items-center justify-center text-muted-foreground hover:text-foreground dark:hover:text-white hover:border-primary/50 hover:bg-primary/20 hover:shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-all">
                  <Twitter className="w-4 h-4" />
                </a>
-               <a href="#" className="w-10 h-10 rounded-full bg-secondary/80 border border-white/5 flex items-center justify-center text-muted-foreground hover:text-white hover:border-primary/50 hover:bg-primary/20 hover:shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-all">
+               <a href="#" className="w-10 h-10 rounded-full bg-secondary dark:bg-secondary/80 border border-border/50 dark:border-white/5 flex items-center justify-center text-muted-foreground hover:text-foreground dark:hover:text-white hover:border-primary/50 hover:bg-primary/20 hover:shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-all">
                  <Github className="w-4 h-4" />
                </a>
-               <a href="#" className="w-10 h-10 rounded-full bg-secondary/80 border border-white/5 flex items-center justify-center text-muted-foreground hover:text-white hover:border-primary/50 hover:bg-primary/20 hover:shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-all">
+               <a href="#" className="w-10 h-10 rounded-full bg-secondary dark:bg-secondary/80 border border-border/50 dark:border-white/5 flex items-center justify-center text-muted-foreground hover:text-foreground dark:hover:text-white hover:border-primary/50 hover:bg-primary/20 hover:shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-all">
                  <Linkedin className="w-4 h-4" />
                </a>
             </div>
@@ -46,7 +46,7 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col space-y-5 lg:col-span-1">
-            <h4 className="text-foreground font-semibold tracking-tight">Recursos</h4>
+              <h4 className="text-lg font-bold text-foreground dark:text-white tracking-tight">Catálogo</h4>
             <ul className="space-y-4">
               {['Calculadora Astronómica', 'Guía de Resoluciones', 'Mapa de Cielos Oscuros', 'Centro de Soporte', 'API Docs'].map(item => (
                 <li key={item}><Link href="#" className="text-sm font-light text-muted-foreground hover:text-primary transition-colors tracking-wide relative group"><span className="absolute -left-3 opacity-0 group-hover:opacity-100 group-hover:left-0 transition-all text-primary">&rsaquo;</span> <span className="group-hover:pl-3 transition-all inline-block">{item}</span></Link></li>
@@ -55,14 +55,14 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col space-y-5 lg:col-span-1">
-            <h4 className="text-foreground font-semibold tracking-tight">Boletín Estelar</h4>
+              <h4 className="text-lg font-bold text-foreground dark:text-white tracking-tight">Suscríbete a la Órbita</h4>
             <p className="text-sm text-muted-foreground leading-relaxed font-light mb-1">
               Únete a nuestra élite observatoria.
             </p>
             <form className="flex gap-2">
               <Input 
                 placeholder="tu@email.com" 
-                className="bg-card/50 border-white/10 focus-visible:ring-primary/50 rounded-xl h-11 backdrop-blur-md"
+                className="bg-card/50 border-border/50 dark:border-white/10 focus-visible:ring-primary/50 rounded-xl h-11 backdrop-blur-md"
               />
               <Button size="icon" className="rounded-xl shrink-0 h-11 w-11 shadow-[0_0_20px_rgba(var(--primary),0.3)] hover:scale-105 transition-transform bg-primary hover:bg-primary/90">
                 <ArrowRight className="w-4 h-4" />
@@ -71,7 +71,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-border/50 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground font-light tracking-wide">
             © {new Date().getFullYear()} AstroAssist AI Technologies. Todos los derechos reservados.
           </p>

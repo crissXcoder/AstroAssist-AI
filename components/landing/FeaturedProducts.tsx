@@ -39,7 +39,7 @@ export function FeaturedProducts() {
       
       <div className="container px-4 mx-auto md:px-6">
         <div className="flex flex-col items-center justify-center space-y-6 text-center mb-24">
-          <Badge variant="glass" className="border-primary/40 text-primary-foreground uppercase tracking-[0.2em] px-5 py-2 shadow-[0_0_30px_rgba(var(--primary),0.2)] bg-background/50">
+          <Badge variant="glass" className="border-primary/20 dark:border-primary/40 text-primary-foreground uppercase tracking-[0.2em] px-5 py-2 shadow-sm dark:shadow-[0_0_30px_rgba(var(--primary),0.2)] bg-secondary/50 dark:bg-background/20 backdrop-blur-md">
             Catálogo Óptico
           </Badge>
           <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-[1.1]">
@@ -48,7 +48,7 @@ export function FeaturedProducts() {
               Premium
             </span>
           </h2>
-          <p className="max-w-[800px] text-muted-foreground md:text-xl font-light leading-relaxed">
+          <p className="max-w-[600px] text-neutral-600 dark:text-neutral-400 md:text-xl font-light leading-relaxed">
             Sistemas ópticos y monturas de vanguardia elegidos por nuestra IA analítica. Interactúa con las tarjetas para explorar la calidad de sus componentes.
           </p>
         </div>

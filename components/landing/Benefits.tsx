@@ -31,7 +31,7 @@ export function Benefits() {
 
   return (
     <SectionContainer delay={0.1} className="py-24 border-y border-border/40 relative">
-      <div className="absolute inset-0 bg-background/90" />
+      <div className="absolute inset-0 bg-background/40" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent opacity-50 pointer-events-none" />
       
       <div className="container px-4 md:px-6 mx-auto relative z-10">

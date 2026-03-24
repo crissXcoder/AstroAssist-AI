@@ -58,7 +58,7 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="relative flex flex-col h-full rounded-[2rem] glass border border-white/5 bg-background/50 backdrop-blur-2xl overflow-hidden group hover:shadow-[0_20px_50px_rgba(var(--primary),0.15)] hover:border-white/15 transition-shadow duration-500 will-change-transform"
+        className="relative flex flex-col h-full rounded-4xl glass border border-border/50 dark:border-white/5 bg-secondary/30 dark:bg-background/30 backdrop-blur-2xl overflow-hidden group hover:shadow-[0_20px_50px_rgba(var(--primary),0.05)] dark:hover:shadow-[0_20px_50px_rgba(var(--primary),0.15)] hover:border-border dark:hover:border-white/15 transition-shadow duration-500 will-change-transform"
       >
         {/* Dynamic glare effect overlay */}
         <motion.div
@@ -83,7 +83,7 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
           {/* Tags floating over image */}
           <div className="absolute top-6 left-6 z-20 flex flex-wrap gap-2">
             {product.tags.map(tag => (
-              <Badge key={tag} variant="glass" className="text-xs backdrop-blur-md bg-black/40 border-white/20 text-white shadow-xl px-3 py-1">
+              <Badge key={tag} variant="glass" className="text-xs backdrop-blur-md bg-white/80 dark:bg-black/40 border-border dark:border-white/20 text-foreground dark:text-white shadow-xl px-3 py-1">
                 {tag}
               </Badge>
             ))}
@@ -109,7 +109,7 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
             </span>
             
             <Button size="icon" className="h-[52px] w-[52px] rounded-2xl shadow-[0_0_20px_rgba(var(--primary),0.2)] group-hover:shadow-[0_0_30px_rgba(var(--primary),0.6)] transition-all bg-primary/20 text-primary border border-primary/50 hover:bg-primary hover:text-white group/btn relative overflow-hidden shrink-0 hover:scale-110">
-               <div className="absolute inset-0 w-[200%] h-full bg-linear-to-r from-transparent via-white/30 to-transparent -translate-x-[150%] skew-x-12 group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+               <div className="absolute inset-0 w-[200%] h-full bg-linear-to-r from-transparent via-black/5 dark:via-white/30 to-transparent -translate-x-[150%] skew-x-12 group-hover/btn:translate-x-full transition-transform duration-700" />
                <ShoppingCart className="w-5 h-5 relative z-10" />
             </Button>
           </div>
