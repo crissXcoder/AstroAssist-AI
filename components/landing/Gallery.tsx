@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Maximize2, Camera, Telescope, MapPin, ArrowUpRight } from "lucide-react";
 import { SectionContainer } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "@/components/i18n-provider";
 
 const galleryData = [
   {
@@ -73,6 +74,7 @@ const galleryData = [
 ];
 
 export function Gallery() {
+  const t = useTranslations().gallery;
   const [selectedImage, setSelectedImage] = useState<typeof galleryData[0] | null>(null);
 
   // Close modal on Escape
@@ -92,14 +94,14 @@ export function Gallery() {
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
           <div className="flex flex-col space-y-5 max-w-2xl">
             <Badge variant="glass" className="mb-4 bg-secondary/50 dark:bg-background/20 border-border/50 dark:border-white/10 text-foreground dark:text-white backdrop-blur-md">
-              <Camera className="w-4 h-4 mr-2 inline-block" /> Galería Óptica
+              <Camera className="w-4 h-4 mr-2 inline-block" /> {t.badge}
             </Badge>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-glow leading-[1.1]">
-              El Universo a través de nuestras ópticas.
+              {t.title}
             </h2>
           </div>
           <p className="max-w-[700px] text-neutral-600 dark:text-neutral-400 md:text-xl font-light leading-relaxed mx-auto">
-            Astrocultores y observadores de nuestra comunidad demuestran de lo que es capaz el hardware de AstroAssist.
+            {t.description}
           </p>
         </div>
 
@@ -125,23 +127,23 @@ export function Gallery() {
               {/* Dark overlay that fades away slightly */}
               <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/20 to-background/90 opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
               
-              {/* Content overlay */}
-              <div className="absolute inset-0 p-6 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xl font-bold text-white tracking-tight leading-tight drop-shadow-md">{img.title}</h3>
-                  <div className="w-8 h-8 rounded-full bg-white/80 dark:bg-white/20 backdrop-blur-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-75 group-hover:scale-100 border border-border/20 dark:border-white/20 shrink-0 ml-2">
-                    <ArrowUpRight className="w-4 h-4 text-foreground dark:text-white" />
+                {/* Content overlay */}
+                <div className="absolute inset-0 p-6 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-xl font-bold text-white tracking-tight leading-tight drop-shadow-md">{t.items[img.id as keyof typeof t.items].title}</h3>
+                    <div className="w-8 h-8 rounded-full bg-white/80 dark:bg-white/20 backdrop-blur-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-75 group-hover:scale-100 border border-border/20 dark:border-white/20 shrink-0 ml-2">
+                      <ArrowUpRight className="w-4 h-4 text-foreground dark:text-white" />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                    <p className="text-sm text-indigo-300 font-medium flex items-center gap-2">
+                      <Telescope className="w-3.5 h-3.5 shrink-0" /> <span className="line-clamp-1">{t.items[img.id as keyof typeof t.items].equipment}</span>
+                    </p>
+                    <p className="text-xs text-slate-300 flex items-center gap-2">
+                      <MapPin className="w-3.5 h-3.5 shrink-0" /> <span className="line-clamp-1">{t.items[img.id as keyof typeof t.items].location}</span>
+                    </p>
                   </div>
                 </div>
-                <div className="flex flex-col gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                  <p className="text-sm text-indigo-300 font-medium flex items-center gap-2">
-                    <Telescope className="w-3.5 h-3.5 shrink-0" /> <span className="line-clamp-1">{img.equipment}</span>
-                  </p>
-                  <p className="text-xs text-slate-300 flex items-center gap-2">
-                    <MapPin className="w-3.5 h-3.5 shrink-0" /> <span className="line-clamp-1">{img.location}</span>
-                  </p>
-                </div>
-              </div>
             </motion.div>
           ))}
         </div>
@@ -170,7 +172,7 @@ export function Gallery() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-full max-w-6xl aspect-[4/3] md:aspect-auto md:h-[80vh] rounded-[2rem] overflow-hidden glass border border-border/50 dark:border-white/10 flex flex-col md:flex-row shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_100px_rgba(var(--primary),0.3)] bg-card border-card dark:bg-card/60"
+              className="relative w-full max-w-6xl aspect-[4/3] md:aspect-auto md:h-[80vh] rounded-[2rem] overflow-hidden glass border border-border/50 dark:border-white/10 flex flex-col md:flex-row shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_100px_rgba(var(--primary),0.3)] bg-card dark:bg-card/60"
               onClick={(e) => e.stopPropagation()} // Prevent close when clicking modal body
             >
               {/* Image Side */}
@@ -185,31 +187,32 @@ export function Gallery() {
               {/* Details Side */}
               <div className="w-full md:w-1/4 h-full bg-background dark:bg-background/60 p-8 flex flex-col border-t md:border-t-0 md:border-l border-border dark:border-white/10 backdrop-blur-xl">
                 <Badge variant="secondary" className="w-fit mb-6 bg-primary/20 text-primary border-primary/30 uppercase tracking-widest px-3 py-1">
-                  Captura Verificada
+                  {t.modal_verified}
                 </Badge>
                 
-                <h3 className="text-3xl lg:text-4xl font-black tracking-tight mb-2 text-glow">{selectedImage.title}</h3>
-                <p className="text-primary font-medium pb-6 border-b border-border/50 dark:border-white/10 mb-6">Fotografía por {selectedImage.photographer}</p>
+                <h3 className="text-3xl lg:text-4xl font-black tracking-tight mb-2 text-glow">{t.items[selectedImage.id as keyof typeof t.items].title}</h3>
+                <p className="text-primary font-medium pb-6 border-b border-border/50 dark:border-white/10 mb-6">{t.modal_photo_by} {t.items[selectedImage.id as keyof typeof t.items].photographer}</p>
                 
                 <div className="flex flex-col gap-6">
                   <div>
                     <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-2 flex items-center gap-2">
-                       <Telescope className="w-4 h-4 text-primary" /> Hardware Óptico
+                       <Telescope className="w-4 h-4 text-primary" /> {t.modal_hardware}
                     </h4>
-                    <p className="text-foreground font-medium text-lg">{selectedImage.equipment}</p>
+                      <p className="text-sm font-medium">{t.items[selectedImage.id as keyof typeof t.items].equipment}</p>
                   </div>
-                  
                   <div>
                     <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-2 flex items-center gap-2">
-                       <MapPin className="w-4 h-4 text-primary" /> Punto de Captura
+                       <MapPin className="w-4 h-4 text-primary" /> {t.modal_capture}
                     </h4>
-                    <p className="text-foreground font-medium">{selectedImage.location}</p>
+                    <div className="bg-secondary dark:bg-secondary/40 border border-border dark:border-white/10 rounded-xl p-3 shadow-inner">
+                      <p className="text-sm font-medium">{t.items[selectedImage.id as keyof typeof t.items].location}</p>
+                    </div>
                   </div>
                 </div>
                 
                 <div className="mt-auto pt-6 border-t border-border/50 dark:border-white/10">
                    <p className="text-xs text-muted-foreground leading-relaxed text-pretty">
-                     Esta imagen fue obtenida usando equipamiento disponible en el catálogo de AstroAssist AI. Las condiciones atmosféricas y el tiempo expuesto pueden iterar sobre el resultado final de observación visual humana.
+                     {t.modal_note}
                    </p>
                 </div>
               </div>

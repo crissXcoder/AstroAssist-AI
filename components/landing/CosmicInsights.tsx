@@ -4,44 +4,46 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Orbit, Zap, Globe, ArrowRight } from "lucide-react";
 import { SectionContainer } from "@/components/ui/section";
-
-const insights = [
-  {
-    id: 1,
-    title: "El Ojo de Dios",
-    subtitle: "Nebulosa Helix",
-    description: "Una remota estrella extinta expulsando anillos de plasma al vacío interestelar.",
-    image: "https://imgs.search.brave.com/E4y87XYXy2oOzWR5fuZ-nUwdivjazrB-lLIru3-NKl4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnJl/ZGQuaXQvMTl5Z2F0/ZWtzdzc4MS5qcGc",
-    icon: <Sparkles className="w-5 h-5 text-indigo-400" />
-  },
-  {
-    id: 2,
-    title: "Eco Creacional",
-    subtitle: "Radiación de Fondo",
-    description: "El termal más antiguo del universo. Luz viajando ininterrumpidamente por 13.800 millones de años.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
-    icon: <Zap className="w-5 h-5 text-purple-400" />
-  },
-  {
-    id: 3,
-    title: "Agujero Supermasivo",
-    subtitle: "Horizonte M87",
-    description: "Un vórtice gravitacional equivalente a 6,500 millones de soles devorando el tejido espacio-tiempo.",
-    image: "https://images.unsplash.com/photo-1436891620584-47fd0e565afb?q=80&w=1200&auto=format&fit=crop",
-    icon: <Orbit className="w-5 h-5 text-amber-400" />
-  },
-  {
-    id: 4,
-    title: "Límite del Sistema",
-    subtitle: "Nube de Oort",
-    description: "Una gigantesca esfera helada. El abismo final antes del infinito dominio extrasolar.",
-    image: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
-    icon: <Globe className="w-5 h-5 text-cyan-400" />
-  }
-];
+import { useTranslations } from "@/components/i18n-provider";
 
 export function CosmicInsights() {
+  const t = useTranslations().insights;
   const [activeItem, setActiveItem] = useState(1);
+
+  const insights = [
+    {
+      id: 1,
+      title: t.items[0].title,
+      subtitle: t.items[0].subtitle,
+      description: t.items[0].description,
+      image: "https://imgs.search.brave.com/E4y87XYXy2oOzWR5fuZ-nUwdivjazrB-lLIru3-NKl4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnJl/ZGQuaXQvMTl5Z2F0/ZWtzdzc4MS5qcGc",
+      icon: <Sparkles className="w-5 h-5 text-indigo-400" />
+    },
+    {
+      id: 2,
+      title: t.items[1].title,
+      subtitle: t.items[1].subtitle,
+      description: t.items[1].description,
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
+      icon: <Zap className="w-5 h-5 text-purple-400" />
+    },
+    {
+      id: 3,
+      title: t.items[2].title,
+      subtitle: t.items[2].subtitle,
+      description: t.items[2].description,
+      image: "https://images.unsplash.com/photo-1436891620584-47fd0e565afb?q=80&w=1200&auto=format&fit=crop",
+      icon: <Orbit className="w-5 h-5 text-amber-400" />
+    },
+    {
+      id: 4,
+      title: t.items[3].title,
+      subtitle: t.items[3].subtitle,
+      description: t.items[3].description,
+      image: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+      icon: <Globe className="w-5 h-5 text-cyan-400" />
+    }
+  ];
 
   return (
     <SectionContainer delay={0.2} className="py-24 md:py-32 relative overflow-hidden">
@@ -55,15 +57,15 @@ export function CosmicInsights() {
         <div className="flex flex-col items-center sm:items-start text-center sm:text-left mb-16 lg:mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/30 dark:bg-white/2 border border-border/50 dark:border-white/5 w-fit mb-6 backdrop-blur-md">
             <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-neutral-400">Bitácora Estelar</span>
+            <span className="text-[10px] font-medium tracking-[0.25em] uppercase text-neutral-400">{t.badge}</span>
           </div>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between w-full gap-8">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-[-0.03em] text-white leading-[1.1] max-w-xl">
-              Maravillas del <br className="hidden md:block"/>
-              <span className="text-neutral-600">Universo Profundo.</span>
+              {t.title_part1} <br className="hidden md:block"/>
+              <span className="text-neutral-600">{t.title_part2}</span>
             </h2>
             <p className="max-w-[700px] text-neutral-600 dark:text-neutral-400 md:text-xl font-light leading-relaxed mb-12">
-              Anomalías registradas y catalogadas por nuestra red de telemetría IA.
+              {t.description}
             </p>
           </div>
         </div>
@@ -122,7 +124,7 @@ export function CosmicInsights() {
                     className="absolute bottom-8 left-6 right-6 lg:left-1/2 lg:-translate-x-1/2 lg:w-max lg:bottom-1/2 lg:translate-y-1/2 lg:-rotate-90 origin-center text-center lg:text-left flex items-center justify-center lg:justify-start"
                     style={{ pointerEvents: isActive ? 'none' : 'auto' }}
                   >
-                    <span className="text-sm font-medium tracking-[0.1em] text-neutral-400 whitespace-nowrap uppercase">{item.title}</span>
+                    <span className="text-sm font-medium tracking-widest text-neutral-400 whitespace-nowrap uppercase">{item.title}</span>
                   </motion.div>
 
                   {/* Expanded Narrative Payload */}
@@ -145,7 +147,7 @@ export function CosmicInsights() {
                         </p>
                         
                         <div className="mt-6 flex items-center gap-2 text-[11px] font-medium tracking-widest uppercase text-foreground dark:text-white group/btn w-fit pointer-events-auto cursor-pointer border-b border-transparent hover:border-black/30 dark:hover:border-white/30 pb-1 transition-all duration-300">
-                          Explorar <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
+                          {t.explore} <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
                         </div>
                       </motion.div>
                     )}

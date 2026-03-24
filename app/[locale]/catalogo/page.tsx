@@ -5,11 +5,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, Sparkles } from "lucide-react";
 import { ProductCard } from "@/components/landing/ProductCard";
 import { catalogData, ProductCategory } from "@/lib/catalog-data";
+import { useTranslations } from "@/components/i18n-provider";
 
 const CATEGORIES: ("Todos" | ProductCategory)[] = ["Todos", "Telescopios", "Monturas", "Cámaras", "Accesorios"];
 
 export default function CatalogPage() {
   const [activeCategory, setActiveCategory] = useState<"Todos" | ProductCategory>("Todos");
+  const t = useTranslations().catalog_page;
+
+  const categoryMap: Record<string, keyof typeof t.categories> = {
+    "Todos": "todos",
+    "Telescopios": "telescopios",
+    "Monturas": "monturas",
+    "Cámaras": "camaras",
+    "Accesorios": "accesorios"
+  };
 
   const filteredProducts = activeCategory === "Todos" 
     ? catalogData 
@@ -32,7 +42,7 @@ export default function CatalogPage() {
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.05] w-fit mb-8 shadow-sm"
           >
             <Sparkles className="w-3.5 h-3.5 text-neutral-400" />
-            <span className="text-[10px] sm:text-[11px] font-medium tracking-[0.2em] uppercase text-neutral-300">Arsenal Óptico</span>
+            <span className="text-[10px] sm:text-[11px] font-medium tracking-[0.2em] uppercase text-neutral-300">{t.badge}</span>
           </motion.div>
           
           <motion.h1 
@@ -41,8 +51,8 @@ export default function CatalogPage() {
             transition={{ duration: 1, delay: 0.1 }}
             className="text-5xl md:text-7xl lg:text-[6rem] font-medium tracking-tight md:tracking-[-0.03em] text-white leading-[1.05] mb-8"
           >
-            Catálogo <br className="hidden md:block"/>
-            <span className="text-neutral-500">Especializado.</span>
+            {t.title_part1} <br className="hidden md:block"/>
+            <span className="text-neutral-500">{t.title_part2}</span>
           </motion.h1>
           
           <motion.p 
@@ -51,7 +61,7 @@ export default function CatalogPage() {
             transition={{ duration: 1, delay: 0.2 }}
             className="text-base md:text-lg text-neutral-400 font-light leading-relaxed max-w-2xl tracking-wide"
           >
-            Sistemas calibrados y seleccionados mediante telemetría orbital de AstroAssist. Filtra las ópticas, monturas y accesorios que elevarán tu ecosistema espacial.
+            {t.description}
           </motion.p>
         </div>
 
@@ -66,13 +76,13 @@ export default function CatalogPage() {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`relative px-6 py-3 rounded-full text-xs md:text-sm font-medium transition-all duration-500 outline-none backdrop-blur-md border tracking-wide ${
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 pointer-events-auto ${
                 activeCategory === category 
-                  ? "bg-white text-black border-transparent shadow-[0_0_30px_rgba(255,255,255,0.15)] scale-105"
-                  : "bg-white/[0.02] text-neutral-400 border-white/5 hover:bg-white/10 hover:text-white"
+                  ? 'bg-primary text-primary-foreground shadow-[0_0_15px_rgba(var(--primary),0.5)]' 
+                  : 'bg-secondary dark:bg-white/3 text-neutral-600 dark:text-neutral-400 border border-border/50 dark:border-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 hover:text-foreground'
               }`}
             >
-              {category}
+              {t.categories[categoryMap[category]]}
             </button>
           ))}
         </motion.div>
@@ -102,14 +112,14 @@ export default function CatalogPage() {
                animate={{ opacity: 1, y: 0 }} 
                className="col-span-1 md:col-span-2 lg:col-span-3 flex flex-col items-center justify-center py-32 text-center"
              >
-                <div className="w-20 h-20 rounded-full bg-white/[0.02] border border-white/5 flex items-center justify-center mb-6">
+                <div className="bg-secondary/50 dark:bg-white/2 rounded-full p-2 border border-border/50 dark:border-white/5 flex items-center justify-center mb-6">
                   <Search className="w-8 h-8 text-neutral-500" />
                 </div>
-                <h3 className="text-xl font-medium text-white mb-2">Sin sistemas disponibles</h3>
-                <p className="text-neutral-500 font-light max-w-sm">
-                  Acabamos de agotar los recursos visuales en este sector espacial. Nuestra IA está orbitando por más equipamiento.
-                </p>
-             </motion.div>
+                 <h3 className="text-xl font-medium text-white mb-2">{t.empty_title}</h3>
+                 <p className="text-neutral-500 font-light max-w-sm">
+                   {t.empty_desc}
+                 </p>
+              </motion.div>
           )}
         </div>
       </div>

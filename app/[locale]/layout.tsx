@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { FloatingChat } from "@/components/chat/FloatingChat";
 import { Navbar } from "@/components/landing/Navbar";
+import { I18nProvider } from "@/components/i18n-provider";
+import { getDictionary, Locale } from "@/lib/i18n";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,16 +66,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+  params,
+}: {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const dictionary = await getDictionary(locale);
+
   return (
     <html
-      lang="es"
+      lang={locale}
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased relative`}
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-1000 antialiased overflow-x-hidden relative">
         <ThemeProvider
@@ -85,9 +93,11 @@ export default function RootLayout({
           <div className="fixed inset-0 z-[-1] pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(99,102,241,0.08),transparent_80%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(168,85,247,0.06),transparent_80%)]" />
           <div className="fixed inset-0 z-[-1] pointer-events-none bg-[radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.05),transparent_60%)] dark:bg-[radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.03),transparent_60%)]" />
           
-          <Navbar />
-          {children}
-          <FloatingChat />
+          <I18nProvider dictionary={dictionary} locale={locale as Locale}>
+            <Navbar />
+            {children}
+            <FloatingChat />
+          </I18nProvider>
         </ThemeProvider>
       </body>
     </html>

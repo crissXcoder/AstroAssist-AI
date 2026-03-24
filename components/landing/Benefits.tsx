@@ -4,28 +4,30 @@ import { SectionContainer } from "@/components/ui/section";
 import { Bot, ShieldCheck, Rocket, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { STAGGER_CONTAINER, FADE_IN_UP } from "@/lib/motion";
+import { useTranslations } from "@/components/i18n-provider";
 
 export function Benefits() {
+  const t = useTranslations().benefits;
   const features = [
     {
       icon: <Bot className="w-8 h-8 text-primary" />,
-      title: "Asistencia de IA 24/7",
-      description: "AstroAssist analiza tu ubicación y clima para recomendarte los mejores equipos en tiempo real."
+      title: t.items[0].title,
+      description: t.items[0].description
     },
     {
       icon: <ShieldCheck className="w-8 h-8 text-primary" />,
-      title: "Garantía Extendida",
-      description: "Protección de 5 años en todos los equipos ópticos y monturas ecuatoriales contra defectos."
+      title: t.items[1].title,
+      description: t.items[1].description
     },
     {
       icon: <Rocket className="w-8 h-8 text-primary" />,
-      title: "Envíos Asegurados",
-      description: "Logística especializada internacional. Tu telescopio llegará en perfectas condiciones a todo el mundo."
+      title: t.items[2].title,
+      description: t.items[2].description
     },
     {
       icon: <Zap className="w-8 h-8 text-primary" />,
-      title: "Calibración Óptica",
-      description: "Cada equipo es pre-colimado usando estrellas artificiales antes de despacharse del laboratorio."
+      title: t.items[3].title,
+      description: t.items[3].description
     }
   ];
 

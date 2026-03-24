@@ -6,11 +6,16 @@ import { Telescope, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useTranslations, useLocale } from "@/components/i18n-provider";
 
 export function Navbar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const t = useTranslations().navbar;
+  const locale = useLocale();
 
   useEffect(() => {
     return scrollY.on("change", (latest) => {
@@ -31,7 +36,7 @@ export function Navbar() {
         }`}
       >
         <div className="container px-4 md:px-6 mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href={`/${locale}`} className="flex items-center gap-3 group">
             <div className="p-2 bg-primary/20 rounded-[10px] border border-primary/30 group-hover:bg-primary/40 transition-colors shadow-[0_0_15px_rgba(var(--primary),0.2)] group-hover:scale-105 duration-300">
               <Telescope className="w-5 h-5 text-primary" />
             </div>
@@ -39,17 +44,19 @@ export function Navbar() {
           </Link>
           
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">Inicio</Link>
-            <Link href="#features" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">Tecnología</Link>
-            <Link href="/catalogo" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">Sistema Óptico</Link>
-            <Link href="#community" className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">Comunidad</Link>
+            <Link href={`/${locale}`} className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">{t.home}</Link>
+            <Link href={`/${locale}#features`} className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">{t.technology}</Link>
+            <Link href={`/${locale}/catalogo`} className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">{t.optics}</Link>
+            <Link href={`/${locale}#community`} className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">{t.community}</Link>
           </nav>
           
           <div className="hidden md:flex items-center gap-4">
+            <LanguageSwitcher />
             <ThemeToggle />
           </div>
 
           <div className="flex items-center gap-2 md:hidden">
+            <LanguageSwitcher />
             <ThemeToggle />
             <Button 
               variant="ghost" 
@@ -79,7 +86,7 @@ export function Navbar() {
             </div>
             
             <nav className="flex flex-col gap-6 text-xl font-medium tracking-tight">
-              {['Catálogo', 'Galería', 'Comunidad', 'IA Asistente'].map((item, i) => (
+              {[t.optics, 'Galería', t.community, 'IA Asistente'].map((item, i) => (
                  <motion.div 
                    key={item}
                    initial={{ opacity: 0, x: 20 }}

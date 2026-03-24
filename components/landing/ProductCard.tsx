@@ -4,6 +4,7 @@ import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } fr
 import { ShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "@/components/i18n-provider";
 
 interface Product {
   id: string | number;
@@ -15,6 +16,13 @@ interface Product {
 }
 
 export function ProductCard({ product, index }: { product: Product; index: number }) {
+  const tContext = useTranslations();
+  const t = tContext.catalog_page.products[product.id as keyof typeof tContext.catalog_page.products];
+  
+  const name = t?.name || product.name;
+  const description = t?.description || product.description;
+  const tags = t?.tags || product.tags;
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -62,7 +70,7 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
       >
         {/* Dynamic glare effect overlay */}
         <motion.div
-          className="pointer-events-none absolute -inset-px z-30 transition-opacity duration-300 opacity-0 group-hover:opacity-100 mix-blend-screen rounded-[2rem] overflow-hidden"
+          className="pointer-events-none absolute -inset-px z-30 transition-opacity duration-300 opacity-0 group-hover:opacity-100 mix-blend-screen rounded-4xl overflow-hidden"
           style={{ background }}
         />
 
@@ -76,13 +84,13 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
           
           <img 
             src={product.image} 
-            alt={product.name} 
+            alt={name} 
             className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out mix-blend-screen"
           />
           
           {/* Tags floating over image */}
           <div className="absolute top-6 left-6 z-20 flex flex-wrap gap-2">
-            {product.tags.map(tag => (
+            {tags.map(tag => (
               <Badge key={tag} variant="glass" className="text-xs backdrop-blur-md bg-white/80 dark:bg-black/40 border-border dark:border-white/20 text-foreground dark:text-white shadow-xl px-3 py-1">
                 {tag}
               </Badge>
@@ -96,11 +104,11 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
           style={{ transform: "translateZ(50px)" }}
         >
           <h3 className="text-2xl font-black tracking-tight text-foreground group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-white group-hover:to-primary transition-all duration-300">
-            {product.name}
+            {name}
           </h3>
           
           <p className="mt-4 text-sm text-muted-foreground/80 leading-relaxed line-clamp-3 font-light">
-            {product.description}
+            {description}
           </p>
 
           <div className="mt-auto pt-8 flex items-end justify-between">

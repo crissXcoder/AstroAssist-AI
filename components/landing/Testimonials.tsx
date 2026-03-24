@@ -7,26 +7,28 @@ import { MessageSquareQuote } from "lucide-react";
 import { motion } from "framer-motion";
 import { STAGGER_CONTAINER, FADE_IN_UP } from "@/lib/motion";
 import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "@/components/i18n-provider";
 
 export function Testimonials() {
+  const t = useTranslations().testimonials;
   const reviews = [
     {
-      name: "Carlos Rivera",
-      role: "Astrofotógrafo Aficionado",
-      text: "AstroAssist me ayudó a confirmar que la montura EQ6-R Pro soportaría mi telescopio reflector de 8 pulgadas. Comprar sin miedo al error es invaluable en este hobby.",
-      initials: "CR"
+      name: t.items[0].name,
+      role: t.items[0].role,
+      text: t.items[0].text,
+      initials: t.items[0].initials
     },
     {
-      name: "Dra. Elena Marín",
-      role: "Astrofísica Investigadora",
-      text: "Pregunté por un equipo robusto portátil para observaciones de campo electromagnético. El chatbot fue sorprendentemente certero sugiriendo el ecosistema ZWO.",
-      initials: "EM"
+      name: t.items[1].name,
+      role: t.items[1].role,
+      text: t.items[1].text,
+      initials: t.items[1].initials
     },
     {
-      name: "Javier Soto",
-      role: "Fotógrafo de Paisajes",
-      text: "La sugerencia in-situ sobre la cámara especializada ASI533MC con refrigeración resolvió todos mis problemas de ruido térmico en Larga Exposición nocturna.",
-      initials: "JS"
+      name: t.items[2].name,
+      role: t.items[2].role,
+      text: t.items[2].text,
+      initials: t.items[2].initials
     }
   ];
 
@@ -39,10 +41,10 @@ export function Testimonials() {
           initial="initial" whileInView="animate" viewport={{ once: true, margin: "-50px" }} variants={FADE_IN_UP}
         >
           <MessageSquareQuote className="w-10 h-10 text-primary opacity-80 mb-2 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
-          <Badge variant="glass" className="mb-4 bg-secondary/50 dark:bg-background/20 backdrop-blur-md">Testimonios</Badge>
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter">Comunidad <span className="text-glow text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-400">Astronómica</span></h2>
+          <Badge variant="glass" className="mb-4 bg-secondary/50 dark:bg-background/20 backdrop-blur-md">{t.badge}</Badge>
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter">{t.title_part1} <span className="text-glow text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-400">{t.title_part2}</span></h2>
           <p className="max-w-[700px] text-neutral-600 dark:text-neutral-400 md:text-xl font-light leading-relaxed">
-            Descubre cómo nuestra telemetría está transformando la manera en que los profesionales de las estrellas eligen su equipamiento.
+            {t.description}
           </p>
         </motion.div>
 
@@ -51,9 +53,9 @@ export function Testimonials() {
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
           {reviews.map((review, i) => (
-             <motion.div key={i} variants={FADE_IN_UP} className="h-full">
-               <div className="relative h-full rounded-3xl p-[1px] group overflow-hidden">
-                 {/* CSS Magic: Conic Gradient Rotating Border */}
+              <motion.div key={i} variants={FADE_IN_UP} className="h-full">
+                <div className="relative h-full rounded-3xl p-px group overflow-hidden">
+                  {/* CSS Magic: Conic Gradient Rotating Border */}
                  <div className="absolute inset-0 bg-[conic-gradient(from_0deg_at_50%_50%,rgba(var(--primary),0)_0%,rgba(var(--primary),1)_20%,rgba(var(--primary),0)_40%)] opacity-0 group-hover:opacity-100 group-hover:animate-[spin_3s_linear_infinite] transition-opacity duration-700 w-[250%] h-[250%] -top-[75%] -left-[75%] pointer-events-none" />
                  
                  {/* Internal Mask - Must have higher z-index than the rotating gradient */}

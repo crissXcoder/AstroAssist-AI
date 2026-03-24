@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Telescope, ShieldCheck, Zap, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useTranslations, useLocale } from "@/components/i18n-provider";
 
 export function CtaSection() {
+  const t = useTranslations().cta;
+  const locale = useLocale();
   return (
     <section className="relative w-full py-24 md:py-32 overflow-hidden">
       {/* Background Ambience */}
@@ -17,7 +20,7 @@ export function CtaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative rounded-[2rem] overflow-hidden border border-border/50 dark:border-white/5 bg-secondary/30 dark:bg-white/2 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
+          className="relative rounded-4xl overflow-hidden border border-border/50 dark:border-white/5 bg-secondary/30 dark:bg-white/2 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
         >
           {/* Internal gradient sweep */}
           <div className="absolute inset-0 bg-linear-to-br from-indigo-500/5 via-transparent to-purple-500/5 opacity-50 pointer-events-none" />
@@ -27,27 +30,27 @@ export function CtaSection() {
             <div className="p-10 md:p-16 lg:p-20 flex flex-col justify-center">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 dark:bg-white/3 border border-border/50 dark:border-white/5 w-fit mb-8 shadow-sm">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
-                <span className="text-[10px] sm:text-[11px] font-medium tracking-[0.2em] uppercase text-neutral-300">Exploración Ilimitada</span>
+                <span className="text-[10px] sm:text-[11px] font-medium tracking-[0.2em] uppercase text-neutral-300">{t.badge}</span>
               </div>
               
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight md:tracking-[-0.03em] text-white leading-[1.05] mb-6">
-                Inicia tu nueva era de <br className="hidden lg:block"/>
-                <span className="text-neutral-500">observación.</span>
+                {t.title_part1} <br className="hidden lg:block"/>
+                <span className="text-neutral-500">{t.title_part2}</span>
               </h2>
               
               <p className="text-lg text-neutral-600 dark:text-neutral-400 font-light leading-relaxed max-w-xl mb-10">
-                Lleva la óptica con grado de observatorio a tu jardín. Equipamiento garantizado, calibrado y respaldado estructuralmente por nuestra inteligencia artificial.
+                {t.description}
               </p>
               
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                <Link href="/catalogo">
+                <Link href={`/${locale}/catalogo`}>
                   <Button size="lg" className="h-12 px-8 rounded-full bg-white text-black hover:bg-neutral-200 transition-colors w-full sm:w-auto text-sm font-medium shadow-[0_0_30px_rgba(255,255,255,0.15)] group">
-                    Descubrir equipos <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    {t.button} <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
                 <div className="flex items-center gap-2 text-xs text-neutral-500">
                   <ShieldCheck className="w-4 h-4 text-emerald-500/70" />
-                  <span className="tracking-wide">Garantía de 5 años</span>
+                  <span className="tracking-wide">{t.guarantee}</span>
                 </div>
               </div>
             </div>
@@ -70,7 +73,7 @@ export function CtaSection() {
                      <div className="w-10 h-10 rounded-full bg-secondary dark:bg-white/5 flex items-center justify-center border border-border/50 dark:border-white/10">
                        <Camera className="w-5 h-5 text-primary" />
                      </div>
-                     <span className="text-[10px] font-medium text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full border border-emerald-400/20 tracking-wider">AstroAssist Ready</span>
+                     <span className="text-[10px] font-medium text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full border border-emerald-400/20 tracking-wider">{t.status_ready}</span>
                    </div>
                    
                    <div className="space-y-4 mb-2">
@@ -87,8 +90,8 @@ export function CtaSection() {
                    </div>
                    
                    <div className="mt-8 pt-6 border-t border-border/50 dark:border-white/5 flex items-center justify-between">
-                     <span className="text-xs font-semibold text-neutral-200">Enlace Óptico</span>
-                     <span className="text-[10px] font-light text-neutral-500">100% Estabilizado</span>
+                     <span className="text-xs font-semibold text-neutral-200">{t.status_link}</span>
+                     <span className="text-[10px] font-light text-neutral-500">{t.status_stab}</span>
                    </div>
                  </motion.div>
                </div>

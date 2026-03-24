@@ -1,0 +1,232 @@
+{
+  "navbar": {
+    "home": "Home",
+    "technology": "Technology",
+    "optics": "Optical System",
+    "community": "Community"
+  },
+  "hero": {
+    "badge": "ASTROASSIST ONLINE",
+    "title_part1": "The universe,",
+    "title_part2": "with absolute",
+    "title_part3": "exactitude.",
+    "description": "Superior optical equipment assisted by artificial intelligence. We permanently redefine your observation boundaries.",
+    "cta_catalog": "Explore catalog",
+    "cta_console": "Meet the AI"
+  },
+  "footer": {
+    "description": "The definitive ecosystem for optical iteration and premium astrophotography, powered by telemetry and Artificial Intelligence.",
+    "catalog": "Catalog",
+    "catalog_items": ["Telescopes", "Equatorial Mounts", "Astronomy Cameras", "Filters & Accessories"],
+    "resources": "Resources",
+    "resources_items": ["Astronomy Calculator", "Resolution Guide", "Dark Sky Map", "Support Center", "API Docs"],
+    "subscribe": "Subscribe to the Orbit",
+    "subscribe_desc": "Join our elite observatory network.",
+    "rights": "AstroAssist AI Technologies. All rights reserved."
+  },
+  "cta": {
+    "badge": "Limitless Exploration",
+    "title_part1": "Start your new era of",
+    "title_part2": "observation.",
+    "description": "Bring observatory-grade optics to your backyard. Guaranteed equipment, calibrated and structurally supported by our artificial intelligence.",
+    "button": "Discover equipment",
+    "guarantee": "5-year Warranty",
+    "status_ready": "AstroAssist Ready",
+    "status_link": "Optical Link",
+    "status_stab": "100% Stabilized"
+  },
+  "benefits": {
+    "items": [
+      {
+        "title": "24/7 AI Assistance",
+        "description": "AstroAssist analyzes your location and weather to recommend the best equipment in real time."
+      },
+      {
+        "title": "Extended Warranty",
+        "description": "5-year protection on all optical equipment and equatorial mounts against defects."
+      },
+      {
+        "title": "Insured Shipping",
+        "description": "Specialized international logistics. Your telescope will arrive in perfect condition worldwide."
+      },
+      {
+        "title": "Optical Calibration",
+        "description": "Each device is pre-collimated using artificial stars before leaving the laboratory."
+      }
+    ]
+  },
+  "chatbot": {
+    "badge": "AstroAssist AI Integrated",
+    "title_part1": "Your Expert Advisor,",
+    "title_part2": "Available 24/7",
+    "description": "You are not alone under the stars. Our custom-developed AI knows the complete catalog and evaluates technical conditions to ensure the perfect photograph.",
+    "features": [
+      "Instant technical recommendations",
+      "Optical compatibility and payload calculations",
+      "Level evaluation for beginners"
+    ]
+  },
+  "featured": {
+    "badge": "Optical Catalog",
+    "title_part1": "Premium",
+    "title_part2": "Equipment",
+    "description": "Cutting-edge optical systems and mounts chosen by our analytical AI. Interact with the cards to explore the quality of their components."
+  },
+  "gallery": {
+    "badge": "Optical Gallery",
+    "title": "The Universe through our optics.",
+    "description": "Astroculturists and observers in our community demonstrate what AstroAssist hardware is capable of.",
+    "modal_verified": "Verified Capture",
+    "modal_photo_by": "Photography by",
+    "modal_hardware": "Optical Hardware",
+    "modal_capture": "Capture Point",
+    "modal_note": "This image was obtained using equipment available in the AstroAssist AI catalog. Atmospheric conditions and exposure time can iterate on the final visual observation result.",
+    "items": {
+      "img1": {
+        "title": "Orion Nebula (M42)",
+        "photographer": "AstroAssist Community",
+        "equipment": "Sky-Watcher EQ6-R Pro + Asi533MC",
+        "location": "Atacama Observatory"
+      },
+      "img2": {
+        "title": "Pleiades Star Cluster",
+        "photographer": "Dr. Elena M.",
+        "equipment": "Celestron NexStar 130SLT",
+        "location": "Bortle 2 Dark Sky"
+      },
+      "img3": {
+        "title": "Andromeda Galaxy",
+        "photographer": "PRO Astrophoto",
+        "equipment": "80mm ED Refractor",
+        "location": "Mojave Desert"
+      },
+      "img4": {
+        "title": "Photographic Transit",
+        "photographer": "Carlos R.",
+        "equipment": "90mm Maksutov-Cassegrain",
+        "location": "Rocky Mountains"
+      },
+      "img5": {
+        "title": "Central Milky Way",
+        "photographer": "Star Hunters",
+        "equipment": "Sony A7SIII + 14mm Lens",
+        "location": "Teide National Park"
+      },
+      "img6": {
+        "title": "Lunar Surface",
+        "photographer": "Astronomical Institute",
+        "equipment": "CEM60 Mount",
+        "location": "Observatory Dome"
+      },
+      "img7": {
+        "title": "Partial Solar Eclipse",
+        "photographer": "M. Rodriguez",
+        "equipment": "Baader Solar Filter",
+        "location": "Mexico City"
+      }
+    }
+  },
+  "testimonials": {
+    "badge": "Testimonials",
+    "title_part1": "Astronomical",
+    "title_part2": "Community",
+    "description": "Discover how our telemetry is transforming the way professionals of the stars choose their equipment.",
+    "items": [
+      {
+        "name": "Carlos Rivera",
+        "role": "Amateur Astrophotographer",
+        "text": "AstroAssist helped me confirm that the EQ6-R Pro mount would support my 8-inch reflector telescope. Buying without fear of making a mistake is invaluable in this hobby.",
+        "initials": "CR"
+      },
+      {
+        "name": "Dr. Elena Marín",
+        "role": "Astrophysics Researcher",
+        "text": "I asked for a robust portable setup for electromagnetic field observations. The chatbot was surprisingly accurate in suggesting the ZWO ecosystem.",
+        "initials": "EM"
+      },
+      {
+        "name": "Javier Soto",
+        "role": "Landscape Photographer",
+        "text": "The on-site suggestion about the specialized ASI533MC cooled camera solved all my thermal noise issues during long-exposure nights.",
+        "initials": "JS"
+      }
+    ]
+  },
+  "insights": {
+    "badge": "Stellar Logbook",
+    "title_part1": "Wonders of the",
+    "title_part2": "Deep Universe.",
+    "description": "Anomalies recorded and cataloged by our AI telemetry network.",
+    "explore": "Explore",
+    "items": [
+      {
+        "title": "Eye of God",
+        "subtitle": "Helix Nebula",
+        "description": "A remote extinct star expelling rings of plasma into the interstellar void."
+      },
+      {
+        "title": "Creational Echo",
+        "subtitle": "Background Radiation",
+        "description": "The oldest thermal glow in the universe. Light traveling uninterrupted for 13.8 billion years."
+      },
+      {
+        "title": "Supermassive Hole",
+        "subtitle": "M87 Horizon",
+        "description": "A gravitational vortex equivalent to 6.5 billion suns devouring the spacetime fabric."
+      },
+      {
+        "title": "System Limit",
+        "subtitle": "Oort Cloud",
+        "description": "A gigantic frozen sphere. The final abyss before the infinite extrasolar domain."
+      }
+    ]
+  },
+  "catalog_page": {
+    "badge": "Optical Arsenal",
+    "title_part1": "Specialized",
+    "title_part2": "Catalog.",
+    "description": "Systems calibrated and selected via AstroAssist orbital telemetry. Filter the optics, mounts, and accessories that will elevate your spatial ecosystem.",
+    "categories": {
+      "todos": "All",
+      "telescopios": "Telescopes",
+      "monturas": "Mounts",
+      "camaras": "Cameras",
+      "accesorios": "Accessories"
+    },
+    "empty_title": "No systems available",
+    "empty_desc": "We just ran out of visual resources in this spatial sector. Our AI is orbiting for more equipment.",
+    "products": {
+      "celestron-130slt": {
+        "name": "Celestron NexStar 130SLT",
+        "description": "Computerized Newtonian Telescope ideal for lunar and planetary observers. High precision interconnected sidereal tracking.",
+        "tags": ["Beginner", "Automatic"]
+      },
+      "sw-eq6r": {
+        "name": "Sky-Watcher EQ6-R Pro",
+        "description": "Ultra-precise German Equatorial Mount with belt drive. The backbone of premium observatory-grade astrophotography.",
+        "tags": ["Advanced", "Precise"]
+      },
+      "zwo-533mc": {
+        "name": "ZWO ASI533MC Pro",
+        "description": "Color CMOS sensor with extreme thermoelectric cooling (Peltier) ensuring minimum noise in ultra-long cosmic exposures.",
+        "tags": ["Astrophotography", "CMOS Sensor"]
+      },
+      "celestron-edge": {
+        "name": "Celestron EdgeHD 8\"",
+        "description": "Advanced Optical Tube with coma correction and hyper-flat field. StarBright XLT transmission for relentless deep resolution.",
+        "tags": ["Professional", "High Resolution"]
+      },
+      "zwo-eaf": {
+        "name": "ZWO EAF Focuser 5V",
+        "description": "Advanced electronic micro-focuser for sub-millimeter remote optics adjustments with zero inter-phasic ambient vibration.",
+        "tags": ["Accessories", "AI Sync"]
+      },
+      "optolong-lpro": {
+        "name": "Optolong L-eXtreme 2\"",
+        "description": "Strict dual-bandpass filter for Ha and OIII. Pierces through heavily light-polluted skies (Bortle 8).",
+        "tags": ["Narrowband", "Bortle 8"]
+      }
+    }
+  }
+}
+

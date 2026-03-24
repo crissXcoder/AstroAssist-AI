@@ -4,8 +4,11 @@ import { Telescope, Github, Twitter, Linkedin, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useTranslations, useLocale } from "@/components/i18n-provider";
 
 export function Footer() {
+  const t = useTranslations().footer;
+  const locale = useLocale();
   return (
     <footer className="relative border-t border-border/50 dark:border-white/5 pt-20 pb-10 overflow-hidden">
       {/* Decorative glows */}
@@ -21,7 +24,7 @@ export function Footer() {
               <span className="text-2xl font-black tracking-tighter text-glow">AstroAssist AI</span>
             </Link>
             <p className="text-muted-foreground font-light text-sm leading-relaxed max-w-[320px]">
-              El ecosistema definitivo para la iteración óptica y astrofotografía premium, potenciado por telemetría e Inteligencia Artificial.
+              {t.description}
             </p>
             <div className="flex items-center gap-4 pt-2">
                <a href="#" className="w-10 h-10 rounded-full bg-secondary dark:bg-secondary/80 border border-border/50 dark:border-white/5 flex items-center justify-center text-muted-foreground hover:text-foreground dark:hover:text-white hover:border-primary/50 hover:bg-primary/20 hover:shadow-[0_0_15px_rgba(var(--primary),0.3)] transition-all">
@@ -37,27 +40,27 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col space-y-5 lg:col-span-1">
-            <h4 className="text-foreground font-semibold tracking-tight">Equipamiento</h4>
+            <h4 className="text-foreground font-semibold tracking-tight">{t.catalog_items ? 'Equipamiento' : 'Equipamiento'}</h4>
             <ul className="space-y-4">
-              {['Telescopios Reflectores', 'Refractores Apocromáticos', 'Monturas Ecuatoriales', 'Cámaras CMOS', 'Filtros Optométricos'].map(item => (
+              {t.catalog_items.map(item => (
+                <li key={item}><Link href={`/${locale}/catalogo`} className="text-sm font-light text-muted-foreground hover:text-primary transition-colors tracking-wide relative group"><span className="absolute -left-3 opacity-0 group-hover:opacity-100 group-hover:left-0 transition-all text-primary">&rsaquo;</span> <span className="group-hover:pl-3 transition-all inline-block">{item}</span></Link></li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex flex-col space-y-5 lg:col-span-1">
+              <h4 className="text-lg font-bold text-foreground dark:text-white tracking-tight">{t.resources}</h4>
+            <ul className="space-y-4">
+              {t.resources_items.map(item => (
                 <li key={item}><Link href="#" className="text-sm font-light text-muted-foreground hover:text-primary transition-colors tracking-wide relative group"><span className="absolute -left-3 opacity-0 group-hover:opacity-100 group-hover:left-0 transition-all text-primary">&rsaquo;</span> <span className="group-hover:pl-3 transition-all inline-block">{item}</span></Link></li>
               ))}
             </ul>
           </div>
 
           <div className="flex flex-col space-y-5 lg:col-span-1">
-              <h4 className="text-lg font-bold text-foreground dark:text-white tracking-tight">Catálogo</h4>
-            <ul className="space-y-4">
-              {['Calculadora Astronómica', 'Guía de Resoluciones', 'Mapa de Cielos Oscuros', 'Centro de Soporte', 'API Docs'].map(item => (
-                <li key={item}><Link href="#" className="text-sm font-light text-muted-foreground hover:text-primary transition-colors tracking-wide relative group"><span className="absolute -left-3 opacity-0 group-hover:opacity-100 group-hover:left-0 transition-all text-primary">&rsaquo;</span> <span className="group-hover:pl-3 transition-all inline-block">{item}</span></Link></li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="flex flex-col space-y-5 lg:col-span-1">
-              <h4 className="text-lg font-bold text-foreground dark:text-white tracking-tight">Suscríbete a la Órbita</h4>
+              <h4 className="text-lg font-bold text-foreground dark:text-white tracking-tight">{t.subscribe}</h4>
             <p className="text-sm text-muted-foreground leading-relaxed font-light mb-1">
-              Únete a nuestra élite observatoria.
+              {t.subscribe_desc}
             </p>
             <form className="flex gap-2">
               <Input 
@@ -73,7 +76,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-border/50 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground font-light tracking-wide">
-            © {new Date().getFullYear()} AstroAssist AI Technologies. Todos los derechos reservados.
+            © {new Date().getFullYear()} {t.rights}
           </p>
           <div className="flex items-center gap-6">
             <Link href="#" className="text-xs text-muted-foreground hover:text-white transition-colors tracking-widest uppercase">Privacidad</Link>
