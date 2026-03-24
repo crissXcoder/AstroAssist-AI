@@ -1,6 +1,7 @@
 import { Hero } from "@/components/landing/Hero";
 import { FeaturedProducts } from "@/components/landing/FeaturedProducts";
 import { ChatbotSection } from "@/components/landing/ChatbotSection";
+import { CosmicInsights } from "@/components/landing/CosmicInsights";
 import { Benefits } from "@/components/landing/Benefits";
 import { Gallery } from "@/components/landing/Gallery";
 import { Testimonials } from "@/components/landing/Testimonials";
@@ -14,6 +15,7 @@ export default function Home() {
       <FeaturedProducts />
       <Benefits />
       <ChatbotSection />
+      <CosmicInsights />
       <Gallery />
       <Testimonials />
       <CtaSection />
