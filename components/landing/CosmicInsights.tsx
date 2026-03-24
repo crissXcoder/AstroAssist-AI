@@ -32,7 +32,7 @@ export function CosmicInsights() {
       title: t.items[2].title,
       subtitle: t.items[2].subtitle,
       description: t.items[2].description,
-      image: "https://images.unsplash.com/photo-1436891620584-47fd0e565afb?q=80&w=1200&auto=format&fit=crop",
+      image: "https://imgs.search.brave.com/AkeNCGchre1T-GwH5th_aOVSXX1oHKyFw2XZjMTHyxQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5lcy53aXJlZC5j/b20vcGhvdG9zLzY2/YzM4NDJiOTU4MTUy/MTI0MjhkMWEwNy8x/Njo5L3dfNjQwLGNf/bGltaXQvR2V0dHlJ/bWFnZXMtMTE1NTI2/NjA1Ny5qcGc",
       icon: <Orbit className="w-5 h-5 text-amber-400" />
     },
     {
