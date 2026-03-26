@@ -227,6 +227,64 @@
         "tags": ["Banda Estrecha", "Bortle 8"]
       }
     }
+  },
+  "setup_builder": {
+    "badge": "Configurador de Sistemas",
+    "title_part1": "Encuentra tu",
+    "title_part2": "setup perfecto.",
+    "description": "Proporciona tus parámetros de observación y nuestro sistema configurará el ecosistema óptico ideal.",
+    "back": "Atrás",
+    "next": "Continuar",
+    "finish": "Analizar Setup",
+    "step_experience": {
+      "title": "Perfil de Observador",
+      "subtitle": "¿Cuál es tu nivel de experiencia?",
+      "beginner": "Principiante",
+      "beginner_desc": "Buscando mi primer telescopio.",
+      "intermediate": "Intermedio",
+      "intermediate_desc": "He utilizado equipo óptico antes.",
+      "advanced": "Avanzado",
+      "advanced_desc": "Observador experimentado o astrofotógrafo."
+    },
+    "step_budget": {
+      "title": "Asignación de Recursos",
+      "subtitle": "¿Cuál es tu presupuesto para hardware?",
+      "low": "Entrada",
+      "low_desc": "Equipamiento eficiente y accesible.",
+      "medium": "Entusiasta",
+      "medium_desc": "Ópticas avanzadas y seguimiento.",
+      "high": "Grado Observatorio",
+      "high_desc": "Sistemas premium profesionales."
+    },
+    "step_goal": {
+      "title": "Objetivo Principal",
+      "subtitle": "¿Qué deseas lograr?",
+      "planets": "Luna y Planetas",
+      "planets_desc": "Vistas de alto contraste del sistema solar.",
+      "deepsky": "Cielo Profundo",
+      "deepsky_desc": "Nebulosas, galaxias y cúmulos estelares.",
+      "astrophotography": "Astrofotografía",
+      "astrophotography_desc": "Captura de largo tiempo de exposición."
+    },
+    "step_environment": {
+      "title": "Entorno Local",
+      "subtitle": "¿Desde dónde observarás?",
+      "city": "Horizonte Urbano",
+      "city_desc": "Alta contaminación lumínica (Bortle 8-9).",
+      "suburban": "Suburbios",
+      "suburban_desc": "Contaminación lumínica moderada (Bortle 5-7).",
+      "darksky": "Cielo Oscuro",
+      "darksky_desc": "Cielos prístinos (Bortle 1-4)."
+    },
+    "result": {
+      "title": "Configuración Óptima",
+      "subtitle": "Basado en tus parámetros, recomendamos este ecosistema.",
+      "main_gear": "Hardware Principal",
+      "accessories": "Complementos Recomendados",
+      "reasoning": "Análisis del Sistema",
+      "ai_prompt": "Preguntar a la IA sobre este setup...",
+      "ai_button": "Preguntar",
+      "restart": "Reconfigurar Setup"
+    }
   }
 }
-

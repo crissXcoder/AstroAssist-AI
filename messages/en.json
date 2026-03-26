@@ -227,6 +227,64 @@
         "tags": ["Narrowband", "Bortle 8"]
       }
     }
+  },
+  "setup_builder": {
+    "badge": "System Configurator",
+    "title_part1": "Find your",
+    "title_part2": "perfect setup.",
+    "description": "Provide your observational parameters and our system will configure the ideal optical ecosystem.",
+    "back": "Back",
+    "next": "Continue",
+    "finish": "Analyze Setup",
+    "step_experience": {
+      "title": "Observer Profile",
+      "subtitle": "What is your current experience level?",
+      "beginner": "Beginner",
+      "beginner_desc": "Looking for my first telescope.",
+      "intermediate": "Intermediate",
+      "intermediate_desc": "I have used optical equipment before.",
+      "advanced": "Advanced",
+      "advanced_desc": "Experienced observer or astrophotographer."
+    },
+    "step_budget": {
+      "title": "Resource Allocation",
+      "subtitle": "What is your hardware budget?",
+      "low": "Entry Level",
+      "low_desc": "Efficient and accessible equipment.",
+      "medium": "Enthusiast",
+      "medium_desc": "Advanced optics and tracking.",
+      "high": "Observatory",
+      "high_desc": "Premium, professional-grade systems."
+    },
+    "step_goal": {
+      "title": "Primary Objective",
+      "subtitle": "What do you want to achieve?",
+      "planets": "Lunar & Planetary",
+      "planets_desc": "High contrast solar system views.",
+      "deepsky": "Deep Sky",
+      "deepsky_desc": "Nebulae, galaxies, and star clusters.",
+      "astrophotography": "Astrophotography",
+      "astrophotography_desc": "Long exposure deep space imaging."
+    },
+    "step_environment": {
+      "title": "Local Environment",
+      "subtitle": "Where will you observe from?",
+      "city": "City Skyline",
+      "city_desc": "Heavy light pollution (Bortle 8-9).",
+      "suburban": "Suburbs",
+      "suburban_desc": "Moderate light pollution (Bortle 5-7).",
+      "darksky": "Dark Site",
+      "darksky_desc": "Pristine skies (Bortle 1-4)."
+    },
+    "result": {
+      "title": "Optimal Configuration",
+      "subtitle": "Based on your parameters, we recommend this ecosystem.",
+      "main_gear": "Primary Hardware",
+      "accessories": "Recommended Add-ons",
+      "reasoning": "System Analysis",
+      "ai_prompt": "Ask AI about this setup...",
+      "ai_button": "Ask",
+      "restart": "Reconfigure Setup"
+    }
   }
 }
-
