@@ -1,0 +1,29 @@
+{
+  "hero": {
+    "background": "https://i.ibb.co/NgYcMxtM/image.png",
+    "dashboard": "https://images.unsplash.com/photo-1543722530-d2c3201371e7?q=80&w=2500&auto=format&fit=crop"
+  },
+  "gallery": {
+    "img1": "https://i.ibb.co/KxNyT1hw/image.png",
+    "img2": "https://i.ibb.co/FLmZ912y/image.png",
+    "img3": "https://i.ibb.co/qYYXp5Zc/image.png",
+    "img4": "https://images.unsplash.com/photo-1543722530-d2c3201371e7?q=80&w=800&auto=format&fit=crop",
+    "img5": "https://i.ibb.co/Ngk4SCV8/image.png",
+    "img6": "https://imgs.search.brave.com/LdRuaplO4bbceaK0JcJntjm4_TCgAin1njzGycoaEtw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wbmcu/cG5ndHJlZS5jb20v/cG5nLXZlY3Rvci8y/MDI0MDkxMy9vdXJt/aWQvcG5ndHJlZS1s/dW5hci1zdXJmYWNl/LXBuZy1pbWFnZV8x/MzU1ODcyMi5wbmc",
+    "img7": "https://imgs.search.brave.com/WgJsTnKG48uIe9ejdLN7i999_-e03W5k6Y5sjjy53Cg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9hcGkvbWVk/aWEvc21hbGwvNzE0/NzA5OTg0L3N0b2Nr/LXBob3RvLXBhcnRp/YWwtc29sYXItZWNs/aXBzZS1maXJzdC1z/ZWNvbmQtY29udGFj/dHMtc3VuLXNlZW4t/c29sYXItZmlsdGVy"
+  },
+  "insights": {
+    "item1": "https://imgs.search.brave.com/E4y87XYXy2oOzWR5fuZ-nUwdivjazrB-lLIru3-NKl4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnJl/ZGQuaXQvMTl5Z2F0/ZWtzdzc4MS5qcGc",
+    "item2": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
+    "item3": "https://imgs.search.brave.com/AkeNCGchre1T-GwH5th_aOVSXX1oHKyFw2XZjMTHyxQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5lcy53aXJlZC5j/b20vcGhvdG9zLzY2/YzM4NDJiOTU4MTUy/MTI0MjhkMWEwNy8x/Njo5L3dfNjQwLGNf/bGltaXQvR2V0dHlJ/bWFnZXMtMTE1NTI2/NjA1Ny5qcGc",
+    "item4": "https://i.ibb.co/gFL3Dwb5/image.png"
+  },
+  "products": {
+    "celestron-130slt": "https://i.ibb.co/bgxKwG6y/image.png",
+    "sw-eq6r": "https://i.ibb.co/BKZkdQbj/image.png",
+    "zwo-533mc": "https://i.ibb.co/k61Kp1jd/image.png",
+    "celestron-edge": "https://i.ibb.co/1f4Zcdqk/91030-xlt-edgehd8-large-1.jpg",
+    "zwo-eaf": "https://i.ibb.co/QFpPK6LH/image.png",
+    "optolong-lpro": "https://imgs.search.brave.com/koROv4oldKmlv8wvHrXYE4ug_vMMlSxjbINHt9yLpGQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/dGVzdGFyLmNvbS5h/dS9jZG4vc2hvcC9w/cm9kdWN0cy9MLWVY/dHJlbWUtU0FJLXNo/YXJwZW4tRGVOb2lz/ZUFJLWRlbm9pc2Uu/cG5nP3Y9MTYxOTMz/OTU1NCZ3aWR0aD0x/MjE0"
+  }
+}

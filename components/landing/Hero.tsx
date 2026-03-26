@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useTranslations, useLocale } from "@/components/i18n-provider";
 import { Badge } from "@/components/ui/badge"; // Assuming Badge is needed for the new structure
 import { ChevronRight } from "lucide-react"; // Assuming ChevronRight is needed for the new structure
+import images from "@/lib/images.json";
 
 export function Hero() {
   const containerRef = useRef<HTMLElement>(null);
@@ -38,7 +39,7 @@ export function Hero() {
         style={{ y: bgY }}
         className="absolute inset-0 z-0 pointer-events-none"
       >
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2500&auto=format&fit=crop')] bg-cover bg-center opacity-[0.10] mix-blend-screen" />
+        <div className="absolute inset-0 bg-cover bg-center opacity-[0.10] mix-blend-screen" style={{ backgroundImage: `url('${images.hero.background}')` }} />
         <div className="absolute inset-0 bg-linear-to-b from-[#0A0D14]/80 via-transparent to-[#0A0D14]" />
         
         {/* Single subtle aura for depth */}
@@ -118,7 +119,7 @@ export function Hero() {
             <div className="w-2.5 h-2.5 rounded-full bg-neutral-700/50" />
           </div>
           
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1543722530-d2c3201371e7?q=80&w=2500&auto=format&fit=crop')] bg-cover bg-center opacity-60 mix-blend-lighten scale-[1.02]" />
+          <div className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-lighten scale-[1.02]" style={{ backgroundImage: `url('${images.hero.dashboard}')` }} />
           
           <div className="absolute inset-0 bg-linear-to-t from-[#0A0D14] via-transparent to-transparent opacity-80" />
 
