@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Orbit, Zap, Globe, ArrowRight } from "lucide-react";
 import { SectionContainer } from "@/components/ui/section";
 import { useTranslations } from "@/components/i18n-provider";
+import images from "@/lib/images.json";
 
 export function CosmicInsights() {
   const t = useTranslations().insights;
@@ -16,7 +17,7 @@ export function CosmicInsights() {
       title: t.items[0].title,
       subtitle: t.items[0].subtitle,
       description: t.items[0].description,
-      image: "https://imgs.search.brave.com/E4y87XYXy2oOzWR5fuZ-nUwdivjazrB-lLIru3-NKl4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnJl/ZGQuaXQvMTl5Z2F0/ZWtzdzc4MS5qcGc",
+      image: images.insights.item1,
       icon: <Sparkles className="w-5 h-5 text-indigo-400" />
     },
     {
@@ -24,7 +25,7 @@ export function CosmicInsights() {
       title: t.items[1].title,
       subtitle: t.items[1].subtitle,
       description: t.items[1].description,
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
+      image: images.insights.item2,
       icon: <Zap className="w-5 h-5 text-purple-400" />
     },
     {
@@ -32,7 +33,7 @@ export function CosmicInsights() {
       title: t.items[2].title,
       subtitle: t.items[2].subtitle,
       description: t.items[2].description,
-      image: "https://imgs.search.brave.com/AkeNCGchre1T-GwH5th_aOVSXX1oHKyFw2XZjMTHyxQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5lcy53aXJlZC5j/b20vcGhvdG9zLzY2/YzM4NDJiOTU4MTUy/MTI0MjhkMWEwNy8x/Njo5L3dfNjQwLGNf/bGltaXQvR2V0dHlJ/bWFnZXMtMTE1NTI2/NjA1Ny5qcGc",
+      image: images.insights.item3,
       icon: <Orbit className="w-5 h-5 text-amber-400" />
     },
     {
@@ -40,7 +41,7 @@ export function CosmicInsights() {
       title: t.items[3].title,
       subtitle: t.items[3].subtitle,
       description: t.items[3].description,
-      image: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+      image: images.insights.item4,
       icon: <Globe className="w-5 h-5 text-cyan-400" />
     }
   ];
