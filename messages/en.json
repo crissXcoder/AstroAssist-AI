@@ -6,71 +6,71 @@
     "community": "Community"
   },
   "hero": {
-    "badge": "ASTROASSIST ONLINE",
-    "title_part1": "The universe,",
-    "title_part2": "with absolute",
-    "title_part3": "exactitude.",
-    "description": "Superior optical equipment assisted by artificial intelligence. We permanently redefine your observation boundaries.",
+    "badge": "ASTROASSIST",
+    "title_part1": "Precision",
+    "title_part2": "optics,",
+    "title_part3": "guided.",
+    "description": "Professional-grade optical equipment with intelligent guidance. Calibrated for the modern observer.",
     "cta_catalog": "Explore catalog",
-    "cta_console": "Meet the AI"
+    "cta_console": "System Console"
   },
   "footer": {
-    "description": "The definitive ecosystem for optical iteration and premium astrophotography, powered by telemetry and Artificial Intelligence.",
+    "description": "Professional optical systems and intelligent guidance for astrophotography.",
     "catalog": "Catalog",
     "catalog_items": ["Telescopes", "Equatorial Mounts", "Astronomy Cameras", "Filters & Accessories"],
     "resources": "Resources",
     "resources_items": ["Astronomy Calculator", "Resolution Guide", "Dark Sky Map", "Support Center", "API Docs"],
     "subscribe": "Subscribe to the Orbit",
-    "subscribe_desc": "Join our elite observatory network.",
+    "subscribe_desc": "Join our observer network.",
     "rights": "AstroAssist AI Technologies. All rights reserved."
   },
   "cta": {
-    "badge": "Limitless Exploration",
-    "title_part1": "Start your new era of",
-    "title_part2": "observation.",
-    "description": "Bring observatory-grade optics to your backyard. Guaranteed equipment, calibrated and structurally supported by our artificial intelligence.",
+    "badge": "Clear Skies",
+    "title_part1": "Precision in every",
+    "title_part2": "capture.",
+    "description": "Equipment built for reliability and calibrated for performance. Backed by intelligent telemetry.",
     "button": "Discover equipment",
     "guarantee": "5-year Warranty",
-    "status_ready": "AstroAssist Ready",
-    "status_link": "Optical Link",
-    "status_stab": "100% Stabilized"
+    "status_ready": "System Ready",
+    "status_link": "Telemetry Link",
+    "status_stab": "Stabilized"
   },
   "benefits": {
     "items": [
       {
-        "title": "24/7 AI Assistance",
-        "description": "AstroAssist analyzes your location and weather to recommend the best equipment in real time."
+        "title": "Intelligent Telemetry",
+        "description": "Real-time analysis of atmospheric conditions and technical recommendations."
       },
       {
         "title": "Extended Warranty",
-        "description": "5-year protection on all optical equipment and equatorial mounts against defects."
+        "description": "5-year protection on all optical equipment and equatorial mounts."
       },
       {
         "title": "Insured Shipping",
-        "description": "Specialized international logistics. Your telescope will arrive in perfect condition worldwide."
+        "description": "Specialized international logistics. Your equipment will arrive safely."
       },
       {
         "title": "Optical Calibration",
-        "description": "Each device is pre-collimated using artificial stars before leaving the laboratory."
+        "description": "Equipment is optically verified and calibrated before shipping."
       }
     ]
   },
   "chatbot": {
-    "badge": "AstroAssist AI Integrated",
-    "title_part1": "Your Expert Advisor,",
-    "title_part2": "Available 24/7",
-    "description": "You are not alone under the stars. Our custom-developed AI knows the complete catalog and evaluates technical conditions to ensure the perfect photograph.",
+    "badge": "Integrated Systems",
+    "title_part1": "Technical Guidance",
+    "title_part2": "When You Need It",
+    "description": "Access our repository of optical knowledge and get instant evaluations for your planned observations.",
     "features": [
-      "Instant technical recommendations",
-      "Optical compatibility and payload calculations",
-      "Level evaluation for beginners"
+      "Technical recommendations",
+      "Optical compatibility checks",
+      "Setup guidance"
     ]
   },
   "featured": {
-    "badge": "Optical Catalog",
-    "title_part1": "Premium",
+    "badge": "Selected Optics",
+    "title_part1": "Curated",
     "title_part2": "Equipment",
-    "description": "Cutting-edge optical systems and mounts chosen by our analytical AI. Interact with the cards to explore the quality of their components."
+    "description": "Reliable optical systems and mounts curated for performance. Review the specifications for each component."
   },
   "gallery": {
     "badge": "Optical Gallery",
@@ -227,6 +227,64 @@
         "tags": ["Narrowband", "Bortle 8"]
       }
     }
+  },
+  "setup_builder": {
+    "badge": "System Configurator",
+    "title_part1": "Find your",
+    "title_part2": "perfect setup.",
+    "description": "Provide your observational parameters and our system will configure the ideal optical ecosystem.",
+    "back": "Back",
+    "next": "Continue",
+    "finish": "Analyze Setup",
+    "step_experience": {
+      "title": "Observer Profile",
+      "subtitle": "What is your current experience level?",
+      "beginner": "Beginner",
+      "beginner_desc": "Looking for my first telescope.",
+      "intermediate": "Intermediate",
+      "intermediate_desc": "I have used optical equipment before.",
+      "advanced": "Advanced",
+      "advanced_desc": "Experienced observer or astrophotographer."
+    },
+    "step_budget": {
+      "title": "Resource Allocation",
+      "subtitle": "What is your hardware budget?",
+      "low": "Entry Level",
+      "low_desc": "Efficient and accessible equipment.",
+      "medium": "Enthusiast",
+      "medium_desc": "Advanced optics and tracking.",
+      "high": "Observatory",
+      "high_desc": "Premium, professional-grade systems."
+    },
+    "step_goal": {
+      "title": "Primary Objective",
+      "subtitle": "What do you want to achieve?",
+      "planets": "Lunar & Planetary",
+      "planets_desc": "High contrast solar system views.",
+      "deepsky": "Deep Sky",
+      "deepsky_desc": "Nebulae, galaxies, and star clusters.",
+      "astrophotography": "Astrophotography",
+      "astrophotography_desc": "Long exposure deep space imaging."
+    },
+    "step_environment": {
+      "title": "Local Environment",
+      "subtitle": "Where will you observe from?",
+      "city": "City Skyline",
+      "city_desc": "Heavy light pollution (Bortle 8-9).",
+      "suburban": "Suburbs",
+      "suburban_desc": "Moderate light pollution (Bortle 5-7).",
+      "darksky": "Dark Site",
+      "darksky_desc": "Pristine skies (Bortle 1-4)."
+    },
+    "result": {
+      "title": "Optimal Configuration",
+      "subtitle": "Based on your parameters, we recommend this ecosystem.",
+      "main_gear": "Primary Hardware",
+      "accessories": "Recommended Add-ons",
+      "reasoning": "System Analysis",
+      "ai_prompt": "Ask AI about this setup...",
+      "ai_button": "Ask",
+      "restart": "Reconfigure Setup"
+    }
   }
 }
-

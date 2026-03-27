@@ -9,6 +9,7 @@ export type Message = {
 
 export function useChat() {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [status, setStatus] = useState<'online' | 'error_auth' | 'error_quota' | 'error_model' | 'offline'>('online');
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -67,14 +68,16 @@ export function useChat() {
         }),
       });
 
-      // Si el servidor falla, tratamos de extraer el error preciso
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.details || errorData.error || 'Error desconocido del servidor (500)');
+      const data = await response.json().catch(() => ({}));
+      
+      if (data.status) {
+        setStatus(data.status);
       }
 
-      const data = await response.json();
-      
+      if (!response.ok) {
+        throw new Error(data.content || data.error || 'Error de servidor (500)');
+      }
+
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
@@ -88,10 +91,16 @@ export function useChat() {
       setError(errorMessage);
       console.error("🔴 AI Chat Error:", err);
       
+      // If result is not online, we already set the status above
+      // But if it was a network error, we set to offline
+      if (!navigator.onLine) {
+        setStatus('offline');
+      }
+
       setMessages(prev => [...prev, {
         id: Date.now().toString(),
         role: 'assistant',
-        content: `Lo siento, ocurrió un error crítico:\n\`${errorMessage}\`\n\nPor favor revisa la consola o reinicia el servidor.`,
+        content: `Lo siento, ocurrió un error técnico:\n\`${errorMessage}\`\n\nPor favor intenta de nuevo o revisa tu configuración.`,
         createdAt: new Date()
       }]);
     } finally {
@@ -115,6 +124,7 @@ export function useChat() {
     setInput,
     isLoading,
     error,
+    status,
     sendMessage,
     clearHistory
   };
