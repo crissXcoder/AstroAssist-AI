@@ -32,7 +32,7 @@ export function Benefits() {
   ];
 
   return (
-    <SectionContainer delay={0.1} className="py-24 md:py-32 border-y border-border/40 relative bg-background">
+    <SectionContainer id="benefits" delay={0.1} className="py-24 md:py-32 border-y border-border/40 relative bg-background">
       <div className="container px-4 md:px-6 mx-auto relative z-10">
         <motion.div 
           variants={STAGGER_CONTAINER}

@@ -86,7 +86,7 @@ export function Gallery() {
   }
 
   return (
-    <SectionContainer delay={0.3} className="py-32 relative overflow-hidden">
+    <SectionContainer id="gallery" delay={0.3} className="py-32 relative overflow-hidden">
       {/* Immersive Deep Background */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none -z-10" />
       <div className="absolute bottom-0 w-full h-[500px] bg-linear-to-t from-background via-background/10 to-transparent pointer-events-none z-10 block" />
@@ -162,7 +162,7 @@ export function Gallery() {
             onClick={() => setSelectedImage(null)}
           >
             <button 
-              className="absolute top-6 right-6 p-3 rounded-full bg-white dark:bg-white/5 hover:bg-neutral-100 dark:hover:bg-white/10 text-foreground dark:text-white transition-colors z-[60] border border-border/50 dark:border-white/10 shadow-lg"
+              className="absolute top-6 right-6 p-3 rounded-full bg-white dark:bg-white/5 hover:bg-neutral-100 dark:hover:bg-white/10 text-foreground dark:text-white transition-colors z-60 border border-border/50 dark:border-white/10 shadow-lg"
               onClick={() => setSelectedImage(null)}
             >
               <X className="w-6 h-6" />
@@ -173,7 +173,7 @@ export function Gallery() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-full max-w-6xl aspect-[4/3] md:aspect-auto md:h-[80vh] rounded-[2rem] overflow-hidden glass border border-border/50 dark:border-white/10 flex flex-col md:flex-row shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_100px_rgba(var(--primary),0.3)] bg-card dark:bg-card/60"
+              className="relative w-full max-w-6xl aspect-4/3 md:aspect-auto md:h-[80vh] rounded-4xl overflow-hidden glass border border-border/50 dark:border-white/10 flex flex-col md:flex-row shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_100px_rgba(var(--primary),0.3)] bg-card dark:bg-card/60"
               onClick={(e) => e.stopPropagation()} // Prevent close when clicking modal body
             >
               {/* Image Side */}
