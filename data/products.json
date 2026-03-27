@@ -1,0 +1,170 @@
+[
+  {
+    "id": "celestron-130slt",
+    "nameEn": "Celestron NexStar 130SLT",
+    "nameEs": "Celestron NexStar 130SLT",
+    "category": "Telescopios",
+    "price": "$649.00",
+    "images": {
+      "primary": "https://i.ibb.co/bgxKwG6y/image.png"
+    },
+    "descriptionEn": "Computerized Newtonian Telescope ideal for lunar and planetary observers. High-precision interconnected sidereal tracking makes alignment effortless for first-time users.",
+    "descriptionEs": "Telescopio Newtoniano Computarizado ideal para observadores lunares y planetarios. El seguimiento sideral de alta precisión hace que la alineación sea sencilla para usuarios por primera vez.",
+    "recommendedLevel": "beginner",
+    "observationType": "planetary",
+    "skyCondition": "suburban",
+    "portability": "medium",
+    "setupComplexity": "easy",
+    "compatibility": ["zwo-eaf", "optolong-lpro"],
+    "advantages": [
+      "advantagesEn_0",
+      "advantagesEn_1",
+      "advantagesEn_2"
+    ],
+    "idealUseCases": [
+      "useCasesEn_0",
+      "useCasesEn_1"
+    ],
+    "tags": ["beginner", "computerized", "planetary", "lunar", "automatic"]
+  },
+  {
+    "id": "sw-eq6r",
+    "nameEn": "Sky-Watcher EQ6-R Pro",
+    "nameEs": "Sky-Watcher EQ6-R Pro",
+    "category": "Monturas",
+    "price": "$2,025.00",
+    "images": {
+      "primary": "https://i.ibb.co/BKZkdQbj/image.png"
+    },
+    "descriptionEn": "Ultra-precise German Equatorial Mount with belt drive. The backbone of premium observatory-grade astrophotography with a 20 kg payload capacity.",
+    "descriptionEs": "Montura Ecuatorial Alemana ultra-precisa con tracción por correas. La espina dorsal de la astrofotografía premium de grado observatorio con capacidad de carga de 20 kg.",
+    "recommendedLevel": "advanced",
+    "observationType": "astrophotography",
+    "skyCondition": "dark_sky",
+    "portability": "low",
+    "setupComplexity": "advanced",
+    "compatibility": ["celestron-edge", "zwo-533mc", "zwo-eaf", "optolong-lpro"],
+    "advantages": [
+      "advantagesEn_0",
+      "advantagesEn_1",
+      "advantagesEn_2"
+    ],
+    "idealUseCases": [
+      "useCasesEn_0",
+      "useCasesEn_1"
+    ],
+    "tags": ["advanced", "equatorial", "astrophotography", "belt-drive", "goto", "observatory"]
+  },
+  {
+    "id": "zwo-533mc",
+    "nameEn": "ZWO ASI533MC Pro",
+    "nameEs": "ZWO ASI533MC Pro",
+    "category": "Cámaras",
+    "price": "$799.00",
+    "images": {
+      "primary": "https://i.ibb.co/k61Kp1jd/image.png"
+    },
+    "descriptionEn": "Color CMOS sensor with extreme thermoelectric cooling (Peltier) ensuring minimum noise in ultra-long cosmic exposures. Square sensor eliminates corner vignetting.",
+    "descriptionEs": "Sensor CMOS a color con refrigeración termoeléctrica extrema (Peltier) garantizando el mínimo ruido en exposiciones cósmicas ultra-largas. El sensor cuadrado elimina el viñeteado en las esquinas.",
+    "recommendedLevel": "intermediate",
+    "observationType": "astrophotography",
+    "skyCondition": "suburban",
+    "portability": "high",
+    "setupComplexity": "moderate",
+    "compatibility": ["celestron-edge", "sw-eq6r", "zwo-eaf", "optolong-lpro"],
+    "advantages": [
+      "advantagesEn_0",
+      "advantagesEn_1",
+      "advantagesEn_2"
+    ],
+    "idealUseCases": [
+      "useCasesEn_0",
+      "useCasesEn_1"
+    ],
+    "tags": ["astrophotography", "cmos", "cooled", "color", "deep-sky", "intermediate"]
+  },
+  {
+    "id": "celestron-edge",
+    "nameEn": "Celestron EdgeHD 8\"",
+    "nameEs": "Celestron EdgeHD 8\"",
+    "category": "Telescopios",
+    "price": "$1,499.00",
+    "images": {
+      "primary": "https://i.ibb.co/1f4Zcdqk/91030-xlt-edgehd8-large-1.jpg"
+    },
+    "descriptionEn": "Advanced Optical Tube with coma correction and hyper-flat field. StarBright XLT coating delivers relentless deep resolution for both visual and imaging work.",
+    "descriptionEs": "Tubo Óptico avanzado con corrección de coma y campo hiper-plano. El recubrimiento StarBright XLT ofrece una resolución profunda implacable tanto para trabajo visual como de imagen.",
+    "recommendedLevel": "advanced",
+    "observationType": "astrophotography",
+    "skyCondition": "dark_sky",
+    "portability": "low",
+    "setupComplexity": "advanced",
+    "compatibility": ["sw-eq6r", "zwo-533mc", "zwo-eaf", "optolong-lpro"],
+    "advantages": [
+      "advantagesEn_0",
+      "advantagesEn_1",
+      "advantagesEn_2"
+    ],
+    "idealUseCases": [
+      "useCasesEn_0",
+      "useCasesEn_1"
+    ],
+    "tags": ["advanced", "sct", "coma-free", "flat-field", "astrophotography", "high-resolution", "professional"]
+  },
+  {
+    "id": "zwo-eaf",
+    "nameEn": "ZWO EAF Electronic Focuser 5V",
+    "nameEs": "ZWO EAF Micro-Focalizador Electrónico 5V",
+    "category": "Accesorios",
+    "price": "$199.00",
+    "images": {
+      "primary": "https://i.ibb.co/QFpPK6LH/image.png"
+    },
+    "descriptionEn": "Advanced electronic micro-focuser for sub-millimeter remote optics adjustments with zero ambient vibration. Essential for unattended imaging sessions.",
+    "descriptionEs": "Micro-focalizador electrónico avanzado para ajustes sub-milimétricos de óptica remota sin vibración ambiental. Esencial para sesiones de imagen desatendidas.",
+    "recommendedLevel": "intermediate",
+    "observationType": "astrophotography",
+    "skyCondition": "city",
+    "portability": "high",
+    "setupComplexity": "moderate",
+    "compatibility": ["celestron-130slt", "celestron-edge", "zwo-533mc"],
+    "advantages": [
+      "advantagesEn_0",
+      "advantagesEn_1",
+      "advantagesEn_2"
+    ],
+    "idealUseCases": [
+      "useCasesEn_0",
+      "useCasesEn_1"
+    ],
+    "tags": ["accessory", "focuser", "electronic", "ai-sync", "astrophotography", "remote"]
+  },
+  {
+    "id": "optolong-lpro",
+    "nameEn": "Optolong L-eXtreme 2\"",
+    "nameEs": "Optolong L-eXtreme 2\"",
+    "category": "Accesorios",
+    "price": "$309.00",
+    "images": {
+      "primary": "https://imgs.search.brave.com/koROv4oldKmlv8wvHrXYE4ug_vMMlSxjbINHt9yLpGQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/dGVzdGFyLmNvbS5h/dS9jZG4vc2hvcC9w/cm9kdWN0cy9MLWVY/dHJlbWUtU0FJLXNo/YXJwZW4tRGVOb2lz/ZUFJLWRlbm9pc2Uu/cG5nP3Y9MTYxOTMz/OTU1NCZ3aWR0aD0x/MjE0"
+    },
+    "descriptionEn": "Strict dual-bandpass filter for Ha and OIII emission lines. Pierces through heavily light-polluted city skies (Bortle 8) to reveal faint nebulae.",
+    "descriptionEs": "Filtro de doble banda pasante estricto para líneas de emisión Ha y OIII. Perfora cielos fuertemente polucionados (Bortle 8) para revelar nebulosas tenues.",
+    "recommendedLevel": "intermediate",
+    "observationType": "deep_sky",
+    "skyCondition": "city",
+    "portability": "high",
+    "setupComplexity": "easy",
+    "compatibility": ["celestron-130slt", "celestron-edge", "zwo-533mc"],
+    "advantages": [
+      "advantagesEn_0",
+      "advantagesEn_1",
+      "advantagesEn_2"
+    ],
+    "idealUseCases": [
+      "useCasesEn_0",
+      "useCasesEn_1"
+    ],
+    "tags": ["accessory", "filter", "narrowband", "city", "light-pollution", "nebula", "bortle8"]
+  }
+]

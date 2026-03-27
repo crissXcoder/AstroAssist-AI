@@ -6,71 +6,71 @@
     "community": "Comunidad"
   },
   "hero": {
-    "badge": "ASTROASSIST ONLINE",
-    "title_part1": "El universo,",
-    "title_part2": "con absoluta",
-    "title_part3": "exactitud.",
-    "description": "Equipamiento óptico superior asistido por inteligencia artificial. Redefinimos permanentemente tus fronteras de observación.",
+    "badge": "ASTROASSIST",
+    "title_part1": "Óptica de",
+    "title_part2": "precisión,",
+    "title_part3": "guiada.",
+    "description": "Equipamiento óptico profesional con guía inteligente. Calibrado para el observador moderno.",
     "cta_catalog": "Explorar catálogo",
-    "cta_console": "Conocer la IA"
+    "cta_console": "Consola del Sistema"
   },
   "footer": {
-    "description": "El ecosistema definitivo para la iteración óptica y astrofotografía premium, potenciado por telemetría e Inteligencia Artificial.",
+    "description": "Sistemas ópticos profesionales y guía inteligente para astrofotografía.",
     "catalog": "Catálogo",
     "catalog_items": ["Telescopios", "Monturas Ecuatoriales", "Cámaras Astronómicas", "Filtros y Accesorios"],
     "resources": "Recursos",
     "resources_items": ["Calculadora Astronómica", "Guía de Resoluciones", "Mapa de Cielos Oscuros", "Centro de Soporte", "API Docs"],
     "subscribe": "Suscríbete a la Órbita",
-    "subscribe_desc": "Únete a nuestra élite observatoria.",
+    "subscribe_desc": "Únete a nuestra red de observadores.",
     "rights": "AstroAssist AI Technologies. Todos los derechos reservados."
   },
   "cta": {
-    "badge": "Exploración Ilimitada",
-    "title_part1": "Inicia tu nueva era de",
-    "title_part2": "observación.",
-    "description": "Lleva la óptica con grado de observatorio a tu jardín. Equipamiento garantizado, calibrado y respaldado estructuralmente por nuestra inteligencia artificial.",
+    "badge": "Cielos Despejados",
+    "title_part1": "Precisión en cada",
+    "title_part2": "captura.",
+    "description": "Equipamiento construido para la fiabilidad y calibrado para el rendimiento. Respaldado por telemetría inteligente.",
     "button": "Descubrir equipos",
     "guarantee": "Garantía de 5 años",
-    "status_ready": "AstroAssist Ready",
-    "status_link": "Enlace Óptico",
-    "status_stab": "100% Estabilizado"
+    "status_ready": "Sistema Preparado",
+    "status_link": "Enlace de Telemetría",
+    "status_stab": "Estabilizado"
   },
   "benefits": {
     "items": [
       {
-        "title": "Asistencia de IA 24/7",
-        "description": "AstroAssist analiza tu ubicación y clima para recomendarte los mejores equipos en tiempo real."
+        "title": "Telemetría Inteligente",
+        "description": "Análisis en tiempo real de condiciones atmosféricas y recomendaciones técnicas precisas."
       },
       {
         "title": "Garantía Extendida",
-        "description": "Protección de 5 años en todos los equipos ópticos y monturas ecuatoriales contra defectos."
+        "description": "Protección de 5 años en todos los equipos ópticos y monturas ecuatoriales."
       },
       {
         "title": "Envíos Asegurados",
-        "description": "Logística especializada internacional. Tu telescopio llegará en perfectas condiciones a todo el mundo."
+        "description": "Logística especializada internacional. Tu equipo llegará de forma segura."
       },
       {
         "title": "Calibración Óptica",
-        "description": "Cada equipo es pre-colimado usando estrellas artificiales antes de despacharse del laboratorio."
+        "description": "El equipo es verificado y calibrado ópticamente antes de su envío."
       }
     ]
   },
   "chatbot": {
-    "badge": "AstroAssist AI Integrado",
-    "title_part1": "Tu Asesor Experto,",
-    "title_part2": "Disponible 24/7",
-    "description": "No estás solo bajo las estrellas. Nuestra IA desarrollada a medida conoce el catálogo completo y evalúa condiciones técnicas para asegurar la fotografía perfecta.",
+    "badge": "Sistemas Integrados",
+    "title_part1": "Guía Técnica",
+    "title_part2": "Cuando la Necesites",
+    "description": "Accede a nuestro repositorio de conocimiento óptico y obtén evaluaciones instantáneas para tus observaciones.",
     "features": [
-      "Recomendaciones técnicas instantáneas",
-      "Cálculo de compatibilidad óptica y Cargas útiles",
-      "Evaluación de niveles para principiantes"
+      "Recomendaciones técnicas",
+      "Validación de compatibilidad óptica",
+      "Guía de configuración"
     ]
   },
   "featured": {
-    "badge": "Catálogo Óptico",
+    "badge": "Óptica Seleccionada",
     "title_part1": "Equipamiento",
-    "title_part2": "Premium",
-    "description": "Sistemas ópticos y monturas de vanguardia elegidos por nuestra IA analítica. Interactúa con las tarjetas para explorar la calidad de sus componentes."
+    "title_part2": "Curado",
+    "description": "Sistemas ópticos y monturas fiables curadas por su rendimiento. Revisa las especificaciones de cada componente."
   },
   "gallery": {
     "badge": "Galería Óptica",
@@ -227,6 +227,64 @@
         "tags": ["Banda Estrecha", "Bortle 8"]
       }
     }
+  },
+  "setup_builder": {
+    "badge": "Configurador de Sistemas",
+    "title_part1": "Encuentra tu",
+    "title_part2": "setup perfecto.",
+    "description": "Proporciona tus parámetros de observación y nuestro sistema configurará el ecosistema óptico ideal.",
+    "back": "Atrás",
+    "next": "Continuar",
+    "finish": "Analizar Setup",
+    "step_experience": {
+      "title": "Perfil de Observador",
+      "subtitle": "¿Cuál es tu nivel de experiencia?",
+      "beginner": "Principiante",
+      "beginner_desc": "Buscando mi primer telescopio.",
+      "intermediate": "Intermedio",
+      "intermediate_desc": "He utilizado equipo óptico antes.",
+      "advanced": "Avanzado",
+      "advanced_desc": "Observador experimentado o astrofotógrafo."
+    },
+    "step_budget": {
+      "title": "Asignación de Recursos",
+      "subtitle": "¿Cuál es tu presupuesto para hardware?",
+      "low": "Entrada",
+      "low_desc": "Equipamiento eficiente y accesible.",
+      "medium": "Entusiasta",
+      "medium_desc": "Ópticas avanzadas y seguimiento.",
+      "high": "Grado Observatorio",
+      "high_desc": "Sistemas premium profesionales."
+    },
+    "step_goal": {
+      "title": "Objetivo Principal",
+      "subtitle": "¿Qué deseas lograr?",
+      "planets": "Luna y Planetas",
+      "planets_desc": "Vistas de alto contraste del sistema solar.",
+      "deepsky": "Cielo Profundo",
+      "deepsky_desc": "Nebulosas, galaxias y cúmulos estelares.",
+      "astrophotography": "Astrofotografía",
+      "astrophotography_desc": "Captura de largo tiempo de exposición."
+    },
+    "step_environment": {
+      "title": "Entorno Local",
+      "subtitle": "¿Desde dónde observarás?",
+      "city": "Horizonte Urbano",
+      "city_desc": "Alta contaminación lumínica (Bortle 8-9).",
+      "suburban": "Suburbios",
+      "suburban_desc": "Contaminación lumínica moderada (Bortle 5-7).",
+      "darksky": "Cielo Oscuro",
+      "darksky_desc": "Cielos prístinos (Bortle 1-4)."
+    },
+    "result": {
+      "title": "Configuración Óptima",
+      "subtitle": "Basado en tus parámetros, recomendamos este ecosistema.",
+      "main_gear": "Hardware Principal",
+      "accessories": "Complementos Recomendados",
+      "reasoning": "Análisis del Sistema",
+      "ai_prompt": "Preguntar a la IA sobre este setup...",
+      "ai_button": "Preguntar",
+      "restart": "Reconfigurar Setup"
+    }
   }
 }
-

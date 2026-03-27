@@ -4,25 +4,26 @@ import { SectionContainer } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { ProductCard } from "./ProductCard";
 import { useTranslations } from "@/components/i18n-provider";
-import { catalogData } from "@/lib/catalog-data";
+import productsData from "@/data/products.json";
+import type { Product } from "@/types/catalog";
+
+const allProducts = productsData as Product[];
 
 export function FeaturedProducts() {
   const t = useTranslations().featured;
-  const featured = catalogData.slice(0, 3);
+  const featured = allProducts.slice(0, 3);
 
   return (
-    <SectionContainer delay={0.1} className="py-32 relative z-10 overflow-hidden">
-      {/* Huge background glow spanning the entire section */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-screen-xl h-[800px] bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none -z-10 blur-[120px]" />
+    <SectionContainer delay={0.1} className="py-32 relative z-10 overflow-hidden bg-background">
       
       <div className="container px-4 mx-auto md:px-6">
         <div className="flex flex-col items-center justify-center space-y-6 text-center mb-24">
-          <Badge variant="glass" className="border-primary/20 dark:border-primary/40 text-primary-foreground uppercase tracking-[0.2em] px-5 py-2 shadow-sm dark:shadow-[0_0_30px_rgba(var(--primary),0.2)] bg-secondary/50 dark:bg-background/20 backdrop-blur-md">
+          <Badge variant="glass" className="border-border/50 text-foreground uppercase tracking-[0.2em] px-5 py-2 shadow-sm bg-accent/5 backdrop-blur-md">
             {t.badge}
           </Badge>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-[1.1]">
+          <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-[1.1] text-foreground">
             {t.title_part1} <br className="md:hidden" />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-white via-indigo-300 to-primary text-glow">
+            <span className="text-muted-foreground font-medium">
               {t.title_part2}
             </span>
           </h2>
