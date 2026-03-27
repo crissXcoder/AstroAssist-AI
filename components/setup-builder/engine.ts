@@ -35,7 +35,7 @@ export function generateRecommendation(prefs: SetupPreferences): RecommendationR
     if (celestron130slt) mainItems.push(celestron130slt);
     reasoningEn = "For those starting out or with a strict budget, the Celestron NexStar 130SLT offers computerized tracking and enough aperture to view planets and bright deep-sky objects effortlessly.";
     reasoningEs = "Para quienes recién comienzan o con presupuesto ajustado, el Celestron NexStar 130SLT ofrece seguimiento computarizado y apertura suficiente para ver planetas y objetos brillantes del cielo profundo sin esfuerzo.";
-  } else if (prefs.goal === 'astrophotography' && prefs.experience !== 'beginner') {
+  } else if (prefs.goal === 'astrophotography' && (prefs.experience === 'intermediate' || prefs.experience === 'advanced')) {
     if (edgeHd8) mainItems.push(edgeHd8);
     if (eq6r) mainItems.push(eq6r);
     if (zwo533mc) mainItems.push(zwo533mc);

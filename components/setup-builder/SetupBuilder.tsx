@@ -5,13 +5,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "@/components/i18n-provider";
 import { Button } from "@/components/ui/button";
 import { SetupPreferences, generateRecommendation } from "./engine";
-import { ExperienceStep, BudgetStep, GoalStep, EnvironmentStep } from "./steps";
+import { ExperienceStep, BudgetStep, GoalStep, EnvironmentStep, RecommendationResult } from "./steps";
 import { RecommendationResultData } from "./engine";
+import { useLocale } from "@/components/i18n-provider";
 
 const STEPS = ["experience", "budget", "goal", "environment", "result"];
 
 export function SetupBuilder() {
   const t = useTranslations().setup_builder;
+  const locale = useLocale() as "en" | "es";
   const [currentStep, setCurrentStep] = useState(0);
   const [preferences, setPreferences] = useState<SetupPreferences>({
     experience: null,
@@ -32,7 +34,7 @@ export function SetupBuilder() {
     }
   };
 
-  const updatePreference = (key: keyof SetupPreferences, value: any) => {
+  const updatePreference = <K extends keyof SetupPreferences>(key: K, value: SetupPreferences[K]) => {
     setPreferences(prev => ({ ...prev, [key]: value }));
   };
 
@@ -81,39 +83,39 @@ export function SetupBuilder() {
             {currentStep === 0 && (
               <ExperienceStep 
                 value={preferences.experience} 
-                onChange={(v) => updatePreference('experience', v)} 
+                onChange={(v: any) => updatePreference('experience', v)} 
                 t={t.step_experience} 
               />
             )}
             {currentStep === 1 && (
               <BudgetStep 
                 value={preferences.budget} 
-                onChange={(v) => updatePreference('budget', v)} 
+                onChange={(v: any) => updatePreference('budget', v)} 
                 t={t.step_budget} 
               />
             )}
             {currentStep === 2 && (
               <GoalStep 
                 value={preferences.goal} 
-                onChange={(v) => updatePreference('goal', v)} 
+                onChange={(v: any) => updatePreference('goal', v)} 
                 t={t.step_goal} 
               />
             )}
             {currentStep === 3 && (
               <EnvironmentStep 
                 value={preferences.environment} 
-                onChange={(v) => updatePreference('environment', v)} 
+                onChange={(v: any) => updatePreference('environment', v)} 
                 t={t.step_environment} 
               />
             )}
             {currentStep === 4 && (
               <RecommendationResult 
                 data={generateRecommendation(preferences)} 
+                locale={locale}
                 onRestart={() => {
                   setPreferences({ experience: null, budget: null, goal: null, environment: null });
                   setCurrentStep(0);
                 }}
-                t={t.result}
               />
             )}
           </motion.div>

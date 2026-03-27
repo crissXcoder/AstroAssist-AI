@@ -4,11 +4,14 @@ import { SectionContainer } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { ProductCard } from "./ProductCard";
 import { useTranslations } from "@/components/i18n-provider";
-import { catalogData } from "@/lib/catalog-data";
+import productsData from "@/data/products.json";
+import type { Product } from "@/types/catalog";
+
+const allProducts = productsData as Product[];
 
 export function FeaturedProducts() {
   const t = useTranslations().featured;
-  const featured = catalogData.slice(0, 3);
+  const featured = allProducts.slice(0, 3);
 
   return (
     <SectionContainer delay={0.1} className="py-32 relative z-10 overflow-hidden bg-background">
