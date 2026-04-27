@@ -32,24 +32,24 @@ export function Navbar() {
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
           isScrolled 
-            ? "bg-background/80 dark:bg-background/60 backdrop-blur-2xl border-b border-border/50 dark:border-white/5 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.5)]" 
+            ? "bg-surface-container/80 backdrop-blur-2xl border-b border-white/5 py-3 shadow-2xl shadow-black/40" 
             : "bg-transparent py-6"
         }`}
       >
-        <div className="container px-4 md:px-6 mx-auto flex items-center justify-between">
-          <Link href={`/${locale}`} className="flex items-center gap-3 group">
-            <div className="p-2 bg-primary/20 rounded-[10px] border border-primary/30 group-hover:bg-primary/40 transition-colors shadow-[0_0_15px_rgba(var(--primary),0.2)] group-hover:scale-105 duration-300">
-              <Telescope className="w-5 h-5 text-primary" />
+        <div className="container px-6 md:px-12 mx-auto flex items-center justify-between">
+          <Link href={`/${locale}`} className="flex items-center gap-4 group">
+            <div className="p-2.5 bg-primary-container rounded-xl border border-primary/20 group-hover:bg-primary/40 transition-all shadow-xl shadow-primary/20 group-hover:scale-105 duration-300">
+              <Telescope className="w-6 h-6 text-primary" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-foreground transition-all group-hover:text-glow">AstroAssist AI</span>
+            <span className="text-title-md font-bold tracking-tight text-text-main transition-all group-hover:text-glow">AstroAssist AI</span>
           </Link>
           
           <nav className="hidden md:flex items-center gap-8">
-            <Link href={`/${locale}`} className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">{t.home}</Link>
-            <Link href={`/${locale}#benefits`} className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">{t.technology}</Link>
-            <Link href={`/${locale}/catalogo`} className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">{t.optics}</Link>
-            <Link href={`/${locale}/builder`} className="text-sm font-bold text-indigo-400 hover:text-indigo-300 transition-colors">Startup</Link>
-            <Link href={`/${locale}#gallery`} className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-foreground dark:hover:text-white transition-colors">{t.community}</Link>
+            <Link href={`/${locale}`} className="text-label-md text-text-soft hover:text-text-main transition-colors uppercase">{t.home}</Link>
+            <Link href={`/${locale}#benefits`} className="text-label-md text-text-soft hover:text-text-main transition-colors uppercase">{t.technology}</Link>
+            <Link href={`/${locale}/catalogo`} className="text-label-md text-text-soft hover:text-text-main transition-colors uppercase">{t.optics}</Link>
+            <Link href={`/${locale}/builder`} className="text-label-md text-primary hover:text-primary-hover font-bold transition-colors uppercase">Startup</Link>
+            <Link href={`/${locale}#gallery`} className="text-label-md text-text-soft hover:text-text-main transition-colors uppercase">{t.community}</Link>
           </nav>
           
           <div className="hidden md:flex items-center gap-4">
@@ -62,7 +62,7 @@ export function Navbar() {
             <ThemeToggle />
             <Button 
               variant="ghost" 
-              size="icon" 
+              size="icon-sm" 
               onClick={() => setMobileMenuOpen(true)}
             >
                <Menu className="w-6 h-6" />
@@ -78,16 +78,16 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-60 bg-background/95 backdrop-blur-3xl flex flex-col p-6 border-l border-border/50 dark:border-white/10"
+            className="fixed inset-0 z-60 bg-background/98 backdrop-blur-3xl flex flex-col p-6 border-l border-white/10"
           >
             <div className="flex justify-between items-center mb-12">
-               <span className="text-xl font-bold tracking-tight text-glow">AstroAssist AI</span>
+               <span className="text-title-lg font-bold tracking-tight text-glow">AstroAssist AI</span>
                <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)}>
                  <X className="w-6 h-6" />
                </Button>
             </div>
             
-            <nav className="flex flex-col gap-6 text-xl font-medium tracking-tight">
+            <nav className="flex flex-col gap-6 text-headline-md font-medium tracking-tight">
               {[
                 { label: t.home, href: `/${locale}` },
                 { label: t.technology, href: `/${locale}#benefits` },
@@ -104,8 +104,8 @@ export function Navbar() {
                    <Link 
                      href={item.href} 
                      className={cn(
-                       "p-2 -mr-2 flex items-center justify-between rounded-lg transition-colors",
-                       item.label === 'Startup' ? "text-indigo-400 font-bold" : "text-foreground dark:text-white"
+                       "p-2 -mr-2 flex items-center justify-between rounded-xl transition-colors",
+                       item.label === 'Startup' ? "text-primary font-bold" : "text-text-main"
                      )} 
                      onClick={() => setMobileMenuOpen(false)}
                    >
@@ -120,17 +120,18 @@ export function Navbar() {
                  href={`/${locale}#assistant`} 
                  onClick={() => setMobileMenuOpen(false)}
                  className={cn(
-                   buttonVariants({ variant: "default" }),
-                   "w-full h-14 rounded-2xl text-base shadow-[0_0_30px_rgba(var(--primary),0.3)] flex items-center justify-center"
+                   buttonVariants({ variant: "default", size: "lg" }),
+                   "w-full rounded-full"
                  )}
                >
                  Probar AstroAssist
                </Link>
-               <Button variant="glass" className="w-full h-14 rounded-2xl text-base">Acceder</Button>
+               <Button variant="secondary" size="lg" className="w-full">Acceder</Button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
     </>
   );
 }

@@ -36,48 +36,49 @@ export function Testimonials() {
     <SectionContainer delay={0.1} className="py-24 border-t border-border/50 dark:border-white/5 relative">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
       <div className="container px-4 md:px-6 mx-auto relative z-10">
-        <motion.div 
-          className="flex flex-col items-center justify-center space-y-5 text-center mb-20"
-          initial="initial" whileInView="animate" viewport={{ once: true, margin: "-50px" }} variants={FADE_IN_UP}
-        >
-          <MessageSquareQuote className="w-10 h-10 text-primary opacity-80 mb-2 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
-          <Badge variant="glass" className="mb-4 bg-secondary/50 dark:bg-background/20 backdrop-blur-md">{t.badge}</Badge>
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter">{t.title_part1} <span className="text-glow text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-400">{t.title_part2}</span></h2>
-          <p className="max-w-[700px] text-neutral-600 dark:text-neutral-400 md:text-xl font-light leading-relaxed">
+        <div className="flex flex-col items-center justify-center space-y-6 text-center mb-24">
+          <Badge variant="glass" className="bg-primary/5 border-primary/10 text-label-sm text-text-muted">
+            <MessageSquareQuote className="w-4 h-4 mr-2" />
+            {t.badge}
+          </Badge>
+          <h2 className="text-headline-lg md:text-headline-xl font-semibold tracking-tight text-text-main leading-[1.08]">
+            {t.title_part1} <span className="text-primary">{t.title_part2}</span>
+          </h2>
+          <p className="max-w-[700px] text-text-soft md:text-body-lg font-light leading-relaxed mx-auto">
             {t.description}
           </p>
-        </motion.div>
+        </div>
 
         <motion.div 
           variants={STAGGER_CONTAINER} initial="initial" whileInView="animate" viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
           {reviews.map((review, i) => (
-              <motion.div key={i} variants={FADE_IN_UP} className="h-full">
-                <div className="relative h-full rounded-3xl p-px group overflow-hidden">
-                  {/* CSS Magic: Conic Gradient Rotating Border */}
-                 <div className="absolute inset-0 bg-[conic-gradient(from_0deg_at_50%_50%,rgba(var(--primary),0)_0%,rgba(var(--primary),1)_20%,rgba(var(--primary),0)_40%)] opacity-0 group-hover:opacity-100 group-hover:animate-[spin_3s_linear_infinite] transition-opacity duration-700 w-[250%] h-[250%] -top-[75%] -left-[75%] pointer-events-none" />
-                 
-                 {/* Internal Mask - Must have higher z-index than the rotating gradient */}
-                 <Card className="relative h-full bg-card/60 dark:bg-card/80 backdrop-blur-2xl border-border/50 dark:border-white/10 rounded-[calc(1.5rem-1px)] transition-all duration-500 overflow-hidden flex flex-col z-10">
-                   {/* Dark subtle background glow inside the card on hover */}
-                   <div className="absolute inset-0 bg-linear-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                   
-                   <CardHeader className="flex flex-row items-center gap-4 pb-4 pt-6 px-6 relative z-20">
-                     <Avatar className="w-12 h-12 border border-primary/30 bg-primary/10 group-hover:scale-110 transition-transform duration-500 shrink-0 shadow-[0_0_15px_rgba(var(--primary),0.2)]">
-                       <AvatarFallback className="bg-transparent text-primary font-black tracking-tight">{review.initials}</AvatarFallback>
-                     </Avatar>
-                     <div className="flex flex-col gap-0.5">
-                       <h4 className="font-bold text-lg text-foreground tracking-tight leading-none group-hover:text-glow transition-all">{review.name}</h4>
-                       <p className="text-xs text-primary/80 font-medium tracking-wide uppercase">{review.role}</p>
-                     </div>
-                   </CardHeader>
-                   <CardContent className="px-6 pb-8 text-muted-foreground/90 text-sm italic leading-relaxed font-light relative z-20">
-                     "{review.text}"
-                   </CardContent>
-                 </Card>
-               </div>
-             </motion.div>
+            <motion.div key={i} variants={FADE_IN_UP} className="h-full">
+              <div className="relative h-full flex flex-col bg-surface-container border border-white/5 rounded-xl p-8 group hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 overflow-hidden">
+                {/* Decorative inner glow */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                
+                <div className="flex items-center gap-4 mb-6 relative z-10">
+                  <Avatar className="w-12 h-12 border border-primary/20 bg-primary/5 ring-1 ring-primary/5 group-hover:scale-110 transition-transform duration-500 shadow-xl shadow-primary/5">
+                    <AvatarFallback className="bg-transparent text-primary font-bold text-label-md">{review.initials}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col">
+                    <h4 className="text-title-md font-semibold text-text-main group-hover:text-primary transition-colors">{review.name}</h4>
+                    <p className="text-label-sm text-primary uppercase tracking-widest font-bold">{review.role}</p>
+                  </div>
+                </div>
+
+                <div className="relative z-10">
+                  <p className="text-body-sm text-text-soft italic leading-relaxed font-light">
+                    "{review.text}"
+                  </p>
+                </div>
+
+                {/* Bottom accent */}
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-primary/20 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center" />
+              </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

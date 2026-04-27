@@ -53,17 +53,17 @@ export function SetupBuilder() {
       
       {/* Progress Bar */}
       {currentStep < 4 && (
-        <div className="mb-8 w-full">
-          <div className="flex justify-between mb-2">
-            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">{t.badge}</span>
-            <span className="text-xs font-mono text-muted-foreground">0{currentStep + 1} / 04</span>
+        <div className="mb-12 w-full">
+          <div className="flex justify-between mb-3">
+            <span className="text-label-sm text-text-muted">{t.badge}</span>
+            <span className="text-mono-stat text-text-faint">0{currentStep + 1} / 04</span>
           </div>
-          <div className="h-1 w-full bg-accent/20 rounded-full overflow-hidden">
+          <div className="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
             <motion.div 
-              className="h-full bg-foreground"
+              className="h-full bg-primary shadow-[0_0_10px_rgba(98,87,244,0.3)]"
               initial={{ width: "25%" }}
               animate={{ width: `${((currentStep + 1) / 4) * 100}%` }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             />
           </div>
         </div>
@@ -77,7 +77,7 @@ export function SetupBuilder() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="w-full h-full"
           >
             {currentStep === 0 && (
@@ -124,19 +124,19 @@ export function SetupBuilder() {
 
       {/* Navigation Controls */}
       {currentStep < 4 && (
-        <div className="mt-12 flex items-center justify-between border-t border-border/40 pt-6">
+        <div className="mt-16 flex items-center justify-between border-t border-white/5 pt-8">
           <Button 
             variant="ghost" 
             onClick={handleBack} 
             disabled={currentStep === 0}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-text-muted hover:text-text-main"
           >
             {t.back}
           </Button>
           <Button 
             onClick={handleNext} 
             disabled={isNextDisabled()}
-            className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-8"
+            className="bg-primary text-on-primary hover:bg-primary-hover rounded-full px-10 h-12 shadow-lg shadow-primary/20"
           >
             {currentStep === 3 ? t.finish : t.next}
           </Button>

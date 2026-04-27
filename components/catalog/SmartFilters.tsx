@@ -70,18 +70,18 @@ export function SmartFilters({
     : { all: "Todos", clearAll: "Limpiar todo", placeholder: "Buscar equipo…" };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Search + category row */}
-      <div className="flex flex-col sm:flex-row gap-3 items-center">
+      <div className="flex flex-col lg:flex-row gap-4 items-center">
         {/* Search */}
-        <div className="relative flex-1 max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" />
+        <div className="relative flex-1 w-full lg:max-w-md">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-faint" />
           <input
             type="text"
             value={filters.search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={t.placeholder}
-            className="w-full pl-9 pr-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.07] text-sm text-neutral-300 placeholder-neutral-600 focus:outline-none focus:border-indigo-500/50 focus:bg-white/[0.06] transition-all duration-200"
+            className="w-full h-12 pl-11 pr-4 rounded-full bg-surface-container-high border border-white/5 text-body-sm text-text-main placeholder-text-faint focus:outline-none focus:border-primary/50 focus:bg-surface-bright transition-all duration-300"
           />
         </div>
 
@@ -89,10 +89,10 @@ export function SmartFilters({
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => setCategory(null)}
-            className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border ${
+            className={`h-10 px-6 rounded-full text-label-sm font-semibold transition-all duration-300 border ${
               filters.category === null
-                ? "bg-white/10 border-white/20 text-white"
-                : "bg-transparent border-white/[0.06] text-neutral-500 hover:border-white/15 hover:text-neutral-300"
+                ? "bg-primary text-on-primary border-primary"
+                : "bg-surface-container border-white/5 text-text-soft hover:border-white/15 hover:text-text-main hover:bg-surface-bright"
             }`}
           >
             {t.all}
@@ -103,10 +103,10 @@ export function SmartFilters({
               onClick={() =>
                 setCategory(filters.category === cat.value ? null : cat.value)
               }
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border ${
+              className={`h-10 px-6 rounded-full text-label-sm font-semibold transition-all duration-300 border ${
                 filters.category === cat.value
-                  ? "bg-white/10 border-white/20 text-white"
-                  : "bg-transparent border-white/[0.06] text-neutral-500 hover:border-white/15 hover:text-neutral-300"
+                  ? "bg-primary text-on-primary border-primary"
+                  : "bg-surface-container border-white/5 text-text-soft hover:border-white/15 hover:text-text-main hover:bg-surface-bright"
               }`}
             >
               {locale === "en" ? cat.labelEn : cat.labelEs}
@@ -123,8 +123,8 @@ export function SmartFilters({
           exit={{ opacity: 0, y: -8 }}
           className="flex flex-wrap items-center gap-2"
         >
-          <span className="text-[11px] text-neutral-600 uppercase tracking-widest flex items-center gap-1">
-            <SlidersHorizontal className="w-3 h-3" />
+          <span className="text-label-sm text-text-faint flex items-center gap-1.5 uppercase font-semibold">
+            <SlidersHorizontal className="w-3.5 h-3.5" />
             {locale === "en" ? "Active:" : "Activos:"}
           </span>
           {chips.map(({ key, label }) => (
@@ -134,7 +134,7 @@ export function SmartFilters({
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 text-xs font-medium hover:bg-indigo-500/25 transition-colors duration-200"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold hover:bg-primary/20 transition-all duration-300"
             >
               {label}
               <X className="w-3 h-3 opacity-70" />
@@ -143,7 +143,7 @@ export function SmartFilters({
           {isFiltered && (
             <button
               onClick={clearAll}
-              className="text-xs text-neutral-600 hover:text-neutral-400 underline underline-offset-2 transition-colors ml-2"
+              className="text-label-sm text-text-faint hover:text-text-main underline underline-offset-4 transition-colors ml-2"
             >
               {t.clearAll}
             </button>

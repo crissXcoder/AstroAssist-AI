@@ -21,13 +21,13 @@ function Pill<T extends string>({ value, active, label, icon, onClick }: PillPro
   return (
     <button
       onClick={() => onClick(isActive ? null : value)}
-      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${
+      className={`inline-flex items-center gap-2 px-6 h-12 rounded-full text-label-md font-semibold transition-all duration-300 border ${
         isActive
-          ? "bg-indigo-500/20 border-indigo-400/60 text-indigo-300 shadow-[0_0_20px_rgba(99,102,241,0.3)]"
-          : "bg-white/[0.03] border-white/[0.06] text-neutral-400 hover:bg-white/[0.07] hover:border-white/[0.15] hover:text-neutral-200"
+          ? "bg-primary/20 border-primary/40 text-text-main shadow-[0_0_20px_rgba(98,87,244,0.2)]"
+          : "bg-surface-container-high border-white/5 text-text-soft hover:bg-surface-bright hover:border-white/10 hover:text-text-main"
       }`}
     >
-      {icon && <span className="w-4 h-4">{icon}</span>}
+      {icon && <span className="w-4 h-4 opacity-70">{icon}</span>}
       {label}
     </button>
   );
@@ -119,7 +119,7 @@ function ContextDescription({ level, goal, sky, locale }: ContextDescProps) {
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="text-sm text-indigo-400/80 font-light mt-4 text-center"
+      className="text-body-sm text-primary font-medium mt-6 text-center"
     >
       {text}
     </motion.p>
@@ -173,7 +173,7 @@ export function QuickGuide({ filters, setGoal, setLevel, setSky, locale }: Quick
     <div className="flex flex-col gap-6 w-full max-w-3xl mx-auto">
       {/* Goal row */}
       <div>
-        <p className="text-[11px] uppercase tracking-[0.2em] text-neutral-500 font-medium mb-3">{labels.goal}</p>
+        <p className="text-label-sm text-text-faint mb-3">{labels.goal}</p>
         <div className="flex flex-wrap gap-2">
           <Pill value={"planetary" as ObservationType} active={filters.goal} label={labels.planetary} icon={<PlanetIcon />} onClick={setGoal} />
           <Pill value={"deep_sky" as ObservationType} active={filters.goal} label={labels.deep_sky} icon={<GalaxyIcon />} onClick={setGoal} />
@@ -184,7 +184,7 @@ export function QuickGuide({ filters, setGoal, setLevel, setSky, locale }: Quick
       {/* Level + Sky row */}
       <div className="flex flex-col sm:flex-row gap-6">
         <div className="flex-1">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-neutral-500 font-medium mb-3">{labels.level}</p>
+          <p className="text-label-sm text-text-faint mb-3">{labels.level}</p>
           <div className="flex flex-wrap gap-2">
             <Pill value={"beginner" as RecommendedLevel} active={filters.level} label={labels.beginner} onClick={setLevel} />
             <Pill value={"intermediate" as RecommendedLevel} active={filters.level} label={labels.intermediate} onClick={setLevel} />
@@ -192,7 +192,7 @@ export function QuickGuide({ filters, setGoal, setLevel, setSky, locale }: Quick
           </div>
         </div>
         <div className="flex-1">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-neutral-500 font-medium mb-3">{labels.sky}</p>
+          <p className="text-label-sm text-text-faint mb-3">{labels.sky}</p>
           <div className="flex flex-wrap gap-2">
             <Pill value={"city" as SkyCondition} active={filters.sky} label={labels.city} icon={<CityIcon />} onClick={setSky} />
             <Pill value={"suburban" as SkyCondition} active={filters.sky} label={labels.suburban} icon={<TelescopeIcon />} onClick={setSky} />

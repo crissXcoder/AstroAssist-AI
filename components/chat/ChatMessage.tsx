@@ -39,23 +39,23 @@ export function ChatMessage({ message }: { message: Message }) {
             if (!product) return null;
             
             return (
-              <div key={i} className="bg-indigo-500/5 border border-indigo-500/20 rounded-2xl overflow-hidden flex items-center gap-4 p-4 group hover:bg-indigo-500/10 transition-all duration-300 shadow-sm animate-in fade-in slide-in-from-bottom-2">
-                <div className="w-20 h-20 rounded-xl overflow-hidden bg-black shrink-0 relative border border-white/5">
+              <div key={i} className="bg-surface-container border border-white/5 rounded-xl overflow-hidden flex items-center gap-4 p-4 group hover:bg-surface-bright transition-all duration-300 shadow-xl animate-in fade-in slide-in-from-bottom-2">
+                <div className="w-16 h-16 rounded-lg overflow-hidden bg-background shrink-0 relative border border-white/5">
                   <img src={product.images.primary} alt={product.nameEn} className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <h4 className="text-sm font-bold text-white group-hover:text-indigo-300 transition-colors leading-tight mb-1">{product.nameEs}</h4>
-                      <p className="text-[10px] text-indigo-400 font-bold tracking-widest uppercase">{product.category}</p>
+                      <h4 className="text-body-sm font-bold text-text-main group-hover:text-primary transition-colors leading-tight mb-0.5">{product.nameEs}</h4>
+                      <p className="text-[10px] text-primary font-bold tracking-widest uppercase">{product.category}</p>
                     </div>
-                    <span className="text-xs font-mono font-bold text-neutral-300 bg-white/5 px-2 py-1 rounded-md">{product.price}</span>
+                    <span className="text-xs font-mono font-bold text-text-muted">{product.price}</span>
                   </div>
                   <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/5">
-                    <span className="text-[10px] text-neutral-500 uppercase tracking-tighter">{product.recommendedLevel}</span>
+                    <span className="text-[10px] text-text-faint uppercase tracking-tighter">{product.recommendedLevel}</span>
                     <button 
                       onClick={() => router.push(`/${locale}/catalogo?search=${product.id}`)}
-                      className="text-[10px] text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1 font-bold cursor-pointer bg-transparent border-none p-0"
+                      className="text-[10px] text-primary hover:text-primary-hover transition-colors flex items-center gap-1 font-bold cursor-pointer bg-transparent border-none p-0"
                     >
                       {locale === 'en' ? 'Details' : 'Detalles'} <ArrowRight className="w-2.5 h-2.5" />
                     </button>
@@ -75,8 +75,8 @@ export function ChatMessage({ message }: { message: Message }) {
       <ReactMarkdown 
         remarkPlugins={[remarkGfm]}
         components={{
-          h1: ({ children }) => <h1 className="text-lg font-bold mt-4 mb-2">{children}</h1>,
-          h2: ({ children }) => <h2 className="text-md font-bold mt-3 mb-1 text-indigo-400">{children}</h2>,
+          h1: ({ children }) => <h1 className="text-title-md font-bold mt-4 mb-2 text-text-main">{children}</h1>,
+          h2: ({ children }) => <h2 className="text-body-md font-bold mt-3 mb-1 text-primary">{children}</h2>,
           p: ({ children }) => {
             const text = isValidElement(children) 
               ? "" 
@@ -105,7 +105,7 @@ export function ChatMessage({ message }: { message: Message }) {
                     if (headerKey && ALLOWED_HEADERS.includes(headerKey)) {
                       return (
                         <div key={i} className="mt-6 mb-2 first:mt-2 animate-in fade-in slide-in-from-left-2 duration-500">
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-[10px] uppercase font-black tracking-widest text-indigo-400 mb-2.5 shadow-sm shadow-indigo-500/5">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container text-[10px] uppercase font-black tracking-widest text-on-primary-container mb-2.5 shadow-sm shadow-primary/10">
                             <Sparkles className="w-2.5 h-2.5" /> {headerKey}
                           </span>
                         </div>
@@ -113,7 +113,7 @@ export function ChatMessage({ message }: { message: Message }) {
                     }
                     
                     return (
-                      <p key={i} className="mb-4 last:mb-0 leading-relaxed font-normal text-neutral-300/90 tracking-tight pl-1 border-l-2 border-indigo-500/10 ml-1">
+                      <p key={i} className="mb-4 last:mb-0 text-body-sm leading-relaxed text-text-soft/90 tracking-tight pl-3 border-l-2 border-primary/20 ml-1">
                         {renderTextWithProducts(cleanPart)}
                       </p>
                     );
@@ -123,20 +123,20 @@ export function ChatMessage({ message }: { message: Message }) {
             }
             
             return (
-              <p className="mb-4 last:mb-0 leading-relaxed font-normal text-neutral-300/90 tracking-tight">
+              <p className="mb-4 last:mb-0 text-body-sm leading-relaxed text-text-soft/90 tracking-tight">
                 {renderTextWithProducts(text)}
               </p>
             );
           },
           ul: ({ children }) => <ul className="space-y-2 mb-4 list-none">{children}</ul>,
           li: ({ children }) => (
-            <li className="flex gap-2 text-sm font-light text-neutral-400">
-              <span className="text-indigo-500 mt-1.5">•</span>
+            <li className="flex gap-2 text-body-sm text-text-muted">
+              <span className="text-primary mt-1.5">•</span>
               <span>{children}</span>
             </li>
           ),
-          strong: ({ children }) => <strong className="font-bold text-white tracking-tight">{children}</strong>,
-          code: ({ children }) => <code className="bg-white/5 px-1.5 py-0.5 rounded text-xs font-mono">{children}</code>,
+          strong: ({ children }) => <strong className="font-bold text-text-main tracking-tight">{children}</strong>,
+          code: ({ children }) => <code className="bg-surface-bright px-1.5 py-0.5 rounded text-[11px] font-mono text-primary-hover">{children}</code>,
         }}
       >
         {content}
@@ -147,19 +147,19 @@ export function ChatMessage({ message }: { message: Message }) {
   return (
     <div className={cn("flex w-full gap-3", isBot ? "justify-start" : "justify-end")}>
       {isBot && (
-        <Avatar className="w-9 h-9 border border-indigo-500/30 bg-indigo-500/10 mt-1 flex items-center justify-center shrink-0">
+        <Avatar className="w-10 h-10 border border-primary/20 bg-primary-container mt-1 flex items-center justify-center shrink-0">
           <AvatarFallback className="bg-transparent">
-            <Bot className="w-5 h-5 text-indigo-400" />
+            <Bot className="w-5 h-5 text-primary" />
           </AvatarFallback>
         </Avatar>
       )}
       
       <div 
         className={cn(
-          "max-w-[88%] px-5 py-4 rounded-3xl",
+          "max-w-[88%] px-5 py-4 rounded-2xl",
           isBot 
-            ? "bg-white/5 text-neutral-200 rounded-tl-sm border border-white/5 backdrop-blur-md shadow-xl" 
-            : "bg-indigo-600 text-white rounded-tr-sm shadow-lg shadow-indigo-600/20"
+            ? "bg-surface-container-high text-text-soft rounded-tl-sm border border-white/5 shadow-xl" 
+            : "bg-primary text-on-primary rounded-tr-sm shadow-lg shadow-primary/20"
         )}
       >
         <div className="prose prose-invert prose-sm max-w-none">
@@ -168,11 +168,11 @@ export function ChatMessage({ message }: { message: Message }) {
         
         <div className={cn(
           "flex items-center gap-2 mt-3 pt-3 border-t border-white/5",
-          !isBot && "justify-end border-indigo-500/30"
+          !isBot && "justify-end border-white/10"
         )}>
-          {isBot && <Sparkles className="w-3 h-3 text-indigo-400 opacity-50" />}
+          {isBot && <Sparkles className="w-3 h-3 text-primary opacity-50" />}
           <span className={cn(
-            "text-[10px] opacity-40 font-medium tracking-widest uppercase",
+            "text-[10px] opacity-40 font-bold tracking-widest uppercase",
             !isBot && "text-right"
           )}>
             {dateObj.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
@@ -182,12 +182,13 @@ export function ChatMessage({ message }: { message: Message }) {
       </div>
 
       {!isBot && (
-        <Avatar className="w-9 h-9 border border-indigo-500/30 bg-indigo-600 mt-1 flex items-center justify-center shrink-0">
+        <Avatar className="w-10 h-10 border border-primary/20 bg-primary mt-1 flex items-center justify-center shrink-0">
           <AvatarFallback className="bg-transparent">
-            <User className="w-5 h-5 text-white" />
+            <User className="w-5 h-5 text-on-primary" />
           </AvatarFallback>
         </Avatar>
       )}
     </div>
+
   );
 }

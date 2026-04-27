@@ -25,15 +25,15 @@ export function ChatbotSection() {
             className="flex flex-col space-y-8"
           >
             <motion.div variants={FADE_IN_RIGHT}>
-              <Badge variant="glass" className="mb-4 bg-secondary/50 dark:bg-background/20">{t.badge}</Badge>
+              <Badge variant="glass" className="bg-primary/5 border-primary/10 text-label-sm text-text-muted">{t.badge}</Badge>
             </motion.div>
             
-            <motion.h2 variants={FADE_IN_RIGHT} className="text-5xl md:text-6xl font-black tracking-tighter leading-[1.1] text-foreground">
+            <motion.h2 variants={FADE_IN_RIGHT} className="text-headline-lg md:text-headline-xl font-semibold tracking-tight text-text-main leading-[1.08]">
               {t.title_part1} <br/>
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-purple-400 text-glow">{t.title_part2}</span>
+              <span className="text-primary">{t.title_part2}</span>
             </motion.h2>
             
-            <motion.p variants={FADE_IN_RIGHT} className="max-w-[600px] text-neutral-600 dark:text-neutral-400 md:text-xl font-light leading-relaxed mb-10">
+            <motion.p variants={FADE_IN_RIGHT} className="max-w-[600px] text-text-soft md:text-body-lg font-light leading-relaxed mb-10">
               {t.description}
             </motion.p>
             

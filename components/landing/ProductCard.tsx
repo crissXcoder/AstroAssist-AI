@@ -53,17 +53,17 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="relative flex flex-col h-full rounded-4xl glass border border-border/50 dark:border-white/5 bg-secondary/30 dark:bg-background/30 backdrop-blur-2xl overflow-hidden group hover:shadow-[0_20px_50px_rgba(var(--primary),0.05)] dark:hover:shadow-[0_20px_50px_rgba(var(--primary),0.15)] hover:border-border dark:hover:border-white/15 transition-shadow duration-500 will-change-transform"
+        className="relative flex flex-col h-full rounded-xl bg-surface-container-low border border-white/5 backdrop-blur-3xl overflow-hidden group hover:shadow-2xl hover:shadow-primary/10 hover:border-white/15 transition-all duration-500 will-change-transform"
       >
         {/* Dynamic glare effect overlay */}
         <motion.div
-          className="pointer-events-none absolute -inset-px z-30 transition-opacity duration-300 opacity-0 group-hover:opacity-100 mix-blend-screen rounded-4xl overflow-hidden"
+          className="pointer-events-none absolute -inset-px z-30 transition-opacity duration-300 opacity-0 group-hover:opacity-100 mix-blend-screen rounded-xl overflow-hidden"
           style={{ background }}
         />
 
         {/* Top Image Section */}
         <div
-          className="relative w-full h-[300px] overflow-hidden bg-black"
+          className="relative w-full h-[300px] overflow-hidden bg-background"
           style={{ transform: "translateZ(40px)" }}
         >
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-background z-10" />
@@ -71,13 +71,13 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
           <img
             src={product.images.primary}
             alt={name}
-            className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out mix-blend-screen"
+            className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out mix-blend-screen"
           />
 
           {/* Tags floating over image */}
           <div className="absolute top-6 left-6 z-20 flex flex-wrap gap-2">
             {tags.map((tag) => (
-              <Badge key={tag} variant="glass" className="text-xs backdrop-blur-md bg-white/80 dark:bg-black/40 border-border dark:border-white/20 text-foreground dark:text-white shadow-xl px-3 py-1">
+              <Badge key={tag} variant="glass" className="bg-surface-container-highest/80 border-white/10 text-text-main px-3 py-1 text-label-sm">
                 {tag}
               </Badge>
             ))}
@@ -89,22 +89,21 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
           className="flex flex-col flex-1 px-8 pb-8 pt-4 relative z-30"
           style={{ transform: "translateZ(50px)" }}
         >
-          <h3 className="text-2xl font-black tracking-tight text-foreground group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-white group-hover:to-primary transition-all duration-300">
+          <h3 className="text-title-lg font-semibold tracking-tight text-text-main group-hover:text-primary transition-all duration-300">
             {name}
           </h3>
 
-          <p className="mt-4 text-sm text-muted-foreground/80 leading-relaxed line-clamp-3 font-light">
+          <p className="mt-4 text-body-sm text-text-soft leading-relaxed line-clamp-3 font-normal">
             {description}
           </p>
 
           <div className="mt-auto pt-8 flex items-end justify-between">
-            <span className="text-3xl font-black text-white font-mono tracking-tighter drop-shadow-[0_0_15px_rgba(var(--primary),0.5)]">
+            <span className="text-display-md font-bold text-text-main font-mono tracking-tighter">
               {product.price}
             </span>
 
-            <Button size="icon" className="h-[52px] w-[52px] rounded-2xl shadow-[0_0_20px_rgba(var(--primary),0.2)] group-hover:shadow-[0_0_30px_rgba(var(--primary),0.6)] transition-all bg-primary/20 text-primary border border-primary/50 hover:bg-primary hover:text-white group/btn relative overflow-hidden shrink-0 hover:scale-110">
-              <div className="absolute inset-0 w-[200%] h-full bg-linear-to-r from-transparent via-black/5 dark:via-white/30 to-transparent -translate-x-[150%] skew-x-12 group-hover/btn:translate-x-full transition-transform duration-700" />
-              <ShoppingCart className="w-5 h-5 relative z-10" />
+            <Button size="icon" variant="primary" className="h-12 w-12 rounded-xl group-hover:scale-110 transition-transform">
+              <ShoppingCart className="w-5 h-5" />
             </Button>
           </div>
 

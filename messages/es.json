@@ -26,8 +26,8 @@
   },
   "cta": {
     "badge": "Cielos Despejados",
-    "title_part1": "Precisión en cada",
-    "title_part2": "captura.",
+    "title_part1": "Precisión en",
+    "title_part2": "cada captura.",
     "description": "Equipamiento construido para la fiabilidad y calibrado para el rendimiento. Respaldado por telemetría inteligente.",
     "button": "Descubrir equipos",
     "guarantee": "Garantía de 5 años",
@@ -36,6 +36,10 @@
     "status_stab": "Estabilizado"
   },
   "benefits": {
+    "badge": "Ecosistema Pro",
+    "title_part1": "Ventajas del",
+    "title_part2": "Efecto AstroAssist.",
+    "description": "Sistemas diseñados para maximizar cada segundo de exposición astronómica con tecnología de vanguardia.",
     "items": [
       {
         "title": "Telemetría Inteligente",
@@ -74,7 +78,8 @@
   },
   "gallery": {
     "badge": "Galería Óptica",
-    "title": "El Universo a través de nuestras ópticas.",
+    "title_part1": "El Universo",
+    "title_part2": "a través de nuestras ópticas.",
     "description": "Astrocultores y observadores de nuestra comunidad demuestran de lo que es capaz el hardware de AstroAssist.",
     "modal_verified": "Captura Verificada",
     "modal_photo_by": "Fotografía por",

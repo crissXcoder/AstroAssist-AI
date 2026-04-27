@@ -13,21 +13,21 @@ type Props = {
 
 export function MessageInput({ input, setInput, onSubmit, isLoading }: Props) {
   return (
-    <form onSubmit={onSubmit} className="flex gap-2 w-full">
+    <form onSubmit={onSubmit} className="flex gap-3 w-full">
       <Input
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Escribe tu consulta astronómica..."
         disabled={isLoading}
-        className="flex-1 bg-background/50 border-white/10 rounded-xl focus-visible:ring-primary/50 text-base md:text-sm shadow-inner"
+        className="flex-1"
       />
       <Button 
         type="submit" 
         size="icon" 
         disabled={isLoading || !input.trim()}
-        className="rounded-xl h-10 w-10 bg-primary hover:bg-primary/90 shadow-md shadow-primary/20 transition-all shrink-0 hover:scale-105"
+        className="rounded-full h-12 w-12 bg-primary hover:bg-primary-hover shadow-lg shadow-primary/20 transition-all shrink-0"
       >
-        <SendHorizontal className="w-5 h-5" />
+        <SendHorizontal className="w-5 h-5 text-on-primary" />
       </Button>
     </form>
   );

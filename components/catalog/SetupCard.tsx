@@ -24,9 +24,9 @@ const GOAL_ICONS: Record<CuratedSetup["icon"], React.ReactNode> = {
 };
 
 const LEVEL_COLORS = {
-  beginner: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
-  intermediate: "text-amber-400 bg-amber-500/10 border-amber-500/20",
-  advanced: "text-red-400 bg-red-500/10 border-red-500/20",
+  beginner: "bg-success-container/30 text-on-success-container border-success-container/40",
+  intermediate: "bg-warning-container/30 text-on-warning-container border-warning-container/40",
+  advanced: "bg-error-container/30 text-on-error-container border-error-container/40",
 };
 
 const LEVEL_LABELS = {
@@ -63,65 +63,63 @@ export function SetupCard({ setup, index, locale }: SetupCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="relative flex flex-col rounded-3xl border border-white/[0.07] bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-xl overflow-hidden group hover:border-white/[0.14] transition-all duration-500"
+      className="relative flex flex-col rounded-xl border border-white/5 bg-surface-container-low overflow-hidden group hover:border-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5"
     >
-      {/* Top accent bar */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-500/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
       <div className="p-6">
         {/* Icon + badges */}
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
+        <div className="flex items-start justify-between gap-3 mb-6">
+          <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0">
             {GOAL_ICONS[setup.icon]}
           </div>
           <div className="flex flex-wrap gap-2 justify-end">
-            <span className={`text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${LEVEL_COLORS[setup.recommendedLevel]}`}>
+            <span className={`text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${LEVEL_COLORS[setup.recommendedLevel]}`}>
               {LEVEL_LABELS[setup.recommendedLevel][locale]}
             </span>
-            <span className="text-[10px] font-medium px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.06] text-neutral-400">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/5 border border-white/10 text-text-muted">
               {GOAL_LABELS[setup.goal][locale]}
             </span>
           </div>
         </div>
 
         {/* Title + description */}
-        <h3 className="text-lg font-bold text-white mb-2 leading-tight">{name}</h3>
-        <p className="text-sm text-neutral-500 leading-relaxed font-light line-clamp-2 mb-4">{description}</p>
+        <h3 className="text-title-md font-semibold text-text-main mb-2 leading-tight group-hover:text-primary transition-colors">{name}</h3>
+        <p className="text-body-sm text-text-soft leading-relaxed font-light line-clamp-2 mb-6">{description}</p>
 
         {/* Product thumbnails */}
         {allImages.length > 0 && (
-          <div className="flex items-center gap-3 mb-4">
-            {allImages.map((p, i) => (
-              <div
-                key={p.id}
-                className="w-12 h-12 rounded-xl overflow-hidden bg-black/60 border border-white/[0.06] shrink-0"
-                style={{ zIndex: allImages.length - i }}
-              >
-                <img
-                  src={p.images.primary}
-                  alt={locale === "en" ? p.nameEn : p.nameEs}
-                  className="w-full h-full object-cover opacity-70 mix-blend-screen"
-                />
-              </div>
-            ))}
-            <span className="text-xs text-neutral-600 font-light">
-              {main.length} {locale === "en" ? "items" : "productos"}
-              {accessories.length > 0
-                ? ` + ${accessories.length} ${locale === "en" ? "accessories" : "accesorios"}`
-                : ""}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex -space-x-3">
+              {allImages.map((p, i) => (
+                <div
+                  key={p.id}
+                  className="w-10 h-10 rounded-full overflow-hidden bg-surface-container border-2 border-surface-container-low shrink-0 shadow-lg"
+                  style={{ zIndex: allImages.length - i }}
+                >
+                  <img
+                    src={p.images.primary}
+                    alt={locale === "en" ? p.nameEn : p.nameEs}
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                  />
+                </div>
+              ))}
+            </div>
+            <span className="text-label-sm text-text-faint font-medium">
+              {main.length + accessories.length} {locale === "en" ? "items" : "productos"}
             </span>
           </div>
         )}
 
         {/* Reason teaser */}
-        <p className="text-[11px] text-neutral-600 leading-relaxed italic line-clamp-2 mb-5">
-          "{reason.slice(0, 100)}…"
-        </p>
+        <div className="bg-surface-container/50 rounded-lg p-4 mb-6 border border-white/5">
+          <p className="text-body-sm text-text-soft leading-relaxed italic line-clamp-2">
+            "{reason}"
+          </p>
+        </div>
 
         {/* CTA */}
         <Link
-          href={`/builder`}
-          className="inline-flex items-center gap-2 text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors group/link"
+          href={`/${locale}/builder`}
+          className="inline-flex items-center gap-2 text-label-md font-bold text-primary hover:text-primary-hover transition-all group/link"
         >
           {exploreLabel}
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />

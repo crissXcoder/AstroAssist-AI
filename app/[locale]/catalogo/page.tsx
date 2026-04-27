@@ -42,15 +42,15 @@ export default function CatalogPage() {
       };
 
   return (
-    <main className="min-h-screen bg-[#080a12] pt-32 md:pt-40 pb-32 overflow-hidden relative selection:bg-indigo-500/30">
+    <main className="min-h-screen bg-background pt-32 md:pt-40 pb-32 overflow-hidden relative selection:bg-primary/30">
       {/* Ambient background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(99,102,241,0.07),transparent_60%)] pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[30vh] bg-indigo-600/[0.04] blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[10%] right-0 w-[40vw] h-[50vh] bg-purple-600/[0.03] blur-[150px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(98,87,244,0.05),transparent_60%)] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[30vh] bg-primary/5 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[10%] right-0 w-[40vw] h-[50vh] bg-secondary/5 blur-[150px] pointer-events-none" />
 
       {/* Star field (subtle static dots via CSS) */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-30"
+        className="absolute inset-0 pointer-events-none opacity-20"
         style={{
           backgroundImage:
             "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)",
@@ -59,17 +59,17 @@ export default function CatalogPage() {
         }}
       />
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+      <div className="container-max mx-auto px-6 relative z-10">
         {/* ── HERO SECTION ── */}
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16 md:mb-20">
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-20">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.05] w-fit mb-8"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/10 w-fit mb-8 shadow-sm"
           >
-            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-            <span className="text-[10px] sm:text-[11px] font-medium tracking-[0.2em] uppercase text-neutral-400">
+            <Sparkles className="w-3.5 h-3.5 text-primary" />
+            <span className="text-label-sm text-text-muted">
               {t.badge}
             </span>
           </motion.div>
@@ -78,18 +78,18 @@ export default function CatalogPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.1 }}
-            className="text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight md:tracking-[-0.03em] text-white leading-[1.05] mb-6"
+            className="text-headline-lg md:text-headline-xl lg:text-display-lg font-semibold tracking-tight text-text-main leading-[1.1] mb-8"
           >
             {t.title1}{" "}
             <br className="hidden md:block" />
-            <span className="text-neutral-600">{t.title2}</span>
+            <span className="text-primary">{t.title2}</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="text-base md:text-lg text-neutral-500 font-light leading-relaxed max-w-xl tracking-wide mb-12"
+            className="text-body-lg text-text-soft font-light leading-relaxed max-w-2xl mb-16 mx-auto"
           >
             {t.desc}
           </motion.p>
@@ -136,9 +136,9 @@ export default function CatalogPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="text-xs text-neutral-600 font-medium mb-6 flex items-center gap-1.5"
+            className="text-label-sm text-text-muted mb-8 flex items-center gap-2"
           >
-            <Telescope className="w-3.5 h-3.5" />
+            <Telescope className="w-4 h-4 text-primary" />
             {t.count(filteredProducts.length)}
           </motion.p>
         </AnimatePresence>
