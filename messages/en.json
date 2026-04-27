@@ -36,6 +36,10 @@
     "status_stab": "Stabilized"
   },
   "benefits": {
+    "badge": "Pro Ecosystem",
+    "title_part1": "Advantages of the",
+    "title_part2": "AstroAssist Effect.",
+    "description": "Systems designed to maximize every second of astronomical exposure with cutting-edge technology.",
     "items": [
       {
         "title": "Intelligent Telemetry",
@@ -74,7 +78,8 @@
   },
   "gallery": {
     "badge": "Optical Gallery",
-    "title": "The Universe through our optics.",
+    "title_part1": "The Universe",
+    "title_part2": "through our optics.",
     "description": "Astroculturists and observers in our community demonstrate what AstroAssist hardware is capable of.",
     "modal_verified": "Verified Capture",
     "modal_photo_by": "Photography by",
