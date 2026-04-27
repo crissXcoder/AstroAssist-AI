@@ -48,6 +48,8 @@ interface SetupCardProps {
   locale: "en" | "es";
 }
 
+import { Card, CardContent } from "@/shared/components/ui/card";
+
 export function SetupCard({ setup, index, locale }: SetupCardProps) {
   const name = locale === "en" ? setup.nameEn : setup.nameEs;
   const description = locale === "en" ? setup.descriptionEn : setup.descriptionEs;
@@ -63,9 +65,9 @@ export function SetupCard({ setup, index, locale }: SetupCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="relative flex flex-col rounded-xl border border-white/5 bg-surface-container-low overflow-hidden group hover:border-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5"
     >
-      <div className="p-6">
+      <Card variant="interactive" className="h-full relative overflow-hidden group p-0!">
+        <CardContent className="p-6 flex flex-col h-full">
         {/* Icon + badges */}
         <div className="flex items-start justify-between gap-3 mb-6">
           <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0">
@@ -124,7 +126,8 @@ export function SetupCard({ setup, index, locale }: SetupCardProps) {
           {exploreLabel}
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
         </Link>
-      </div>
+        </CardContent>
+      </Card>
     </motion.div>
   );
 }

@@ -6,9 +6,9 @@ import { Bot, Sparkles } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import Link from "next/link";
 import { useTranslations, useLocale } from "@/shared/providers/i18n-provider";
-import { Badge } from "@/shared/components/ui/badge"; // Assuming Badge is needed for the new structure
-import { ChevronRight } from "lucide-react"; // Assuming ChevronRight is needed for the new structure
+import { Badge } from "@/shared/components/ui/badge";
 import images from "@/lib/images.json";
+import { SectionContainer } from "@/shared/components/ui/section";
 
 export function Hero() {
   const containerRef = useRef<HTMLElement>(null);
@@ -30,26 +30,28 @@ export function Hero() {
   const windowRotateX = useTransform(scrollYProgress, [0, 0.5], [8, 0]);
 
   return (
-    <section 
+    <SectionContainer 
       ref={containerRef} 
+      delay={0}
       className="relative w-full min-h-[120vh] md:min-h-[140vh] flex flex-col items-center pt-32 md:pt-44 overflow-hidden perspective-distant"
+      containerClassName="flex flex-col items-center"
+      background={
+        <motion.div 
+          style={{ y: bgY }}
+          className="absolute inset-0 z-0 pointer-events-none"
+        >
+          <div className="absolute inset-0 bg-cover bg-center opacity-[0.10] mix-blend-screen" style={{ backgroundImage: `url('${images.hero.background}')` }} />
+          <div className="absolute inset-0 bg-linear-to-b from-background/80 via-transparent to-background" />
+          
+          {/* Single subtle aura for depth */}
+          <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[40vw] h-[40vw] max-w-[600px] bg-[radial-gradient(ellipse,rgba(98,87,244,0.06),transparent_60%)] rounded-full blur-[80px]" />
+        </motion.div>
+      }
     >
-      {/* 1. Ultra-clean Deep Space Background */}
-      <motion.div 
-        style={{ y: bgY }}
-        className="absolute inset-0 z-0 pointer-events-none"
-      >
-        <div className="absolute inset-0 bg-cover bg-center opacity-[0.10] mix-blend-screen" style={{ backgroundImage: `url('${images.hero.background}')` }} />
-        <div className="absolute inset-0 bg-linear-to-b from-background/80 via-transparent to-background" />
-        
-        {/* Single subtle aura for depth */}
-        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[40vw] h-[40vw] max-w-[600px] bg-[radial-gradient(ellipse,rgba(98,87,244,0.06),transparent_60%)] rounded-full blur-[80px]" />
-      </motion.div>
-
       {/* 2. Premium Minimalist Typography */}
       <motion.div 
         style={{ y: textY, opacity: textOpacity }}
-        className="container relative z-10 px-4 flex flex-col items-center text-center will-change-transform"
+        className="relative z-10 flex flex-col items-center text-center will-change-transform"
       >
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -146,7 +148,7 @@ export function Hero() {
       </motion.div>
 
       {/* Fade connecting to next section */}
-      <div className="absolute bottom-0 w-full h-64 bg-linear-to-t from-background to-transparent z-30" />
-    </section>
+      <div className="absolute bottom-0 w-full h-64 bg-linear-to-t from-background to-transparent z-30 pointer-events-none" />
+    </SectionContainer>
   );
 }

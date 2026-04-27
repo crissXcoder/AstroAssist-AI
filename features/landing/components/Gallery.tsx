@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Maximize2, Camera, Telescope, MapPin, ArrowUpRight } from "lucide-react";
-import { SectionContainer } from "@/shared/components/ui/section";
+import { SectionContainer, SectionHeader } from "@/shared/components/ui/section";
 import { Badge } from "@/shared/components/ui/badge";
+import { Card } from "@/shared/components/ui/card";
 import { useTranslations } from "@/shared/providers/i18n-provider";
 import images from "@/lib/images.json";
 
@@ -92,19 +93,19 @@ export function Gallery() {
       <div className="absolute bottom-0 w-full h-[500px] bg-linear-to-t from-background via-transparent to-transparent pointer-events-none z-10" />
 
       <div className="container px-4 md:px-6 mx-auto relative z-20">
-        <div className="flex flex-col items-center justify-center space-y-6 text-center mb-24">
-          <Badge variant="glass" className="bg-primary/5 border-primary/10 text-label-sm text-text-muted">
-            <Camera className="w-4 h-4 mr-2" />
-            {t.badge}
-          </Badge>
-          <h2 className="text-headline-lg md:text-headline-xl font-semibold tracking-tight text-text-main leading-[1.08] max-w-4xl">
-            {t.title_part1} <br className="sm:hidden" />
-            <span className="text-primary">{t.title_part2}</span>
-          </h2>
-          <p className="max-w-[700px] text-text-soft md:text-body-lg font-light leading-relaxed mx-auto">
-            {t.description}
-          </p>
-        </div>
+        <SectionHeader 
+          badgeText={t.badge}
+          badgeIcon={<Camera className="w-4 h-4 mr-2" />}
+          titleNode={
+            <>
+              {t.title_part1} <br className="sm:hidden" />
+              <span className="text-primary">{t.title_part2}</span>
+            </>
+          }
+          description={t.description}
+          titleClassName="max-w-4xl md:text-headline-xl"
+          descriptionClassName="max-w-[700px] mx-auto"
+        />
 
         {/* Bento Grid Layout - Masonry style representation */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[220px] md:auto-rows-[250px]">
@@ -115,36 +116,41 @@ export function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className={`relative rounded-xl overflow-hidden group cursor-pointer border border-white/5 bg-surface-container shadow-xl ${img.span}`}
-              onClick={() => setSelectedImage(img)}
+              className={img.span}
             >
-              {/* Image with extreme slow scale on hover */}
-              <img 
-                src={img.src} 
-                alt={img.title} 
-                className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-[2s] ease-out will-change-transform"
-              />
-              
-              {/* Dark overlay that fades away slightly */}
-              <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/20 to-background/90 opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
-              
-                {/* Content overlay */}
-                <div className="absolute inset-0 p-6 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-title-lg font-semibold text-text-main tracking-tight leading-tight">{t.items[img.id as keyof typeof t.items].title}</h3>
-                    <div className="w-10 h-10 rounded-full bg-surface-container-highest/80 backdrop-blur-3xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 border border-white/10 shrink-0 ml-2">
-                      <ArrowUpRight className="w-5 h-5 text-text-main" />
+              <Card 
+                variant="interactive" 
+                className="h-full cursor-pointer rounded-xl"
+                onClick={() => setSelectedImage(img)}
+              >
+                {/* Image with extreme slow scale on hover */}
+                <img 
+                  src={img.src} 
+                  alt={img.title} 
+                  className="w-full h-full object-cover opacity-70 group-hover/card:opacity-100 group-hover/card:scale-110 transition-all duration-[2s] ease-out will-change-transform"
+                />
+                
+                {/* Dark overlay that fades away slightly */}
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/20 to-background/90 opacity-80 group-hover/card:opacity-100 transition-opacity duration-500" />
+                
+                  {/* Content overlay */}
+                  <div className="absolute inset-0 p-6 flex flex-col justify-end translate-y-4 group-hover/card:translate-y-0 transition-transform duration-500 ease-out pointer-events-none">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-title-lg font-semibold text-text-main tracking-tight leading-tight">{t.items[img.id as keyof typeof t.items].title}</h3>
+                      <div className="w-10 h-10 rounded-full bg-surface-container-highest/80 backdrop-blur-3xl flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-all duration-500 scale-75 group-hover/card:scale-100 border border-white/10 shrink-0 ml-2">
+                        <ArrowUpRight className="w-5 h-5 text-text-main" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-1.5 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 delay-100">
+                      <p className="text-body-sm text-primary font-medium flex items-center gap-2">
+                        <Telescope className="w-3.5 h-3.5 shrink-0" /> <span className="line-clamp-1">{t.items[img.id as keyof typeof t.items].equipment}</span>
+                      </p>
+                      <p className="text-[12px] text-text-soft flex items-center gap-2">
+                        <MapPin className="w-3.5 h-3.5 shrink-0" /> <span className="line-clamp-1">{t.items[img.id as keyof typeof t.items].location}</span>
+                      </p>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                    <p className="text-body-sm text-primary font-medium flex items-center gap-2">
-                      <Telescope className="w-3.5 h-3.5 shrink-0" /> <span className="line-clamp-1">{t.items[img.id as keyof typeof t.items].equipment}</span>
-                    </p>
-                    <p className="text-[12px] text-text-soft flex items-center gap-2">
-                      <MapPin className="w-3.5 h-3.5 shrink-0" /> <span className="line-clamp-1">{t.items[img.id as keyof typeof t.items].location}</span>
-                    </p>
-                  </div>
-                </div>
+              </Card>
             </motion.div>
           ))}
         </div>

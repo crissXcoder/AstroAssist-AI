@@ -1,6 +1,8 @@
 import { LucideIcon, Telescope, Wallet, Target, Map } from "lucide-react";
 import { cn } from "@/shared/utils/cn";
 import { Button } from "@/shared/components/ui/button";
+import { Card } from "@/shared/components/ui/card";
+import { SectionHeader } from "@/shared/components/ui/section";
 
 interface OptionCardProps {
   id: string;
@@ -13,14 +15,10 @@ interface OptionCardProps {
 
 function OptionCard({ title, description, icon: Icon, selected, onClick }: OptionCardProps) {
   return (
-    <div 
+    <Card 
+      variant="selectable"
       onClick={onClick}
-      className={cn(
-        "relative p-6 rounded-xl border cursor-pointer transition-all duration-400 group flex flex-col gap-4",
-        selected 
-          ? "border-primary bg-primary/10 shadow-[0_10px_40px_rgba(98,87,244,0.15)]" 
-          : "border-white/5 bg-surface-container-low hover:border-white/20 hover:bg-surface-container"
-      )}
+      data-selected={selected}
     >
       <div className={cn(
         "w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300",
@@ -41,7 +39,7 @@ function OptionCard({ title, description, icon: Icon, selected, onClick }: Optio
       )}>
         <div className={cn("w-2.5 h-2.5 rounded-full transition-all duration-300", selected ? "bg-primary scale-100 shadow-[0_0_8px_rgba(98,87,244,0.5)]" : "bg-transparent scale-0")} />
       </div>
-    </div>
+    </Card>
   );
 }
 
@@ -49,12 +47,13 @@ function OptionCard({ title, description, icon: Icon, selected, onClick }: Optio
 export function ExperienceStep({ value, onChange, t }: any) {
   return (
     <div className="flex flex-col space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 w-full">
-      <div>
-        <h2 className="text-headline-lg md:text-headline-xl font-semibold tracking-tight text-text-main leading-[1.08] mb-6">
-          {t.title}
-        </h2>
-        <p className="text-body-lg text-text-soft font-light leading-relaxed max-w-2xl">{t.subtitle}</p>
-      </div>
+      <SectionHeader 
+        title={t.title}
+        description={t.subtitle}
+        align="left"
+        className="mb-0"
+        titleClassName="md:text-headline-xl"
+      />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <OptionCard id="beginner" title={t.beginner} description={t.beginner_desc} icon={Telescope} selected={value === 'beginner'} onClick={() => onChange('beginner')} />
         <OptionCard id="intermediate" title={t.intermediate} description={t.intermediate_desc} icon={Telescope} selected={value === 'intermediate'} onClick={() => onChange('intermediate')} />
@@ -68,12 +67,13 @@ export function ExperienceStep({ value, onChange, t }: any) {
 export function BudgetStep({ value, onChange, t }: any) {
   return (
     <div className="flex flex-col space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 w-full">
-      <div>
-        <h2 className="text-headline-lg md:text-headline-xl font-semibold tracking-tight text-text-main leading-[1.08] mb-6">
-          {t.title}
-        </h2>
-        <p className="text-body-lg text-text-soft font-light leading-relaxed max-w-2xl">{t.subtitle}</p>
-      </div>
+      <SectionHeader 
+        title={t.title}
+        description={t.subtitle}
+        align="left"
+        className="mb-0"
+        titleClassName="md:text-headline-xl"
+      />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <OptionCard id="low" title={t.low} description={t.low_desc} icon={Wallet} selected={value === 'low'} onClick={() => onChange('low')} />
         <OptionCard id="medium" title={t.medium} description={t.medium_desc} icon={Wallet} selected={value === 'medium'} onClick={() => onChange('medium')} />
@@ -87,12 +87,13 @@ export function BudgetStep({ value, onChange, t }: any) {
 export function GoalStep({ value, onChange, t }: any) {
   return (
     <div className="flex flex-col space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 w-full">
-      <div>
-        <h2 className="text-headline-lg md:text-headline-xl font-semibold tracking-tight text-text-main leading-[1.08] mb-6">
-          {t.title}
-        </h2>
-        <p className="text-body-lg text-text-soft font-light leading-relaxed max-w-2xl">{t.subtitle}</p>
-      </div>
+      <SectionHeader 
+        title={t.title}
+        description={t.subtitle}
+        align="left"
+        className="mb-0"
+        titleClassName="md:text-headline-xl"
+      />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <OptionCard id="planets" title={t.planets} description={t.planets_desc} icon={Target} selected={value === 'planets'} onClick={() => onChange('planets')} />
         <OptionCard id="deepsky" title={t.deepsky} description={t.deepsky_desc} icon={Target} selected={value === 'deepsky'} onClick={() => onChange('deepsky')} />
@@ -106,12 +107,13 @@ export function GoalStep({ value, onChange, t }: any) {
 export function EnvironmentStep({ value, onChange, t }: any) {
   return (
     <div className="flex flex-col space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 w-full">
-      <div>
-        <h2 className="text-headline-lg md:text-headline-xl font-semibold tracking-tight text-text-main leading-[1.08] mb-6">
-          {t.title}
-        </h2>
-        <p className="text-body-lg text-text-soft font-light leading-relaxed max-w-2xl">{t.subtitle}</p>
-      </div>
+      <SectionHeader 
+        title={t.title}
+        description={t.subtitle}
+        align="left"
+        className="mb-0"
+        titleClassName="md:text-headline-xl"
+      />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <OptionCard id="city" title={t.city} description={t.city_desc} icon={Map} selected={value === 'city'} onClick={() => onChange('city')} />
         <OptionCard id="suburban" title={t.suburban} description={t.suburban_desc} icon={Map} selected={value === 'suburban'} onClick={() => onChange('suburban')} />
@@ -131,13 +133,19 @@ export function RecommendationResult({ data, onRestart, locale }: { data: any, o
 
   return (
     <div className="flex flex-col space-y-12 animate-in fade-in zoom-in-95 duration-1000 w-full pb-10">
-      <div className="text-center max-w-3xl mx-auto">
-        <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-8 border border-primary/20 shadow-[0_0_40px_rgba(98,87,244,0.15)]">
-          <Telescope className="w-10 h-10" />
-        </div>
-        <h2 className="text-headline-xl md:text-display-lg text-text-main mb-6 tracking-tight">{title}</h2>
-        <p className="text-body-lg text-text-soft leading-relaxed max-w-2xl mx-auto">{reasoning}</p>
-      </div>
+      <SectionHeader 
+        title={title}
+        description={reasoning}
+        align="center"
+        className="max-w-3xl mx-auto"
+        titleClassName="text-headline-xl md:text-display-lg"
+        descriptionClassName="text-body-lg max-w-2xl mx-auto"
+        badgeNode={
+          <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-8 border border-primary/20 shadow-[0_0_40px_rgba(98,87,244,0.15)]">
+            <Telescope className="w-10 h-10" />
+          </div>
+        }
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Main Items */}
@@ -147,7 +155,7 @@ export function RecommendationResult({ data, onRestart, locale }: { data: any, o
           </h3>
           <div className="grid grid-cols-1 gap-4">
             {data.mainItems.map((item: any) => (
-              <div key={item.id} className="flex items-center gap-5 p-5 rounded-xl bg-surface-container border border-white/5 hover:bg-surface-bright transition-all group shadow-xl">
+              <Card key={item.id} variant="compact">
                 <div className="w-20 h-20 rounded-lg overflow-hidden bg-background shrink-0 relative border border-white/5">
                   <img src={item.images.primary} alt={item.nameEn} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
                 </div>
@@ -156,7 +164,7 @@ export function RecommendationResult({ data, onRestart, locale }: { data: any, o
                   <p className="text-label-sm text-text-faint mt-1 uppercase">{item.category}</p>
                   <p className="text-mono-stat text-primary mt-2">{item.price}</p>
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
         </div>
@@ -169,7 +177,7 @@ export function RecommendationResult({ data, onRestart, locale }: { data: any, o
             </h3>
             <div className="grid grid-cols-1 gap-4">
               {data.accessories.map((item: any) => (
-                <div key={item.id} className="flex items-center gap-5 p-5 rounded-xl bg-surface-container border border-white/5 hover:bg-surface-bright transition-all group shadow-xl">
+                <Card key={item.id} variant="compact">
                   <div className="w-20 h-20 rounded-lg overflow-hidden bg-background shrink-0 relative border border-white/5">
                     <img src={item.images.primary} alt={item.nameEn} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
                   </div>
@@ -178,7 +186,7 @@ export function RecommendationResult({ data, onRestart, locale }: { data: any, o
                     <p className="text-label-sm text-text-faint mt-1 uppercase">{item.category}</p>
                     <p className="text-mono-stat text-primary mt-2">{item.price}</p>
                   </div>
-                </div>
+                </Card>
               ))}
             </div>
           </div>
