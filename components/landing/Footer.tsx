@@ -17,7 +17,7 @@ export function Footer() {
       <div className="container px-4 md:px-6 mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           <div className="flex flex-col space-y-6 lg:col-span-2 pr-0 lg:pr-12">
-            <Link href="/" className="flex items-center gap-3 group w-fit">
+            <Link href={`/${locale}`} className="flex items-center gap-3 group w-fit">
               <div className="p-2 bg-primary/20 rounded-xl border border-primary/30 group-hover:bg-primary/40 transition-colors shadow-[0_0_20px_rgba(var(--primary),0.2)]">
                 <Telescope className="w-6 h-6 text-primary" />
               </div>
