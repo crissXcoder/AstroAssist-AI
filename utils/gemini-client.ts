@@ -13,13 +13,17 @@ export class GeminiClient {
   private modelName: string;
 
   constructor(apiKey: string, modelName: string = "gemini-2.0-flash") {
+    if (!apiKey) {
+      console.warn("⚠️ [GeminiClient] Inicializado sin API Key");
+    }
     this.genAI = new GoogleGenAI({ apiKey });
     this.modelName = modelName;
   }
 
   async generate(prompt: string, contents: any[], systemInstruction: string): Promise<GeminiResponse> {
     try {
-      console.log(`🌌 [GeminiClient] Calling ${this.modelName}...`);
+      console.log(`🌌 [GeminiClient] Llamando a ${this.modelName}...`);
+      console.log(`📝 [GeminiClient] Prompt length: ${prompt.length}, History turns: ${contents.length}`);
       
       const response = await this.genAI.models.generateContent({
         model: this.modelName,
@@ -34,10 +38,11 @@ export class GeminiClient {
       const text = response.candidates?.[0]?.content?.parts?.[0]?.text;
 
       if (!text) {
+        console.warn("⚠️ [GeminiClient] Respuesta vacía de la API");
         throw new Error("EMPTY_RESPONSE");
       }
 
-      console.log(`✅ [GeminiClient] Success from ${this.modelName}`);
+      console.log(`✅ [GeminiClient] Éxito desde ${this.modelName} (${text.length} caracteres)`);
       return {
         content: text.trim(),
         status: 'online'
@@ -45,14 +50,19 @@ export class GeminiClient {
 
     } catch (error: any) {
       const errorMsg = error.message || String(error);
-      console.error(`❌ [GeminiClient] Error:`, errorMsg);
+      console.error(`❌ [GeminiClient] Error detectado:`, errorMsg);
+
+      // Log full error for server-side debugging
+      if (error.response) {
+        console.error("📄 [GeminiClient] Error Details:", JSON.stringify(error.response, null, 2));
+      }
 
       // Handle specific API errors from @google/genai
-      if (errorMsg.includes('401') || errorMsg.includes('403') || errorMsg.includes('expired')) {
+      if (errorMsg.includes('401') || errorMsg.includes('403') || errorMsg.includes('API_KEY_INVALID') || errorMsg.includes('expired')) {
         return { 
           content: "", 
           status: 'error_auth', 
-          errorDetail: "API Key inválida o expirada. Por favor actualiza .env.local" 
+          errorDetail: "API Key inválida o expirada. Revisa el archivo .env.local" 
         };
       }
 
@@ -60,7 +70,7 @@ export class GeminiClient {
         return { 
           content: "", 
           status: 'error_quota', 
-          errorDetail: "Límite de cuota excedido (Free Tier). Intenta de nuevo en un minuto." 
+          errorDetail: "Límite de cuota excedido (Free Tier). Espera un momento antes de reintentar." 
         };
       }
 
@@ -68,14 +78,14 @@ export class GeminiClient {
         return { 
           content: "", 
           status: 'error_model', 
-          errorDetail: `El modelo ${this.modelName} no está disponible o el ID es incorrecto.` 
+          errorDetail: `El modelo ${this.modelName} no fue encontrado. Verifica el ID.` 
         };
       }
 
       return { 
         content: "", 
         status: 'offline', 
-        errorDetail: errorMsg 
+        errorDetail: `Error de conexión: ${errorMsg}` 
       };
     }
   }

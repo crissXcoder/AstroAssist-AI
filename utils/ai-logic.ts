@@ -39,24 +39,31 @@ export function detectIntent(query: string): Intent {
 export function getProductContext(intent: Intent, query: string): string {
   const q = query.toLowerCase();
   
-  // Filter relevant products
+  // 1. Search for specific matches (by category, name, or tags)
   const relevantProducts = products.filter(p => {
-    if (intent === "general") return false;
-    const categoryMatch = q.includes(p.category.toLowerCase().slice(0, -1)); // fuzzy match for category
+    const categoryMatch = q.includes(p.category.toLowerCase().slice(0, -2)); // "telescopio" matches "telescopios"
     const nameMatch = q.includes(p.nameEn.toLowerCase()) || q.includes(p.nameEs.toLowerCase());
     const tagMatch = p.tags.some(t => q.includes(t.toLowerCase()));
+    const descMatch = p.descriptionEs.toLowerCase().includes(q) || p.descriptionEn.toLowerCase().includes(q);
     
-    return categoryMatch || nameMatch || tagMatch;
-  }).slice(0, 5);
+    return categoryMatch || nameMatch || tagMatch || (q.length > 3 && descMatch);
+  }).slice(0, 6);
 
+  // 2. If no specific matches, provide popular/essential products as fallback
+  // This prevents the AI from being "blind" during discovery or general chat
   if (relevantProducts.length === 0) {
-    // Return a default set of popular products if no specific match but it's a discovery intent
-    if (intent === "discovery") {
-      return products.slice(0, 3).map(formatProductForContext).join("\n---\n");
-    }
-    return "No specific product context available.";
+    console.log("🔍 [AI-Logic] No se encontraron coincidencias exactas, inyectando catálogo base.");
+    // Return a diverse set of products: one telescope, one mount, one camera
+    const fallbackProducts = [
+      products.find(p => p.id === 'celestron-130slt'), // Beginner favorite
+      products.find(p => p.id === 'zwo-533mc'),       // Popular camera
+      products.find(p => p.id === 'sw-eq6r')          // Standard mount
+    ].filter(Boolean) as Product[];
+
+    return fallbackProducts.map(formatProductForContext).join("\n---\n");
   }
 
+  console.log(`✅ [AI-Logic] Inyectando ${relevantProducts.length} productos relevantes.`);
   return relevantProducts.map(formatProductForContext).join("\n---\n");
 }
 
