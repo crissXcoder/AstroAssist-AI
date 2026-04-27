@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { FloatingChat } from "@/components/chat/FloatingChat";
 import { Navbar } from "@/components/landing/Navbar";
 import { I18nProvider } from "@/components/i18n-provider";
+import { Footer } from "@/components/landing/Footer";
 import { getDictionary, Locale } from "@/lib/i18n";
 
 const geistSans = Geist({
@@ -96,6 +97,7 @@ export default async function RootLayout({
           <I18nProvider dictionary={dictionary} locale={locale as Locale}>
             <Navbar />
             {children}
+            <Footer />
             <FloatingChat />
           </I18nProvider>
         </ThemeProvider>
