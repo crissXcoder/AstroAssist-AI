@@ -24,7 +24,8 @@ export interface Product {
   nameEn: string;
   nameEs: string;
   category: ProductCategory;
-  price: string;
+  price: string; // Display price (e.g. "$1,200")
+  priceValue: number; // Numeric value for calculations
   images: ProductImages;
   descriptionEn: string;
   descriptionEs: string;
