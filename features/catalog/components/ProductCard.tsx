@@ -4,6 +4,7 @@ import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } fr
 import { ShoppingCart, ArrowRight, Zap } from "lucide-react";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
+import { useCart } from "@/features/cart";
 import Link from "next/link";
 import type { Product, RecommendedLevel, ObservationType, SkyCondition } from "@/features/catalog";
 
@@ -55,6 +56,8 @@ export function CatalogProductCard({
 }: CatalogProductCardProps) {
   const name = locale === "en" ? product.nameEn : product.nameEs;
   const description = locale === "en" ? product.descriptionEn : product.descriptionEs;
+
+  const { addItem, setOpen } = useCart();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -185,7 +188,8 @@ export function CatalogProductCard({
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                // Future: handle direct add to cart
+                addItem(product, 1);
+                setOpen(true);
               }}
             >
               <ShoppingCart className="w-5 h-5" />

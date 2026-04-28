@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: 'imgs.search.brave.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
     ],
   },
 };

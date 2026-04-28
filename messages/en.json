@@ -331,5 +331,18 @@
       "ai_button": "Ask",
       "restart": "Reconfigure Setup"
     }
+  },
+  "cart": {
+    "title": "Your Arsenal",
+    "empty": "Your cart is currently empty. The void awaits.",
+    "subtotal": "Subtotal",
+    "shipping": "Secure Shipping",
+    "tax": "Estimated Tax",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "clear": "Clear Arsenal",
+    "free": "Free",
+    "back_to_catalog": "Browse Optics",
+    "remove": "Remove"
   }
 }

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Button, buttonVariants } from "@/shared/components/ui/button";
 import { ThemeToggle } from "@/shared/components/theme-toggle";
 import { LanguageSwitcher } from "@/shared/components/language-switcher";
+import { CartCounter } from "@/features/cart/components/CartCounter";
 import { useTranslations, useLocale } from "@/shared/providers/i18n-provider";
 import { cn } from "@/shared/utils/cn";
 
@@ -53,11 +54,13 @@ export function Navbar() {
           </nav>
           
           <div className="hidden md:flex items-center gap-4">
+            <CartCounter />
             <LanguageSwitcher />
             <ThemeToggle />
           </div>
 
           <div className="flex items-center gap-2 md:hidden">
+            <CartCounter />
             <LanguageSwitcher />
             <ThemeToggle />
             <Button 
