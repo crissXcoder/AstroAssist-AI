@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useReducer, useEffect, useState } from "react";
 import { CartItem, CartState, CartAction, CartSummary } from "../types";
 import { calculateCartSummary, validateQuantity } from "../utils/cart-logic";
+import { mapProductToCartItem } from "../utils/cartMapper";
 import { Product } from "@/features/catalog/types";
 
 const CART_STORAGE_KEY = "astroassist-cart";
@@ -25,15 +26,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         return { ...state, items: newItems };
       }
 
-      const newItem: CartItem = {
-        id: product.id,
-        productId: product.id,
-        name: product.nameEn, // Default to English for store, display handled by component
-        price: product.priceValue,
-        image: product.images.primary,
-        quantity: validatedQty,
-        category: product.category,
-      };
+      const newItem = mapProductToCartItem(product, validatedQty);
 
       return { ...state, items: [...state.items, newItem] };
     }
