@@ -1,13 +1,13 @@
 import { Product } from "../catalog/types";
 
 export interface CartItem {
-  id: string; // Composite ID if needed, or just product ID
+  id: string; // productId
   productId: string;
   name: string;
   price: number;
   image: string;
   quantity: number;
-  // Options like 'color' or 'mount-type' could go here in the future
+  category: string;
 }
 
 export interface CartSummary {
@@ -15,10 +15,22 @@ export interface CartSummary {
   shipping: number;
   tax: number;
   total: number;
-  itemCount: number;
+  totalItems: number;
+  totalUniqueItems: number;
 }
 
 export interface CartState {
   items: CartItem[];
   isOpen: boolean;
 }
+
+export type CartAction =
+  | { type: "ADD_ITEM"; payload: { product: Product; quantity: number } }
+  | { type: "REMOVE_ITEM"; payload: { productId: string } }
+  | { type: "UPDATE_QUANTITY"; payload: { productId: string; quantity: number } }
+  | { type: "INCREMENT_QUANTITY"; payload: { productId: string } }
+  | { type: "DECREMENT_QUANTITY"; payload: { productId: string } }
+  | { type: "CLEAR_CART" }
+  | { type: "SET_CART"; payload: CartItem[] }
+  | { type: "TOGGLE_CART" }
+  | { type: "SET_OPEN"; payload: boolean };

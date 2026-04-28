@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "@/shared/providers/i18n-provider";
 import { Product } from "../../types";
+import { useCart } from "@/features/cart";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
 import { 
@@ -24,6 +25,7 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product, locale }: ProductInfoProps) {
   const t = useTranslations();
+  const { addItem } = useCart();
   const [isAdding, setIsAdding] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
 
@@ -32,12 +34,14 @@ export function ProductInfo({ product, locale }: ProductInfoProps) {
 
   const handleAddToCart = () => {
     setIsAdding(true);
-    // Simulate API call
+    addItem(product, 1);
+    
+    // Smooth feedback for premium feel
     setTimeout(() => {
       setIsAdding(false);
       setIsAdded(true);
-      setTimeout(() => setIsAdded(false), 3000);
-    }, 1000);
+      setTimeout(() => setIsAdded(false), 2000);
+    }, 600);
   };
 
   return (

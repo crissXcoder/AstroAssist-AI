@@ -331,5 +331,18 @@
       "ai_button": "Preguntar",
       "restart": "Reconfigurar Setup"
     }
+  },
+  "cart": {
+    "title": "Tu Arsenal",
+    "empty": "Tu carrito está vacío. El vacío espera.",
+    "subtotal": "Subtotal",
+    "shipping": "Envío Asegurado",
+    "tax": "Impuestos Estimados",
+    "total": "Total",
+    "checkout": "Proceder al Pago",
+    "clear": "Vaciar Arsenal",
+    "free": "Gratis",
+    "back_to_catalog": "Ver Ópticas",
+    "remove": "Eliminar"
   }
 }
