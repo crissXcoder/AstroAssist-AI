@@ -17,5 +17,6 @@ export function mapProductToCartItem(
     price: product.priceValue,
     image: product.images.primary,
     quantity,
+    category: product.category,
   };
 }
