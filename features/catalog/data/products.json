@@ -5,8 +5,12 @@
     "nameEs": "Celestron NexStar 130SLT",
     "category": "Telescopios",
     "price": "$649.00",
+    "priceValue": 649,
     "images": {
-      "primary": "https://i.ibb.co/bgxKwG6y/image.png"
+      "primary": "https://i.ibb.co/bgxKwG6y/image.png",
+      "gallery": [
+        "https://i.ibb.co/bgxKwG6y/image.png"
+      ]
     },
     "descriptionEn": "Computerized Newtonian Telescope ideal for lunar and planetary observers. High-precision interconnected sidereal tracking makes alignment effortless for first-time users.",
     "descriptionEs": "Telescopio Newtoniano Computarizado ideal para observadores lunares y planetarios. El seguimiento sideral de alta precisión hace que la alineación sea sencilla para usuarios por primera vez.",
@@ -17,13 +21,14 @@
     "setupComplexity": "easy",
     "compatibility": ["zwo-eaf", "optolong-lpro"],
     "advantages": [
-      "advantagesEn_0",
-      "advantagesEn_1",
-      "advantagesEn_2"
+      "Sistema de localización SkyAlign ultra rápido",
+      "Óptica reflectora Newtoniana de 130mm para vistas brillantes",
+      "Montura altacimutal computarizada con base de datos de 4,000+ objetos"
     ],
     "idealUseCases": [
-      "useCasesEn_0",
-      "useCasesEn_1"
+      "Observación lunar y planetaria de alta resolución",
+      "Introducción a la astronomía para toda la familia",
+      "Observación en cielos suburbanos con contaminación moderada"
     ],
     "tags": ["beginner", "computerized", "planetary", "lunar", "automatic"]
   },
@@ -33,6 +38,7 @@
     "nameEs": "Sky-Watcher EQ6-R Pro",
     "category": "Monturas",
     "price": "$2,025.00",
+    "priceValue": 2025,
     "images": {
       "primary": "https://i.ibb.co/BKZkdQbj/image.png"
     },
@@ -45,13 +51,14 @@
     "setupComplexity": "advanced",
     "compatibility": ["celestron-edge", "zwo-533mc", "zwo-eaf", "optolong-lpro"],
     "advantages": [
-      "advantagesEn_0",
-      "advantagesEn_1",
-      "advantagesEn_2"
+      "Transmisión por correas para un error periódico mínimo",
+      "Capacidad de carga de 20kg para equipos pesados",
+      "Seguimiento ultra silencioso y preciso para larga exposición"
     ],
     "idealUseCases": [
-      "useCasesEn_0",
-      "useCasesEn_1"
+      "Astrofotografía de cielo profundo de grado profesional",
+      "Configuraciones de observatorio fijo o semi-móvil",
+      "Uso con tubos ópticos de gran apertura y peso"
     ],
     "tags": ["advanced", "equatorial", "astrophotography", "belt-drive", "goto", "observatory"]
   },
@@ -61,6 +68,7 @@
     "nameEs": "ZWO ASI533MC Pro",
     "category": "Cámaras",
     "price": "$799.00",
+    "priceValue": 799,
     "images": {
       "primary": "https://i.ibb.co/k61Kp1jd/image.png"
     },
@@ -73,13 +81,14 @@
     "setupComplexity": "moderate",
     "compatibility": ["celestron-edge", "sw-eq6r", "zwo-eaf", "optolong-lpro"],
     "advantages": [
-      "advantagesEn_0",
-      "advantagesEn_1",
-      "advantagesEn_2"
+      "Cero Amp-Glow incluso en exposiciones de 10 minutos",
+      "Refrigeración Peltier de hasta -35°C bajo la temperatura ambiente",
+      "Sensor de 9 megapíxeles con alta eficiencia cuántica"
     ],
     "idealUseCases": [
-      "useCasesEn_0",
-      "useCasesEn_1"
+      "Fotografía de nebulosas y galaxias con colores vibrantes",
+      "Capturas de larga exposición con ruido térmico casi nulo",
+      "Configuraciones portátiles de alta eficiencia"
     ],
     "tags": ["astrophotography", "cmos", "cooled", "color", "deep-sky", "intermediate"]
   },
@@ -89,6 +98,7 @@
     "nameEs": "Celestron EdgeHD 8\"",
     "category": "Telescopios",
     "price": "$1,499.00",
+    "priceValue": 1499,
     "images": {
       "primary": "https://i.ibb.co/1f4Zcdqk/91030-xlt-edgehd8-large-1.jpg"
     },
@@ -101,13 +111,14 @@
     "setupComplexity": "advanced",
     "compatibility": ["sw-eq6r", "zwo-533mc", "zwo-eaf", "optolong-lpro"],
     "advantages": [
-      "advantagesEn_0",
-      "advantagesEn_1",
-      "advantagesEn_2"
+      "Óptica plana de campo libre de coma hasta el borde",
+      "Recubrimientos StarBright XLT para máxima transmisión de luz",
+      "Sistema de ventilación de espejo para aclimatación rápida"
     ],
     "idealUseCases": [
-      "useCasesEn_0",
-      "useCasesEn_1"
+      "Astrofotografía de alta resolución de cielo profundo",
+      "Observación visual planetaria de máximo detalle",
+      "Investigación astronómica y fotometría básica"
     ],
     "tags": ["advanced", "sct", "coma-free", "flat-field", "astrophotography", "high-resolution", "professional"]
   },
@@ -117,6 +128,7 @@
     "nameEs": "ZWO EAF Micro-Focalizador Electrónico 5V",
     "category": "Accesorios",
     "price": "$199.00",
+    "priceValue": 199,
     "images": {
       "primary": "https://i.ibb.co/QFpPK6LH/image.png"
     },
@@ -129,13 +141,14 @@
     "setupComplexity": "moderate",
     "compatibility": ["celestron-130slt", "celestron-edge", "zwo-533mc"],
     "advantages": [
-      "advantagesEn_0",
-      "advantagesEn_1",
-      "advantagesEn_2"
+      "Precisión sub-micrométrica en el enfoque",
+      "Alimentación directa por USB de 5V",
+      "Soporta software de auto-enfoque en tiempo real"
     ],
     "idealUseCases": [
-      "useCasesEn_0",
-      "useCasesEn_1"
+      "Automatización de sesiones de astrofotografía",
+      "Enfoque remoto sin tocar físicamente el telescopio",
+      "Compensación de cambios térmicos durante la noche"
     ],
     "tags": ["accessory", "focuser", "electronic", "ai-sync", "astrophotography", "remote"]
   },
@@ -145,6 +158,7 @@
     "nameEs": "Optolong L-eXtreme 2\"",
     "category": "Accesorios",
     "price": "$309.00",
+    "priceValue": 309,
     "images": {
       "primary": "https://imgs.search.brave.com/koROv4oldKmlv8wvHrXYE4ug_vMMlSxjbINHt9yLpGQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/dGVzdGFyLmNvbS5h/dS9jZG4vc2hvcC9w/cm9kdWN0cy9MLWVY/dHJlbWUtU0FJLXNo/YXJwZW4tRGVOb2lz/ZUFJLWRlbm9pc2Uu/cG5nP3Y9MTYxOTMz/OTU1NCZ3aWR0aD0x/MjE0"
     },
@@ -157,14 +171,16 @@
     "setupComplexity": "easy",
     "compatibility": ["celestron-130slt", "celestron-edge", "zwo-533mc"],
     "advantages": [
-      "advantagesEn_0",
-      "advantagesEn_1",
-      "advantagesEn_2"
+      "Aísla las líneas Ha y OIII para un contraste extremo",
+      "Ideal para sensores CMOS a color",
+      "Capa de recubrimiento resistente a rayaduras"
     ],
     "idealUseCases": [
-      "useCasesEn_0",
-      "useCasesEn_1"
+      "Fotografía de nebulosas de emisión desde la ciudad",
+      "Mejora radical del contraste en fotos de cielo profundo",
+      "Ahorro de tiempo en el procesado de imagen"
     ],
     "tags": ["accessory", "filter", "narrowband", "city", "light-pollution", "nebula", "bortle8"]
   }
 ]
+
