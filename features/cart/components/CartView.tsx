@@ -3,7 +3,9 @@
 import { useCart } from "../hooks/useCart";
 import { useTranslations, useLocale } from "@/shared/providers/i18n-provider";
 import { motion, AnimatePresence } from "framer-motion";
-import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, ArrowLeft, ShieldCheck, Truck, RotateCcw } from "lucide-react";
+import { Trash2, ShoppingBag, ArrowRight, ArrowLeft, ShieldCheck, Truck, RotateCcw } from "lucide-react";
+import { QuantitySelector } from "./QuantitySelector";
+import { calculateItemSubtotal } from "../utils/cart-logic";
 import { Button } from "@/shared/components/ui/button";
 import { formatCurrency } from "@/shared/utils/currency";
 import { SectionContainer as Section, SectionHeader } from "@/shared/components/ui/section";
@@ -18,6 +20,7 @@ export function CartView() {
     removeItem, 
     incrementQuantity, 
     decrementQuantity, 
+    updateQuantity,
     summary,
     isHydrated
   } = useCart();
@@ -115,30 +118,17 @@ export function CartView() {
                           </div>
 
                           <div className="flex flex-wrap items-center justify-between gap-6 mt-8">
-                            <div className="flex items-center gap-4 bg-background/40 rounded-full p-1.5 border border-outline/10">
-                              <Button 
-                                variant="ghost" 
-                                size="icon-sm" 
-                                onClick={() => decrementQuantity(item.productId)}
-                                className="h-9 w-9 rounded-full bg-surface-bright/50 hover:bg-primary/20 hover:text-primary transition-all"
-                              >
-                                <Minus size={16} />
-                              </Button>
-                              <span className="w-12 text-center text-body-lg font-mono font-bold text-text-main">{item.quantity}</span>
-                              <Button 
-                                variant="ghost" 
-                                size="icon-sm" 
-                                onClick={() => incrementQuantity(item.productId)}
-                                className="h-9 w-9 rounded-full bg-surface-bright/50 hover:bg-primary/20 hover:text-primary transition-all"
-                              >
-                                <Plus size={16} />
-                              </Button>
-                            </div>
+                            <QuantitySelector
+                              quantity={item.quantity}
+                              onUpdate={(val) => updateQuantity(item.productId, val)}
+                              onIncrement={() => incrementQuantity(item.productId)}
+                              onDecrement={() => decrementQuantity(item.productId)}
+                            />
                             
                             <div className="text-right">
                               <p className="text-label-sm text-text-faint mb-1">{t.cart.item_total}</p>
                               <span className="text-title-lg font-bold text-text-main text-glow">
-                                {formatCurrency(item.price * item.quantity, locale)}
+                                {formatCurrency(calculateItemSubtotal(item.price, item.quantity), locale)}
                               </span>
                             </div>
                           </div>

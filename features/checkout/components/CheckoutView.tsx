@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/features/cart/hooks/useCart";
 import { useTranslations, useLocale } from "@/shared/providers/i18n-provider";
@@ -8,27 +9,48 @@ import { SectionContainer as Section, SectionHeader } from "@/shared/components/
 import { Button } from "@/shared/components/ui/button";
 import { OrderSummary } from "./OrderSummary";
 import { CheckoutForm } from "./CheckoutForm";
-import { CheckoutSuccess } from "./CheckoutSuccess";
-import { ShoppingBag, ArrowLeft, CheckCircle2, Truck, CreditCard } from "lucide-react";
+import { ShoppingBag, ArrowLeft, Truck, CreditCard } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/shared/utils/cn";
 
-import { CheckoutStep } from "./types";
+import { CheckoutStep, CheckoutDraft } from "../types";
+import { saveOrder } from "../utils/order-utils";
 
 export function CheckoutView() {
   const [step, setStep] = useState<CheckoutStep>("shipping");
+  const [checkoutData, setCheckoutData] = useState<Partial<CheckoutDraft>>({
+    shippingMethod: "standard",
+    paymentMethod: "credit_card"
+  });
+
+  const router = useRouter();
   const { items, summary, clearCart } = useCart();
   const t = useTranslations();
   const locale = useLocale();
 
-  const handleNextStep = () => {
-    if (step === "shipping") setStep("payment");
+  const handleNextStep = (data?: any) => {
+    if (step === "shipping") {
+      setCheckoutData(prev => ({ ...prev, ...data }));
+      setStep("payment");
+    }
     else if (step === "payment") {
-      // Simulate order placement
-      setStep("success");
-      setTimeout(() => {
-        clearCart();
-      }, 500);
+      // Create final draft
+      const finalDraft: CheckoutDraft = {
+        shippingAddress: data.shippingAddress || checkoutData.shippingAddress || null,
+        paymentMethod: data.paymentMethod || checkoutData.paymentMethod || "credit_card",
+        shippingMethod: data.shippingMethod || checkoutData.shippingMethod || "standard",
+        items,
+        summary
+      };
+
+      // Save order to localStorage
+      const order = saveOrder(finalDraft);
+      
+      // Clear cart immediately before redirect
+      clearCart();
+      
+      // Redirect to confirmation page
+      router.push(`/${locale}/checkout/confirmation?orderId=${order.id}`);
     }
   };
 
@@ -36,7 +58,7 @@ export function CheckoutView() {
     if (step === "payment") setStep("shipping");
   };
 
-  if (items.length === 0 && step !== "success") {
+  if (items.length === 0) {
     return (
       <Section className="pt-32 pb-20 min-h-[70vh] flex flex-col items-center justify-center">
         <div className="w-20 h-20 rounded-full bg-surface-bright/50 flex items-center justify-center mb-6">
@@ -53,8 +75,7 @@ export function CheckoutView() {
   return (
     <Section className="pt-32 pb-20 min-h-screen">
       <div className="container px-6 md:px-12 mx-auto">
-        {step !== "success" && (
-          <div className="mb-12">
+        <div className="mb-12">
             <Link 
               href={`/${locale}/cart`}
               className="inline-flex items-center text-label-sm text-text-soft hover:text-primary transition-colors group mb-6"
@@ -86,45 +107,34 @@ export function CheckoutView() {
                 <span className="text-label-sm">{t.checkout.payment_step}</span>
               </div>
             </div>
-          </div>
-        )}
+        </div>
 
-        <div className={cn(
-          "grid grid-cols-1 lg:grid-cols-12 gap-12 items-start",
-          step === "success" && "lg:grid-cols-1"
-        )}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Main Content */}
-          <div className={cn(
-            "lg:col-span-8",
-            step === "success" && "lg:col-span-12 flex justify-center"
-          )}>
+          <div className="lg:col-span-8">
             <AnimatePresence mode="wait">
-              {step === "success" ? (
-                <CheckoutSuccess key="success" />
-              ) : (
-                <motion.div
-                  key={step}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <CheckoutForm 
-                    step={step} 
-                    onNext={handleNextStep} 
-                    onPrev={handlePrevStep} 
-                  />
-                </motion.div>
-              )}
+              <motion.div
+                key={step}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <CheckoutForm 
+                  step={step} 
+                  onNext={handleNextStep} 
+                  onPrev={handlePrevStep} 
+                  shippingMethod={checkoutData.shippingMethod || "standard"}
+                  setShippingMethod={(method) => setCheckoutData(prev => ({ ...prev, shippingMethod: method }))}
+                />
+              </motion.div>
             </AnimatePresence>
           </div>
 
           {/* Sidebar */}
-          {step !== "success" && (
-            <div className="lg:col-span-4">
-              <OrderSummary />
-            </div>
-          )}
+          <div className="lg:col-span-4">
+            <OrderSummary shippingMethod={checkoutData.shippingMethod} />
+          </div>
         </div>
       </div>
     </Section>

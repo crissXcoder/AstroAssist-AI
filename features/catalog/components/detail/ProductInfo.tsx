@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/shared/utils/cn";
+import { QuantitySelector } from "@/features/cart/components/QuantitySelector";
 
 interface ProductInfoProps {
   product: Product;
@@ -28,13 +29,14 @@ export function ProductInfo({ product, locale }: ProductInfoProps) {
   const { addItem } = useCart();
   const [isAdding, setIsAdding] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   const name = locale === "es" ? product.nameEs : product.nameEn;
   const description = locale === "es" ? product.descriptionEs : product.descriptionEn;
 
   const handleAddToCart = () => {
     setIsAdding(true);
-    addItem(product, 1);
+    addItem(product, quantity);
     
     // Smooth feedback for premium feel
     setTimeout(() => {
@@ -126,8 +128,17 @@ export function ProductInfo({ product, locale }: ProductInfoProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
-        className="flex flex-col sm:flex-row gap-4"
+        className="flex flex-col sm:flex-row items-center gap-4"
       >
+        <QuantitySelector
+          quantity={quantity}
+          onUpdate={setQuantity}
+          onIncrement={() => setQuantity(prev => prev + 1)}
+          onDecrement={() => setQuantity(prev => Math.max(1, prev - 1))}
+          variant="large"
+          className="w-full sm:w-auto"
+        />
+
         <Button 
           size="lg" 
           className={cn(

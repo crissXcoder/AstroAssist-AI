@@ -6,6 +6,8 @@ import { calculateCartSummary, validateQuantity } from "../utils/cart-logic";
 import { mapProductToCartItem } from "../utils/cartMapper";
 import { Product } from "@/features/catalog/types";
 
+import productsData from "@/features/catalog/data/products.json";
+
 const CART_STORAGE_KEY = "astroassist-cart";
 
 const initialState: CartState = {
@@ -22,7 +24,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 
       if (existingItemIndex > -1) {
         const newItems = [...state.items];
-        newItems[existingItemIndex].quantity += validatedQty;
+        newItems[existingItemIndex].quantity = validateQuantity(newItems[existingItemIndex].quantity + validatedQty);
         return { ...state, items: newItems };
       }
 
@@ -51,7 +53,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       return {
         ...state,
         items: state.items.map((item) =>
-          item.productId === action.payload.productId ? { ...item, quantity: item.quantity + 1 } : item
+          item.productId === action.payload.productId ? { ...item, quantity: validateQuantity(item.quantity + 1) } : item
         ),
       };
 
@@ -60,7 +62,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         ...state,
         items: state.items.map((item) =>
           item.productId === action.payload.productId
-            ? { ...item, quantity: Math.max(1, item.quantity - 1) }
+            ? { ...item, quantity: validateQuantity(item.quantity - 1) }
             : item
         ),
       };
@@ -103,13 +105,25 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // Persistence: Load from localStorage
+  // Persistence: Load from localStorage & Cleanup stale items
   useEffect(() => {
     const savedCart = localStorage.getItem(CART_STORAGE_KEY);
     if (savedCart) {
       try {
-        const items = JSON.parse(savedCart);
-        dispatch({ type: "SET_CART", payload: items });
+        const items: CartItem[] = JSON.parse(savedCart);
+        
+        // Filter out items that are no longer in the catalog
+        const validItems = items.filter(item => 
+          productsData.some(p => p.id === item.productId)
+        );
+        
+        // Re-validate all quantities just in case
+        const sanitizedItems = validItems.map(item => ({
+          ...item,
+          quantity: validateQuantity(item.quantity)
+        }));
+
+        dispatch({ type: "SET_CART", payload: sanitizedItems });
       } catch (error) {
         console.error("Failed to parse cart from localStorage", error);
       }

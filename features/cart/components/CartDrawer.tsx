@@ -3,7 +3,9 @@
 import { useCart } from "../hooks/useCart";
 import { useTranslations, useLocale } from "@/shared/providers/i18n-provider";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight } from "lucide-react";
+import { X, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
+import { QuantitySelector } from "./QuantitySelector";
+import { calculateItemSubtotal } from "../utils/cart-logic";
 import { Button } from "@/shared/components/ui/button";
 import { formatCurrency } from "@/shared/utils/currency";
 import { ScrollArea } from "@/shared/components/ui/scroll-area";
@@ -19,6 +21,7 @@ export function CartDrawer() {
     removeItem, 
     incrementQuantity, 
     decrementQuantity, 
+    updateQuantity,
     summary,
     clearCart
   } = useCart();
@@ -122,25 +125,13 @@ export function CartDrawer() {
                               {formatCurrency(item.price, locale)}
                             </span>
                             
-                            <div className="flex items-center gap-1 bg-surface-dim/50 rounded-full p-1 border border-outline/10">
-                              <Button 
-                                variant="ghost" 
-                                size="icon-xs" 
-                                onClick={() => decrementQuantity(item.productId)}
-                                className="h-6 w-6 rounded-full"
-                              >
-                                <Minus size={12} />
-                              </Button>
-                              <span className="w-8 text-center text-xs font-mono">{item.quantity}</span>
-                              <Button 
-                                variant="ghost" 
-                                size="icon-xs" 
-                                onClick={() => incrementQuantity(item.productId)}
-                                className="h-6 w-6 rounded-full"
-                              >
-                                <Plus size={12} />
-                              </Button>
-                            </div>
+                            <QuantitySelector
+                              quantity={item.quantity}
+                              onUpdate={(val) => updateQuantity(item.productId, val)}
+                              onIncrement={() => incrementQuantity(item.productId)}
+                              onDecrement={() => decrementQuantity(item.productId)}
+                              variant="compact"
+                            />
                           </div>
                         </div>
                       </motion.div>

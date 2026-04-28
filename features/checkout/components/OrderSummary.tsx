@@ -6,12 +6,21 @@ import { useTranslations, useLocale } from "@/shared/providers/i18n-provider";
 import { Card } from "@/shared/components/ui/card";
 import { ShoppingBag, ShieldCheck, Truck } from "lucide-react";
 import Image from "next/image";
+import { ShippingMethod } from "../types";
 import { cn } from "@/shared/utils/cn";
 
-export function OrderSummary() {
+interface OrderSummaryProps {
+  shippingMethod?: ShippingMethod;
+}
+
+export function OrderSummary({ shippingMethod }: OrderSummaryProps) {
   const { items, summary } = useCart();
   const t = useTranslations();
   const locale = useLocale();
+
+  // Override shipping cost if pickup is selected
+  const displayShipping = shippingMethod === "pickup" ? 0 : summary.shipping;
+  const displayTotal = summary.total - (summary.shipping - displayShipping);
 
   return (
     <Card className="p-6 md:p-8 bg-surface-container-high/40 border-outline/10 backdrop-blur-xl sticky top-32">
@@ -49,8 +58,8 @@ export function OrderSummary() {
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-text-soft">{t.cart.shipping}</span>
-          <span className={cn(summary.shipping === 0 ? "text-success" : "text-text-main")}>
-            {summary.shipping === 0 ? t.cart.free : formatCurrency(summary.shipping, locale)}
+          <span className={cn(displayShipping === 0 ? "text-success" : "text-text-main")}>
+            {displayShipping === 0 ? t.cart.free : formatCurrency(displayShipping, locale)}
           </span>
         </div>
         <div className="flex justify-between text-sm">
@@ -62,7 +71,7 @@ export function OrderSummary() {
           <span className="text-lg font-bold text-text-main">{t.cart.total}</span>
           <div className="text-right">
             <span className="text-2xl font-bold text-primary text-glow block">
-              {formatCurrency(summary.total, locale)}
+              {formatCurrency(displayTotal, locale)}
             </span>
             <p className="text-[9px] text-text-faint uppercase tracking-tighter">IVA Incluido</p>
           </div>
