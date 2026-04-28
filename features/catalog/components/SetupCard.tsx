@@ -5,6 +5,7 @@ import { ArrowRight, Star, Telescope, Camera } from "lucide-react";
 import Link from "next/link";
 import type { CuratedSetup } from "@/features/catalog";
 import { getSetupProducts } from "@/features/catalog/services/recommendationEngine";
+import { BuySetupButton } from "@/features/cart/components/BuySetupButton";
 
 const GOAL_ICONS: Record<CuratedSetup["icon"], React.ReactNode> = {
   planet: (
@@ -118,14 +119,22 @@ export function SetupCard({ setup, index, locale }: SetupCardProps) {
           </p>
         </div>
 
-        {/* CTA */}
-        <Link
-          href={`/${locale}/builder`}
-          className="inline-flex items-center gap-2 text-label-md font-bold text-primary hover:text-primary-hover transition-all group/link"
-        >
-          {exploreLabel}
-          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
-        </Link>
+        {/* Actions */}
+        <div className="mt-auto pt-6 flex flex-col gap-4">
+          <BuySetupButton 
+            products={[...main, ...accessories]} 
+            locale={locale}
+            className="w-full"
+          />
+          
+          <Link
+            href={`/${locale}/setups/${setup.id}`}
+            className="inline-flex items-center justify-center gap-2 text-label-sm font-bold text-text-muted hover:text-primary transition-all group/link py-2"
+          >
+            {exploreLabel}
+            <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-1" />
+          </Link>
+        </div>
         </CardContent>
       </Card>
     </motion.div>

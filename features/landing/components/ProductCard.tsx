@@ -6,8 +6,10 @@ import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
 import { useTranslations, useLocale } from "@/shared/providers/i18n-provider";
 import type { Product } from "@/features/catalog";
+import { useCart } from "@/features/cart/hooks/useCart";
 
 export function ProductCard({ product, index }: { product: Product; index: number }) {
+  const { addItem } = useCart();
   const locale = useLocale();
   const name = locale === "en" ? product.nameEn : product.nameEs;
   const description = locale === "en" ? product.descriptionEn : product.descriptionEs;
@@ -102,7 +104,16 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
               {product.price}
             </span>
 
-            <Button size="icon" variant="primary" className="h-12 w-12 rounded-xl group-hover:scale-110 transition-transform">
+            <Button 
+              size="icon" 
+              variant="primary" 
+              className="h-12 w-12 rounded-xl group-hover:scale-110 transition-transform active:scale-95"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                addItem(product);
+              }}
+            >
               <ShoppingCart className="w-5 h-5" />
             </Button>
           </div>

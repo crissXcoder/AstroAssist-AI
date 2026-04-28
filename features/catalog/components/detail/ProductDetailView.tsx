@@ -64,8 +64,7 @@ export function ProductDetailView({ product, locale }: ProductDetailViewProps) {
         {/* Related Products Section */}
         <div className="mt-32">
           <RelatedProducts 
-            currentProductId={product.id} 
-            category={product.category} 
+            product={product} 
             locale={locale} 
           />
         </div>

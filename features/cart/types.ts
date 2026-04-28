@@ -31,6 +31,7 @@ export type CartAction =
   | { type: "INCREMENT_QUANTITY"; payload: { productId: string } }
   | { type: "DECREMENT_QUANTITY"; payload: { productId: string } }
   | { type: "CLEAR_CART" }
+  | { type: "ADD_BUNDLE"; payload: { products: Product[] } }
   | { type: "SET_CART"; payload: CartItem[] }
   | { type: "TOGGLE_CART" }
   | { type: "SET_OPEN"; payload: boolean };

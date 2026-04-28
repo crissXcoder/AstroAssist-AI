@@ -24,6 +24,7 @@ export function useCart() {
     
     // Actions
     addItem: context.addItem,
+    addBundle: context.addBundle,
     removeItem: context.removeItem,
     updateQuantity: context.updateQuantity,
     incrementQuantity: context.incrementQuantity,

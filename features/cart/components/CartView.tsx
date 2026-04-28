@@ -13,6 +13,7 @@ import { Card } from "@/shared/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/shared/utils/cn";
+import { CartRecommendations } from "./CartRecommendations";
 
 export function CartView() {
   const { 
@@ -209,6 +210,9 @@ export function CartView() {
             </div>
           </div>
         )}
+
+        {/* Recommendations Section */}
+        <CartRecommendations />
       </div>
     </Section>
   );

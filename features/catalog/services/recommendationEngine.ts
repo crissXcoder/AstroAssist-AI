@@ -136,6 +136,20 @@ export function getProductById(id: string): Product | undefined {
 }
 
 /**
+ * Returns a single setup by ID.
+ */
+export function getSetupById(id: string): CuratedSetup | undefined {
+  return allSetups.find((s) => s.id === id);
+}
+
+/**
+ * Returns all curated setups.
+ */
+export function getAllSetups(): CuratedSetup[] {
+  return allSetups;
+}
+
+/**
  * Returns curated setups matched to the active filters.
  * If no filters are active, returns all setups.
  */
@@ -197,4 +211,128 @@ export function getSetupProducts(setup: CuratedSetup): {
     .map((id) => getProductById(id))
     .filter((p): p is Product => p !== undefined);
   return { main, accessories };
+}
+
+/**
+ * Enhanced Related Products Logic
+ * Scores products based on multiple factors:
+ * - Compatibility (Strongest signal): +10
+ * - Same Category: +5
+ * - Same Observation Type: +4
+ * - Recommended Level (Exact: +3, Adjacent: +1)
+ * - Matching Tags: +1 per common tag
+ */
+export function getRelatedProducts(
+  currentProduct: Product,
+  limit: number = 4
+): Product[] {
+  const scored = allProducts
+    .filter(p => p.id !== currentProduct.id)
+    .map(product => {
+      let score = 0;
+
+      // 1. Compatibility (Highest weight)
+      if (
+        currentProduct.compatibility.includes(product.id) ||
+        product.compatibility.includes(currentProduct.id)
+      ) {
+        score += 10;
+      }
+
+      // 2. Same Category
+      if (product.category === currentProduct.category) {
+        score += 5;
+      }
+
+      // 3. Observation Type (Goal)
+      if (product.observationType === currentProduct.observationType) {
+        score += 4;
+      }
+
+      // 4. Recommended Level
+      const levels = ["beginner", "intermediate", "advanced"];
+      const currentIdx = levels.indexOf(currentProduct.recommendedLevel);
+      const otherIdx = levels.indexOf(product.recommendedLevel);
+      if (currentIdx === otherIdx) {
+        score += 3;
+      } else if (Math.abs(currentIdx - otherIdx) === 1) {
+        score += 1;
+      }
+
+      // 5. Shared Tags
+      const commonTags = product.tags.filter(tag => currentProduct.tags.includes(tag));
+      score += commonTags.length;
+
+      return { product, score };
+    });
+
+  // Sort by score descending
+  scored.sort((a, b) => b.score - a.score);
+
+  // Take top results
+  let results = scored.filter(s => s.score > 0).map(s => s.product);
+
+  // Fallback: If not enough results, add products from same category or observation type
+  if (results.length < limit) {
+    const existingIds = new Set(results.map(r => r.id));
+    const fallbacks = allProducts
+      .filter(p => p.id !== currentProduct.id && !existingIds.has(p.id))
+      .sort((a, b) => {
+        // Simple fallback sort: same category first
+        if (a.category === currentProduct.category && b.category !== currentProduct.category) return -1;
+        if (a.category !== currentProduct.category && b.category === currentProduct.category) return 1;
+        return 0;
+      });
+    
+    results = [...results, ...fallbacks].slice(0, limit);
+  }
+
+  return results.slice(0, limit);
+}
+
+/**
+ * Returns recommendations based on a collection of products (e.g. a shopping cart).
+ * Prioritizes compatibility and accessories.
+ */
+export function getRecommendedForCart(
+  cartProducts: Product[],
+  limit: number = 4
+): Product[] {
+  if (cartProducts.length === 0) {
+    // If cart is empty, return top-rated or general recommendations
+    return allProducts.slice(0, limit);
+  }
+
+  const existingIds = new Set(cartProducts.map(p => p.id));
+  
+  // Aggregate scores from all products in cart
+  const scores: Record<string, number> = {};
+
+  cartProducts.forEach(currentProduct => {
+    const related = getRelatedProducts(currentProduct, allProducts.length);
+    related.forEach((p, idx) => {
+      if (existingIds.has(p.id)) return;
+      
+      // Simple inverse rank scoring + baseline
+      const rankScore = Math.max(0, 10 - idx);
+      scores[p.id] = (scores[p.id] || 0) + rankScore;
+    });
+  });
+
+  const sortedIds = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+  const results = sortedIds
+    .map(id => getProductById(id))
+    .filter((p): p is Product => p !== undefined)
+    .slice(0, limit);
+
+  // If still not enough, add general fallbacks
+  if (results.length < limit) {
+    const resultsIds = new Set(results.map(r => r.id));
+    const fallbacks = allProducts
+      .filter(p => !existingIds.has(p.id) && !resultsIds.has(p.id))
+      .slice(0, limit - results.length);
+    return [...results, ...fallbacks];
+  }
+
+  return results;
 }

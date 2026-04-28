@@ -3,6 +3,8 @@ import { cn } from "@/shared/utils/cn";
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
 import { SectionHeader } from "@/shared/components/ui/section";
+import { BuySetupButton } from "@/features/cart/components/BuySetupButton";
+import { Product } from "@/features/catalog/types";
 
 interface OptionCardProps {
   id: string;
@@ -193,11 +195,17 @@ export function RecommendationResult({ data, onRestart, locale }: { data: any, o
         )}
       </div>
 
-      <div className="flex justify-center pt-10">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-10">
+        <BuySetupButton 
+          products={[...data.mainItems, ...data.accessories]} 
+          locale={locale}
+          className="w-full sm:w-auto min-w-[280px]"
+        />
+        
         <Button 
-          variant="secondary" 
+          variant="ghost" 
           onClick={onRestart}
-          className="rounded-full px-12 h-14 text-label-md shadow-xl transition-all"
+          className="rounded-full px-12 h-14 text-label-md text-text-muted hover:text-text-main"
         >
           {restartBtn}
         </Button>

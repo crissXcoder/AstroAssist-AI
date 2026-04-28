@@ -25,12 +25,12 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       if (existingItemIndex > -1) {
         const newItems = [...state.items];
         newItems[existingItemIndex].quantity = validateQuantity(newItems[existingItemIndex].quantity + validatedQty);
-        return { ...state, items: newItems };
+        return { ...state, items: newItems, isOpen: true };
       }
 
       const newItem = mapProductToCartItem(product, validatedQty);
 
-      return { ...state, items: [...state.items, newItem] };
+      return { ...state, items: [...state.items, newItem], isOpen: true };
     }
 
     case "REMOVE_ITEM":
@@ -70,6 +70,22 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     case "CLEAR_CART":
       return { ...state, items: [] };
 
+    case "ADD_BUNDLE": {
+      const { products } = action.payload;
+      const newItems = [...state.items];
+
+      products.forEach((product) => {
+        const existingItemIndex = newItems.findIndex((item) => item.productId === product.id);
+        if (existingItemIndex > -1) {
+          newItems[existingItemIndex].quantity = validateQuantity(newItems[existingItemIndex].quantity + 1);
+        } else {
+          newItems.push(mapProductToCartItem(product, 1));
+        }
+      });
+
+      return { ...state, items: newItems, isOpen: true }; // Open cart when bundle added
+    }
+
     case "SET_CART":
       return { ...state, items: action.payload };
 
@@ -87,6 +103,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 interface CartContextType extends CartState {
   summary: CartSummary;
   addItem: (product: Product, quantity?: number) => void;
+  addBundle: (products: Product[]) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   incrementQuantity: (productId: string) => void;
@@ -141,6 +158,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const summary = calculateCartSummary(state.items);
 
   const addItem = (product: Product, quantity = 1) => dispatch({ type: "ADD_ITEM", payload: { product, quantity } });
+  const addBundle = (products: Product[]) => dispatch({ type: "ADD_BUNDLE", payload: { products } });
   const removeItem = (productId: string) => dispatch({ type: "REMOVE_ITEM", payload: { productId } });
   const updateQuantity = (productId: string, quantity: number) =>
     dispatch({ type: "UPDATE_QUANTITY", payload: { productId, quantity } });
@@ -158,6 +176,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         ...state,
         summary,
         addItem,
+        addBundle,
         removeItem,
         updateQuantity,
         incrementQuantity,
