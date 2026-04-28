@@ -70,6 +70,46 @@
       "Guía de configuración"
     ]
   },
+  "product_detail": {
+    "back": "Volver al catálogo",
+    "add_to_cart": "Añadir al carrito",
+    "adding": "Añadiendo...",
+    "added": "¡Añadido!",
+    "ai_assistant": "Asistente AI",
+    "ai_desc": "Consulta técnica sobre este equipo.",
+    "secure_checkout": "Compra Segura",
+    "secure_desc": "Encriptación de grado militar.",
+    "specs": "Especificaciones",
+    "advantages": "Ventajas Clave",
+    "use_cases": "Casos de Uso Ideales",
+    "related": "Productos Relacionados",
+    "recommended_level": "Nivel Recomendado",
+    "observation_type": "Tipo de Observación",
+    "sky_condition": "Condición del Cielo",
+    "sky": {
+      "city": "Urbano",
+      "suburban": "Suburbano",
+      "dark_sky": "Cielo Oscuro"
+    },
+    "portability": "Portabilidad",
+    "complexity": "Complejidad de Montaje",
+    "ideal_use": "Casos de Uso Ideales",
+    "specifications": "Especificaciones Técnicas",
+    "levels": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    },
+    "goals": {
+      "planetary": "Observación Planetaria",
+      "deep_sky": "Cielo Profundo",
+      "astrophotography": "Astrofotografía",
+      "general": "Uso General"
+    },
+    "not_found_title": "Producto no encontrado",
+    "not_found_desc": "El equipo que buscas parece haber salido de órbita.",
+    "not_found_cta": "Explorar catálogo"
+  },
   "featured": {
     "badge": "Óptica Seleccionada",
     "title_part1": "Equipamiento",

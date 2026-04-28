@@ -70,6 +70,46 @@
       "Setup guidance"
     ]
   },
+  "product_detail": {
+    "back": "Back to catalog",
+    "add_to_cart": "Add to cart",
+    "adding": "Adding...",
+    "added": "Added!",
+    "ai_assistant": "AI Assistant",
+    "ai_desc": "Technical query about this equipment.",
+    "secure_checkout": "Secure Checkout",
+    "secure_desc": "Military-grade encryption.",
+    "specs": "Specifications",
+    "advantages": "Key Advantages",
+    "use_cases": "Ideal Use Cases",
+    "related": "Related Products",
+    "recommended_level": "Recommended Level",
+    "observation_type": "Observation Type",
+    "sky_condition": "Sky Condition",
+    "sky": {
+      "city": "City",
+      "suburban": "Suburban",
+      "dark_sky": "Dark Sky"
+    },
+    "portability": "Portability",
+    "complexity": "Setup Complexity",
+    "ideal_use": "Ideal Use Cases",
+    "specifications": "Technical Specifications",
+    "levels": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "goals": {
+      "planetary": "Planetary Observation",
+      "deep_sky": "Deep Sky",
+      "astrophotography": "Astrophotography",
+      "general": "General Use"
+    },
+    "not_found_title": "Product Not Found",
+    "not_found_desc": "The equipment you are looking for seems to have gone out of orbit.",
+    "not_found_cta": "Explore Catalog"
+  },
   "featured": {
     "badge": "Selected Optics",
     "title_part1": "Curated",
@@ -177,12 +217,12 @@
       {
         "title": "Supermassive Hole",
         "subtitle": "M87 Horizon",
-        "description": "A gravitational vortex equivalent to 6.5 billion suns devouring the spacetime fabric."
+        "description": "Un vórtice gravitacional equivalente a 6,500 millones de soles devorando el tejido espacio-tiempo."
       },
       {
         "title": "System Limit",
         "subtitle": "Oort Cloud",
-        "description": "A gigantic frozen sphere. The final abyss before the infinite extrasolar domain."
+        "description": "A gigantesca esfera helada. El abismo final antes del infinito dominio extrasolar."
       }
     ]
   },

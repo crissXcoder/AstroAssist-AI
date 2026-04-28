@@ -4,6 +4,7 @@ import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } fr
 import { ShoppingCart, ArrowRight, Zap } from "lucide-react";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
+import Link from "next/link";
 import type { Product, RecommendedLevel, ObservationType, SkyCondition } from "@/features/catalog";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -95,6 +96,7 @@ export function CatalogProductCard({
             : "border-white/5 hover:border-white/10 hover:shadow-2xl hover:shadow-primary/10"
         }`}
       >
+        <Link href={`/${locale}/catalogo/${product.id}`} className="absolute inset-0 z-40" aria-label={`View ${name}`} />
         {/* Glare */}
         <motion.div
           className="pointer-events-none absolute -inset-px z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-screen rounded-xl overflow-hidden"
@@ -179,7 +181,12 @@ export function CatalogProductCard({
             <Button
               size="icon"
               variant="primary"
-              className="h-12 w-12 rounded-xl shrink-0 shadow-lg shadow-primary/20"
+              className="h-12 w-12 rounded-xl shrink-0 shadow-lg shadow-primary/20 relative z-50"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                // Future: handle direct add to cart
+              }}
             >
               <ShoppingCart className="w-5 h-5" />
             </Button>
