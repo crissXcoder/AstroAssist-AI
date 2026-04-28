@@ -178,15 +178,35 @@ export function CartDrawer() {
 
                 <div className="flex flex-col gap-3">
                   <Button 
-                    className="w-full h-14 rounded-full bg-primary hover:bg-primary-hover text-lg font-bold group"
+                    asChild
+                    className="w-full h-14 rounded-full bg-primary hover:bg-primary-hover text-lg font-bold group shadow-lg shadow-primary/20"
+                    onClick={() => setOpen(false)}
                   >
-                    <span>{t.cart.checkout}</span>
-                    <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                    <Link href={`/${locale}/checkout`}>
+                      <span>{t.cart.checkout}</span>
+                      <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                    </Link>
                   </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    asChild
+                    className="w-full h-12 rounded-full border-outline/20 hover:bg-surface-bright/50"
+                    onClick={() => setOpen(false)}
+                  >
+                    <Link href={`/${locale}/cart`}>
+                      Ver carrito completo
+                    </Link>
+                  </Button>
+
                   <Button 
                     variant="ghost" 
-                    onClick={clearCart}
-                    className="text-text-faint hover:text-error transition-colors"
+                    onClick={() => {
+                      if (confirm(t.cart.clear_confirm || "¿Vaciar carrito?")) {
+                        clearCart();
+                      }
+                    }}
+                    className="text-text-faint hover:text-error transition-colors mt-2"
                   >
                     {t.cart.clear}
                   </Button>
