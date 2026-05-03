@@ -27,7 +27,8 @@
       "@/shared/*": ["shared/*"],
       "@/lib/*": ["lib/*"],
       "@/config/*": ["config/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "@shared/*": ["shared/*"]
     }
   },
   "include": [
@@ -36,7 +37,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
+    "shared/dto/**/*"
   ],
   "exclude": ["node_modules"]
 }

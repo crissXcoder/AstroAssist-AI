@@ -3,7 +3,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
-import { RegisterDto } from '../schemas/auth.schema';
+import { RegisterDto } from '@shared/dto/register.dto';
 import { useGeo } from '@/features/auth/hooks/useGeo';
 import { Input } from '@/shared/components/ui/input';
 import { Button } from '@/shared/components/ui/button';
@@ -67,7 +67,7 @@ export const RegisterFormSteps: React.FC<RegisterFormStepsProps> = ({
     let fieldsToValidate: FieldName[] = [];
     if (step === 1) fieldsToValidate = ['cedula', 'fullName', 'birthDate'];
     if (step === 2) fieldsToValidate = ['email', 'phone'];
-    if (step === 3) fieldsToValidate = ['province', 'canton', 'district', 'city', 'exactAddress'];
+    if (step === 3) fieldsToValidate = ['province', 'canton', 'district', 'town', 'exactAddress'];
 
     const isValid = await trigger(fieldsToValidate);
     if (isValid) setStep((s) => s + 1);
@@ -199,9 +199,9 @@ export const RegisterFormSteps: React.FC<RegisterFormStepsProps> = ({
               {errors.district && <p className="text-xs text-red-400">{errors.district.message}</p>}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="city" className="text-zinc-300">Localidad</Label>
-              <Input id="city" placeholder="San José Centro" className="bg-white/5 border-white/10 text-white" {...register('city')} />
-              {errors.city && <p className="text-xs text-red-400">{errors.city.message}</p>}
+              <Label htmlFor="town" className="text-zinc-300">Localidad</Label>
+              <Input id="town" placeholder="San José Centro" className="bg-white/5 border-white/10 text-white" {...register('town')} />
+              {errors.town && <p className="text-xs text-red-400">{errors.town.message}</p>}
             </div>
             <div className="space-y-2">
               <Label htmlFor="exactAddress" className="text-zinc-300">Dirección Exacta</Label>

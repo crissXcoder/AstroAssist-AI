@@ -1,3 +1,6 @@
+import { RegisterDto } from '@shared/dto/register.dto';
+import { LoginDto } from '@shared/dto/login.dto';
+
 /**
  * Estructura estándar de respuesta del servidor.
  */
@@ -70,22 +73,6 @@ export interface LoginResponse {
   // Tokens se manejan via cookies httpOnly, pero el backend podría retornar info básica
 }
 
-export interface RegisterPayload {
-  email: string;
-  password?: string;
-  cedula: string;
-  fullName: string;
-  birthDate: string;
-  phone: string;
-  province: string;
-  canton: string;
-  district: string;
-  city: string;
-  exactAddress: string;
-  postalCode?: string;
-}
+export type RegisterPayload = RegisterDto;
 
-export interface LoginPayload {
-  email: string;
-  password?: string;
-}
+export type LoginPayload = LoginDto;

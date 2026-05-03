@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { RegisterDto } from '@/features/auth/schemas/auth.schema';
+import { RegisterDto } from '@shared/dto/register.dto';
 import { useAuth } from '@/features/auth';
 import {
   Card,
