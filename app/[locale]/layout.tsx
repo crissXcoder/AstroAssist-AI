@@ -1,14 +1,18 @@
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
-import { ThemeProvider } from "@/shared/providers/theme-provider";
-import { FloatingChat } from "@/features/chat";
-import { Navbar } from "@/features/landing/components/Navbar";
-import { CartDrawer } from "@/features/cart/components/CartDrawer";
-import { I18nProvider } from "@/shared/providers/i18n-provider";
-import { CartProvider } from "@/features/cart";
-import { Footer } from "@/features/landing/components/Footer";
+import { TanStackProvider } from "@/shared/providers/tanstack-provider";
+import { AuthProvider } from "@/features/auth";
 import { getDictionary, Locale } from "@/lib/i18n";
+import { Footer } from "@/features/landing/components/Footer";
+import { CartProvider } from "@/features/cart";
+import { I18nProvider } from "@/shared/providers/i18n-provider";
+import { CartDrawer } from "@/features/cart/components/CartDrawer";
+import { Navbar } from "@/features/landing/components/Navbar";
+import { FloatingChat } from "@/features/chat";
+import { ThemeProvider } from "@/shared/providers/theme-provider";
+import "../globals.css";
+import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import "reflect-metadata";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -97,13 +101,17 @@ export default async function RootLayout({
           <div className="fixed inset-0 z-[-1] pointer-events-none bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.04),transparent_60%)]" />
           
           <I18nProvider dictionary={dictionary} locale={locale as Locale}>
-            <CartProvider>
-              <Navbar />
-              <CartDrawer />
-              {children}
-              <Footer />
-              <FloatingChat />
-            </CartProvider>
+            <TanStackProvider>
+              <AuthProvider>
+                <CartProvider>
+                  <Navbar />
+                  <CartDrawer />
+                  {children}
+                  <Footer />
+                  <FloatingChat />
+                </CartProvider>
+              </AuthProvider>
+            </TanStackProvider>
           </I18nProvider>
         </ThemeProvider>
       </body>

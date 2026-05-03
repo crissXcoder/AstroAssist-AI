@@ -9,7 +9,9 @@ import { ThemeToggle } from "@/shared/components/theme-toggle";
 import { LanguageSwitcher } from "@/shared/components/language-switcher";
 import { CartCounter } from "@/features/cart/components/CartCounter";
 import { useTranslations, useLocale } from "@/shared/providers/i18n-provider";
+import { useAuth } from "@/features/auth";
 import { cn } from "@/shared/utils/cn";
+import { LogOut, User, ShieldCheck } from "lucide-react";
 
 export function Navbar() {
   const { scrollY } = useScroll();
@@ -18,6 +20,8 @@ export function Navbar() {
   
   const t = useTranslations().navbar;
   const locale = useLocale();
+
+  const { user, status, logout, isAdmin } = useAuth();
 
   useEffect(() => {
     return scrollY.on("change", (latest) => {
@@ -57,6 +61,65 @@ export function Navbar() {
             <CartCounter />
             <LanguageSwitcher />
             <ThemeToggle />
+            
+            <div className="h-6 w-px bg-white/10 mx-2" />
+            
+            {status === 'authenticated' ? (
+              <div className="flex items-center gap-2">
+                {isAdmin && (
+                  <Link 
+                    href={`/${locale}/admin`}
+                    className={cn(
+                      buttonVariants({ variant: "ghost", size: "sm" }),
+                      "text-primary hover:text-primary-hover gap-2"
+                    )}
+                  >
+                    <ShieldCheck className="w-4 h-4" />
+                    {t.admin}
+                  </Link>
+                )}
+                <Link 
+                  href={`/${locale}/profile`}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "sm" }),
+                    "text-text-soft hover:text-text-main gap-2"
+                  )}
+                >
+                  <User className="w-4 h-4" />
+                  {t.profile}
+                </Link>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => logout()}
+                  className="text-text-soft hover:text-error gap-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  {t.logout}
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Link 
+                  href={`/${locale}/login`}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "sm" }),
+                    "text-text-soft hover:text-text-main"
+                  )}
+                >
+                  {t.login}
+                </Link>
+                <Link 
+                  href={`/${locale}/register`}
+                  className={cn(
+                    buttonVariants({ variant: "default", size: "sm" }),
+                    "rounded-full px-6"
+                  )}
+                >
+                  {t.register}
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-2 md:hidden">
@@ -119,17 +182,69 @@ export function Navbar() {
             </nav>
             
             <div className="mt-auto flex flex-col gap-4">
-               <Link 
-                 href={`/${locale}#assistant`} 
-                 onClick={() => setMobileMenuOpen(false)}
-                 className={cn(
-                   buttonVariants({ variant: "default", size: "lg" }),
-                   "w-full rounded-full"
-                 )}
-               >
-                 Probar AstroAssist
-               </Link>
-               <Button variant="secondary" size="lg" className="w-full">Acceder</Button>
+              {status === 'authenticated' ? (
+                <>
+                  {isAdmin && (
+                    <Link 
+                      href={`/${locale}/admin`}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={cn(
+                        buttonVariants({ variant: "outline", size: "lg" }),
+                        "w-full rounded-xl gap-3 border-primary/20 text-primary"
+                      )}
+                    >
+                      <ShieldCheck className="w-5 h-5" />
+                      {t.admin}
+                    </Link>
+                  )}
+                  <Link 
+                    href={`/${locale}/profile`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      buttonVariants({ variant: "secondary", size: "lg" }),
+                      "w-full rounded-xl gap-3"
+                    )}
+                  >
+                    <User className="w-5 h-5" />
+                    {t.profile}
+                  </Link>
+                  <Button 
+                    variant="ghost" 
+                    size="lg" 
+                    onClick={() => {
+                      logout();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full rounded-xl gap-3 text-error hover:bg-error/10"
+                  >
+                    <LogOut className="w-5 h-5" />
+                    {t.logout}
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Link 
+                    href={`/${locale}/register`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      buttonVariants({ variant: "default", size: "lg" }),
+                      "w-full rounded-xl shadow-xl shadow-primary/20"
+                    )}
+                  >
+                    {t.register}
+                  </Link>
+                  <Link 
+                    href={`/${locale}/login`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      buttonVariants({ variant: "secondary", size: "lg" }),
+                      "w-full rounded-xl"
+                    )}
+                  >
+                    {t.login}
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         )}
