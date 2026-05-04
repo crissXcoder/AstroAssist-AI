@@ -118,7 +118,7 @@ export function SetupCard({ setup, index, locale }: SetupCardProps) {
         {/* Reason teaser */}
         <div className="bg-surface-container/50 rounded-lg p-4 mb-6 border border-white/5">
           <p className="text-body-sm text-text-soft leading-relaxed italic line-clamp-2">
-            "{reason}"
+            &quot;{reason}&quot;
           </p>
         </div>
 

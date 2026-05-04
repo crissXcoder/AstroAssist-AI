@@ -36,7 +36,10 @@ export function useCatalogFilters(): UseCatalogFiltersReturn {
       const params = new URLSearchParams(window.location.search);
       const searchQuery = params.get("search");
       if (searchQuery) {
-        setFilters(prev => ({ ...prev, search: searchQuery }));
+        setFilters(prev => {
+          if (prev.search === searchQuery) return prev;
+          return { ...prev, search: searchQuery };
+        });
       }
     }
   }, []);
