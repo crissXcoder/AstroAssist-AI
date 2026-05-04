@@ -28,7 +28,7 @@
       "@/lib/*": ["lib/*"],
       "@/config/*": ["config/*"],
       "@/styles/*": ["styles/*"],
-      "@shared/*": ["../shared/*"]
+      "@shared/*": ["shared/*"]
     }
   },
   "include": [
