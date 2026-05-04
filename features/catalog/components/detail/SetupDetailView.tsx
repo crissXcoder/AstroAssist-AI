@@ -147,7 +147,7 @@ export function SetupDetailView({ setup, locale }: SetupDetailViewProps) {
             <h2 className="text-label-md font-bold uppercase tracking-widest">{locale === "es" ? "Análisis del Experto" : "Expert Analysis"}</h2>
           </div>
           <p className="text-2xl md:text-3xl text-text-main leading-relaxed italic font-light">
-            "{reason}"
+            &quot;{reason}&quot;
           </p>
           <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
             <Info className="w-48 h-48" />

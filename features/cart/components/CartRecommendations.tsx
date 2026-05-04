@@ -14,8 +14,18 @@ export function CartRecommendations() {
   const t = useTranslations();
   const locale = useLocale();
   const { items } = useCart();
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsHydrated(true);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Derived state: Map cart items to full products and get recommendations
   const recommendations = useMemo(() => {
+    // Map cart items to full products
     const allProducts = getAllProducts();
     const cartProducts = items
       .map(item => allProducts.find(p => p.id === item.productId))

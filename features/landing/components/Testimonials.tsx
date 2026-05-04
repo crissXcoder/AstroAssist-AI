@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import Image from "next/image";
 import { useTranslations } from "@/shared/providers/i18n-provider";
 import { Star, Quote, Sparkles } from "lucide-react";
 
@@ -107,7 +108,13 @@ export function Testimonials() {
               
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors">
-                  <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
+                  <Image 
+                    src={testimonial.avatar} 
+                    alt={testimonial.name} 
+                    width={48}
+                    height={48}
+                    className="w-full h-full object-cover" 
+                  />
                 </div>
                 <div>
                   <h4 className="text-text-main font-bold text-sm tracking-tight">{testimonial.name}</h4>
