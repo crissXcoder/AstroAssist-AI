@@ -1,9 +1,6 @@
 "use client";
 
-// Cosmic Confirmation View
-
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { 
   CheckCircle2, 
   ArrowRight, 
@@ -51,297 +48,234 @@ export function ConfirmationView({ orderId }: ConfirmationViewProps) {
       }, 800);
       return () => clearTimeout(timer);
     } else {
-      setLoading(false);
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [orderId]);
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center py-32 space-y-8">
+      <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center space-y-6">
         <div className="relative">
-          <div className="w-20 h-20 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Telescope size={24} className="text-primary animate-pulse" />
-          </div>
+          <div className="w-24 h-24 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
+          <Telescope className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 text-primary/40" />
         </div>
-        <p className="text-text-muted font-mono animate-pulse uppercase tracking-[0.2em] text-label-sm">
-          {t.checkout.processing}
-        </p>
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold tracking-tight text-text-main">
+            {t.checkout.confirmation.processing.title}
+          </h2>
+          <p className="text-text-soft">
+            {t.checkout.confirmation.processing.message}
+          </p>
+        </div>
       </div>
     );
   }
 
   if (!order) {
     return (
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-2xl mx-auto text-center py-20 px-6"
-      >
-        <div className="w-20 h-20 rounded-3xl bg-error/10 flex items-center justify-center mx-auto mb-8 border border-error/20">
-          <AlertCircle size={40} className="text-error" />
+      <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center space-y-8">
+        <div className="w-20 h-20 rounded-full bg-destructive/10 flex items-center justify-center">
+          <AlertCircle className="w-10 h-10 text-destructive" />
         </div>
-        <h2 className="text-headline-md font-bold text-text-main mb-4">{t.checkout.no_order_found}</h2>
-        <p className="text-body-md text-text-muted mb-10">{t.checkout.no_order_desc}</p>
-        <Button asChild size="lg" className="rounded-full px-8 bg-primary">
-          <Link href={`/${locale}/catalogo`}>
-            {t.checkout.view_catalog}
-            <ArrowRight className="ml-2" size={18} />
+        <div className="space-y-4 max-w-md">
+          <h2 className="text-3xl font-bold tracking-tight text-text-main">
+            {t.checkout.confirmation.error.title}
+          </h2>
+          <p className="text-text-soft text-lg leading-relaxed">
+            {t.checkout.confirmation.error.message}
+          </p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
+          <Link href={`/${locale}/catalogo`} className="flex-1">
+            <Button variant="outline" className="w-full h-12 rounded-xl group border-white/10 hover:bg-white/5">
+              <ShoppingCart className="mr-2 w-4 h-4" />
+              {t.checkout.confirmation.error.browse_catalog}
+            </Button>
           </Link>
-        </Button>
-      </motion.div>
+          <Link href={`/${locale}/`} className="flex-1">
+            <Button className="w-full h-12 rounded-xl group bg-primary hover:bg-primary-dark">
+              {t.checkout.confirmation.error.home}
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
+        </div>
+      </div>
     );
   }
 
   return (
-    <div className="max-w-5xl mx-auto">
-      {/* Top Section: Celebration */}
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-16"
-      >
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", damping: 12, stiffness: 200, delay: 0.2 }}
-          className="w-24 h-24 rounded-3xl bg-success/10 border border-success/30 flex items-center justify-center mx-auto mb-8 shadow-[0_0_50px_rgba(16,185,129,0.2)] relative"
-        >
-          <CheckCircle2 size={48} className="text-success" />
-          <motion.div 
-            animate={{ opacity: [0, 1, 0], scale: [1, 1.5, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute inset-0 rounded-3xl border-2 border-success/20"
-          />
-        </motion.div>
-
-        <h1 className="text-headline-xl font-bold text-text-main mb-6 tracking-tight text-glow">
-          {t.checkout.success}
-        </h1>
-        <p className="text-body-lg text-text-soft mb-8 max-w-2xl mx-auto leading-relaxed">
-          {t.checkout.success_desc}
-        </p>
-
-        <div className="inline-flex flex-col items-center gap-2">
-          <span className="text-text-faint text-[10px] uppercase tracking-[0.3em] font-bold">Expedition Protocol ID</span>
-          <div className="px-8 py-3 rounded-2xl bg-surface-bright/10 border border-outline/10 backdrop-blur-md shadow-inner flex items-center gap-3">
-            <span className="text-primary font-mono text-title-md font-bold tracking-wider">{order.id}</span>
-            <div className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column: Details */}
+    <div className="max-w-5xl mx-auto py-12 px-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        {/* Main Content */}
         <div className="lg:col-span-2 space-y-8">
-          {/* Order Summary Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            <Card className="overflow-hidden bg-surface-container/30 border-outline/10 backdrop-blur-sm">
-              <div className="p-6 border-b border-outline/10 bg-surface-bright/5 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Package className="text-primary" size={20} />
-                  <h3 className="text-title-sm font-bold text-text-main uppercase tracking-wider">{t.checkout.order_summary}</h3>
-                </div>
-                <Badge variant="outline" className="bg-primary/10 border-primary/20 text-primary">
-                  {order.status.toUpperCase()}
+          {/* Header Card */}
+          <Card className="relative overflow-hidden border-white/5 bg-surface-container/30 backdrop-blur-xl p-8 rounded-2xl">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -mr-32 -mt-32" />
+            
+            <div className="relative z-10 flex flex-col items-center text-center space-y-6">
+              <div className="w-20 h-20 rounded-full bg-secondary/20 flex items-center justify-center border border-secondary/30 ring-8 ring-secondary/5">
+                <CheckCircle2 className="w-10 h-10 text-secondary" />
+              </div>
+              
+              <div className="space-y-2">
+                <h1 className="text-4xl font-black text-text-main tracking-tight">
+                  {t.checkout.confirmation.success.title}
+                </h1>
+                <p className="text-text-soft text-lg">
+                  {t.checkout.confirmation.success.message} <span className="text-text-main font-semibold">{order.shippingAddress?.email}</span>
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Badge variant="secondary" className="px-4 py-1.5 rounded-full bg-surface-container border-white/5 text-xs font-bold uppercase tracking-widest">
+                  ID: {order.id.slice(0, 8)}
+                </Badge>
+                <Badge className="px-4 py-1.5 rounded-full bg-secondary/10 text-secondary border-secondary/20 text-xs font-bold uppercase tracking-widest">
+                  {t.checkout.confirmation.order_details.status}: {order.status}
                 </Badge>
               </div>
-              <div className="p-0">
-                <table className="w-full text-left border-collapse">
-                  <thead className="bg-surface-bright/5">
-                    <tr>
-                      <th className="px-6 py-4 text-label-sm text-text-muted uppercase tracking-widest">{t.checkout.products}</th>
-                      <th className="px-6 py-4 text-label-sm text-text-muted uppercase tracking-widest text-center">{t.checkout.qty.split(':')[0]}</th>
-                      <th className="px-6 py-4 text-label-sm text-text-muted uppercase tracking-widest text-right">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-outline/5">
-                    {order.items.map((item) => (
-                      <tr key={item.id} className="hover:bg-surface-bright/5 transition-colors group">
-                        <td className="px-6 py-5">
-                          <div className="flex items-center gap-4">
-                            <div className="relative w-16 h-16 rounded-xl bg-background/50 border border-outline/10 overflow-hidden shrink-0">
-                              <Image 
-                                src={item.image} 
-                                alt={item.name} 
-                                fill 
-                                className="object-cover group-hover:scale-110 transition-transform duration-500" 
-                              />
-                            </div>
-                            <div>
-                              <div className="text-body-sm font-bold text-text-main mb-1">{item.name}</div>
-                              <div className="text-[11px] text-text-faint font-mono">SKU: {item.id.slice(0, 8).toUpperCase()}</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-5 text-center text-body-sm text-text-soft font-mono">
-                          {item.quantity}
-                        </td>
-                        <td className="px-6 py-5 text-right text-body-sm font-bold text-text-main font-mono">
-                          {formatCurrency(item.price * item.quantity)}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className="p-8 bg-surface-bright/5 space-y-3">
-                <div className="flex justify-between text-body-sm text-text-soft">
-                  <span>{t.cart.subtotal}</span>
-                  <span className="font-mono">{formatCurrency(order.summary.subtotal)}</span>
-                </div>
-                <div className="flex justify-between text-body-sm text-text-soft">
-                  <span>{t.cart.shipping}</span>
-                  <span className="font-mono">{order.summary.shipping === 0 ? t.cart.free : formatCurrency(order.summary.shipping)}</span>
-                </div>
-                <div className="flex justify-between text-body-sm text-text-soft">
-                  <span>{t.cart.tax}</span>
-                  <span className="font-mono">{formatCurrency(order.summary.tax)}</span>
-                </div>
-                <div className="pt-4 mt-4 border-t border-outline/10 flex justify-between items-baseline">
-                  <span className="text-title-sm font-bold text-text-main uppercase tracking-widest">{t.cart.total}</span>
-                  <span className="text-headline-sm font-bold text-primary font-mono drop-shadow-[0_0_15px_rgba(98,87,244,0.3)]">
-                    {formatCurrency(order.summary.total)}
-                  </span>
-                </div>
-              </div>
-            </Card>
-          </motion.div>
+            </div>
+          </Card>
 
-          {/* Logistics & Support Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="p-8 rounded-3xl bg-surface-bright/5 border border-outline/10 hover:border-primary/20 transition-all group/step"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 group-hover/step:scale-110 transition-transform">
-                  <Telescope size={24} className="text-primary" />
-                </div>
-                <span className="text-label-sm uppercase font-bold tracking-[0.2em] text-primary">{t.checkout.next_steps}</span>
+          {/* Action Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-6 rounded-3xl bg-surface-container/20 border border-white/5 hover:bg-surface-container/30 transition-colors group">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Mail className="w-6 h-6 text-primary" />
               </div>
-              <p className="text-body-sm text-text-muted leading-relaxed">
-                {t.checkout.next_steps_desc}
+              <h3 className="font-bold text-text-main mb-1">{t.checkout.confirmation.actions.email_sent.title}</h3>
+              <p className="text-sm text-text-soft leading-relaxed">
+                {t.checkout.confirmation.actions.email_sent.message}
               </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="p-8 rounded-3xl bg-surface-bright/5 border border-outline/10 hover:border-secondary/20 transition-all group/step"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center border border-secondary/20 group-hover/step:scale-110 transition-transform">
-                  <Mail size={24} className="text-secondary" />
-                </div>
-                <span className="text-label-sm uppercase font-bold tracking-[0.2em] text-secondary">{t.checkout.tracking}</span>
+            </div>
+            <div className="p-6 rounded-3xl bg-surface-container/20 border border-white/5 hover:bg-surface-container/30 transition-colors group">
+              <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Sparkles className="w-6 h-6 text-secondary" />
               </div>
-              <p className="text-body-sm text-text-muted leading-relaxed">
-                {t.checkout.tracking_desc}
+              <h3 className="font-bold text-text-main mb-1">{t.checkout.confirmation.actions.next_steps.title}</h3>
+              <p className="text-sm text-text-soft leading-relaxed">
+                {t.checkout.confirmation.actions.next_steps.message}
               </p>
-            </motion.div>
+            </div>
           </div>
+
+          {/* Order Content */}
+          <Card className="border-white/5 bg-surface-container/10 rounded-2xl overflow-hidden">
+            <div className="p-6 border-b border-white/5 bg-white/5 flex items-center gap-3">
+              <Package className="w-5 h-5 text-primary" />
+              <h3 className="font-bold text-text-main">{t.checkout.confirmation.order_details.title}</h3>
+            </div>
+            <div className="divide-y divide-white/5">
+              {order.items.map((item) => (
+                <div key={item.id} className="p-6 flex gap-4 hover:bg-white/5 transition-colors">
+                  <div className="w-20 h-20 rounded-2xl bg-black/40 overflow-hidden border border-white/10 shrink-0">
+                    <Image 
+                      src={item.image} 
+                      alt={item.name} 
+                      width={80} 
+                      height={80} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-bold text-text-main truncate">{item.name}</h4>
+                    <p className="text-xs text-text-soft mb-2 uppercase tracking-widest">{item.category}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-text-soft">Qty: {item.quantity}</span>
+                      <span className="font-bold text-secondary">{formatCurrency(item.price)}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="p-6 bg-white/5 space-y-3">
+              <div className="flex justify-between text-sm text-text-soft">
+                <span>{t.checkout.confirmation.order_details.subtotal}</span>
+                <span>{formatCurrency(order.summary.subtotal)}</span>
+              </div>
+              <div className="flex justify-between text-sm text-text-soft">
+                <span>{t.checkout.confirmation.order_details.shipping}</span>
+                <span className="text-secondary font-medium">{order.summary.shipping === 0 ? "Free" : formatCurrency(order.summary.shipping)}</span>
+              </div>
+              <div className="flex justify-between items-center pt-3 border-t border-white/10">
+                <span className="font-bold text-text-main">{t.checkout.confirmation.order_details.total}</span>
+                <span className="text-2xl font-black text-secondary">{formatCurrency(order.summary.total)}</span>
+              </div>
+            </div>
+          </Card>
         </div>
 
-        {/* Right Column: Sidebar Info */}
-        <div className="space-y-8">
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            <Card className="p-8 bg-surface-container/30 border-outline/10 backdrop-blur-sm space-y-8">
-              {/* Customer Info */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 text-text-main font-bold uppercase tracking-wider text-[11px]">
-                  <MapPin size={16} className="text-primary" />
-                  {t.checkout.shipping_address}
+        {/* Sidebar */}
+        <div className="space-y-6">
+          {/* Shipping Info */}
+          <Card className="p-6 border-white/5 bg-surface-container/20 rounded-3xl space-y-6">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <MapPin className="w-4 h-4 text-primary" />
                 </div>
-                <div className="space-y-1">
-                  <p className="text-body-sm font-bold text-text-main">{order.shippingAddress?.fullName}</p>
-                  <p className="text-body-sm text-text-soft">{order.shippingAddress?.address}</p>
-                  <p className="text-body-sm text-text-soft">{order.shippingAddress?.city}, {order.shippingAddress?.zipCode}</p>
-                  <p className="text-body-sm text-text-soft">{order.shippingAddress?.country}</p>
-                </div>
+                <h4 className="font-bold text-text-main text-sm uppercase tracking-widest">{t.checkout.confirmation.order_details.shipping_address}</h4>
               </div>
-
-              {/* Contact Info */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 text-text-main font-bold uppercase tracking-wider text-[11px]">
-                  <Mail size={16} className="text-primary" />
-                  Contact Information
-                </div>
-                <div className="space-y-1">
-                  <p className="text-body-sm text-text-soft">{order.shippingAddress?.email}</p>
-                  <p className="text-body-sm text-text-soft">{order.shippingAddress?.phone}</p>
-                </div>
+              <div className="text-sm text-text-soft space-y-1 pl-11">
+                <p className="font-bold text-text-main">{order.shippingAddress?.fullName}</p>
+                <p>{order.shippingAddress?.address}</p>
+                <p>{order.shippingAddress?.city}, {order.shippingAddress?.zipCode}</p>
+                <p>{order.shippingAddress?.country}</p>
               </div>
-
-              {/* Payment & Shipping Method */}
-              <div className="space-y-4 pt-4 border-t border-outline/10">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-text-main font-bold uppercase tracking-wider text-[11px]">
-                    <CreditCard size={16} className="text-primary" />
-                    Payment
-                  </div>
-                  <span className="text-[11px] text-text-soft uppercase tracking-wider">{order.paymentMethod.replace('_', ' ')}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-text-main font-bold uppercase tracking-wider text-[11px]">
-                    <Calendar size={16} className="text-primary" />
-                    Date
-                  </div>
-                  <span className="text-[11px] text-text-soft uppercase tracking-wider">
-                    {new Date(order.createdAt).toLocaleDateString(locale, { day: '2-digit', month: 'short', year: 'numeric' })}
-                  </span>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="pt-4 border-t border-outline/10 space-y-4">
-                <Button asChild className="w-full h-14 rounded-2xl bg-primary hover:bg-primary-hover shadow-lg shadow-primary/20 group">
-                  <Link href={`/${locale}`} className="flex items-center justify-center gap-3">
-                    <span className="font-bold uppercase tracking-widest text-label-sm">{t.checkout.back_home}</span>
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" className="w-full h-14 rounded-2xl border-outline/10 bg-surface-bright/5 hover:bg-surface-bright/20 transition-all group">
-                  <Link href={`/${locale}/catalogo`} className="flex items-center justify-center gap-3">
-                    <Sparkles size={18} className="text-secondary group-hover:scale-110 transition-transform" />
-                    <span className="font-bold uppercase tracking-widest text-label-sm">{t.checkout.continue_shopping}</span>
-                  </Link>
-                </Button>
-              </div>
-            </Card>
-          </motion.div>
-
-          {/* Social / Share Tip */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="p-6 rounded-3xl bg-primary/5 border border-primary/10 text-center"
-          >
-            <h4 className="text-label-sm font-bold text-primary uppercase tracking-[0.2em] mb-2">Share your expedition</h4>
-            <p className="text-[11px] text-text-muted mb-4">Join the community and share your setup using #AstroAssistAI</p>
-            <div className="flex justify-center gap-3">
-              <button className="w-10 h-10 rounded-xl bg-surface-bright/10 flex items-center justify-center text-text-soft hover:text-primary transition-colors">
-                <Share2 size={18} />
-              </button>
-              <button className="w-10 h-10 rounded-xl bg-surface-bright/10 flex items-center justify-center text-text-soft hover:text-primary transition-colors">
-                <Mail size={18} />
-              </button>
             </div>
-          </motion.div>
+
+            <div className="h-px bg-white/5" />
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center">
+                  <CreditCard className="w-4 h-4 text-secondary" />
+                </div>
+                <h4 className="font-bold text-text-main text-sm uppercase tracking-widest">{t.checkout.confirmation.order_details.payment_method}</h4>
+              </div>
+              <div className="text-sm text-text-soft pl-11">
+                <p className="flex items-center gap-2 uppercase">
+                  {order.paymentMethod.replace('_', ' ')}
+                </p>
+              </div>
+            </div>
+
+            <div className="h-px bg-white/5" />
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-cosmic-500/10 flex items-center justify-center">
+                  <Calendar className="w-4 h-4 text-cosmic-500" />
+                </div>
+                <h4 className="font-bold text-text-main text-sm uppercase tracking-widest">{t.checkout.confirmation.order_details.delivery_est}</h4>
+              </div>
+              <div className="text-sm text-text-soft pl-11">
+                <p className="text-secondary font-bold">Oct 12 - Oct 15, 2026</p>
+              </div>
+            </div>
+          </Card>
+
+          {/* Social / Support */}
+          <div className="p-8 rounded-2xl bg-linear-to-br from-primary/20 to-secondary/20 border border-white/10 text-center space-y-4">
+            <h4 className="font-bold text-text-main">{t.checkout.confirmation.support.title}</h4>
+            <p className="text-sm text-text-soft">
+              {t.checkout.confirmation.support.message}
+            </p>
+            <Button variant="outline" className="w-full rounded-xl border-white/10 hover:bg-white/10">
+              <Share2 className="w-4 h-4 mr-2" />
+              {t.checkout.confirmation.support.share}
+            </Button>
+          </div>
+
+          <Link href={`/${locale}/catalogo`} className="block">
+            <Button variant="ghost" className="w-full rounded-xl hover:bg-white/5 text-text-soft">
+              <ChevronRight className="w-4 h-4 mr-2 rotate-180" />
+              {t.checkout.confirmation.actions.continue_shopping}
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

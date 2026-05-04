@@ -16,7 +16,7 @@ export const AdminUsersPage: React.FC = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [searchInput, setSearchInput] = useState('');
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const {
     users,
@@ -60,7 +60,7 @@ export const AdminUsersPage: React.FC = () => {
             </p>
           </div>
         </div>
-        <CreateCustomerDialog onCreateCustomer={createCustomer} />
+        <CreateCustomerDialog onCreateCustomer={async (payload) => { await createCustomer(payload); }} />
       </div>
 
       {/* ── Search + Refresh ── */}
@@ -90,7 +90,11 @@ export const AdminUsersPage: React.FC = () => {
       {isError && (
         <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 flex items-start gap-3 text-sm text-red-400">
           <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
-          <p>{(error as any)?.message || 'Error al cargar los usuarios'}</p>
+          <p>
+            {error instanceof Error 
+              ? error.message 
+              : (error as unknown as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Error al cargar los usuarios'}
+          </p>
         </div>
       )}
 
@@ -101,8 +105,18 @@ export const AdminUsersPage: React.FC = () => {
         isLoading={isLoading}
         page={page}
         onPageChange={setPage}
-        onToggleStatus={(id, isActive) => toggleStatus({ id, isActive })}
-        onUpdate={(id, payload) => updateCustomer({ id, payload })}
+        onToggleStatus={async (id, isActive) => { await toggleStatus({ id, isActive }); }}
+        onUpdate={async (id, payload) => {
+          try {
+            await updateCustomer({ id, payload });
+            return { success: true };
+          } catch (err: unknown) {
+            return { 
+              success: false, 
+              error: (err as unknown as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Error al actualizar el cliente' 
+            };
+          }
+        }}
       />
     </div>
   );

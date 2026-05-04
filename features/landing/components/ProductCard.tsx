@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from "framer-motion";
+import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
@@ -70,10 +71,13 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
         >
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-background z-10" />
 
-          <img
+          <Image
             src={product.images.primary}
             alt={name}
-            className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out mix-blend-screen"
+            fill
+            priority={index < 3}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out mix-blend-screen"
           />
 
           {/* Tags floating over image */}

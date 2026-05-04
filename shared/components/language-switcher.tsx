@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Globe } from "lucide-react";
 import { useLocale } from "@/shared/providers/i18n-provider";
 import {
@@ -12,7 +12,6 @@ import {
 } from "@/shared/components/ui/dropdown-menu";
 
 export function LanguageSwitcher() {
-  const router = useRouter();
   const pathname = usePathname();
   const currentLocale = useLocale();
 

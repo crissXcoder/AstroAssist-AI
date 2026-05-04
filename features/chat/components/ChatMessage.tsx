@@ -2,11 +2,12 @@
 
 import { cn } from "@/shared/utils/cn";
 import { Avatar, AvatarFallback } from "@/shared/components/ui/avatar";
-import { Bot, User, Sparkles, AlertCircle, Info, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { Bot, User, Sparkles, ArrowRight } from "lucide-react";
 import { Message } from "@/features/chat";
 import { useRouter, useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
-import React, { isValidElement } from "react";
+import React, { isValidElement, useMemo } from "react";
 import remarkGfm from "remark-gfm";
 import productsData from "@/features/catalog/data/products.json";
 import type { Product } from "@/features/catalog";
@@ -19,9 +20,11 @@ export function ChatMessage({ message }: { message: Message }) {
   const params = useParams();
   const locale = (params.locale as string) || "es";
 
-  const dateObj = message.createdAt instanceof Date 
-    ? message.createdAt 
-    : new Date(message.createdAt || Date.now());
+  const dateObj = useMemo(() => {
+    return message.createdAt instanceof Date 
+      ? message.createdAt 
+      : new Date(message.createdAt || new Date());
+  }, [message.createdAt]);
 
   // Helper to render text with nested product cards
   const renderTextWithProducts = (text: string) => {
@@ -41,7 +44,13 @@ export function ChatMessage({ message }: { message: Message }) {
             return (
               <div key={i} className="bg-surface-container border border-white/5 rounded-xl overflow-hidden flex items-center gap-4 p-4 group hover:bg-surface-bright transition-all duration-300 shadow-xl animate-in fade-in slide-in-from-bottom-2">
                 <div className="w-16 h-16 rounded-lg overflow-hidden bg-background shrink-0 relative border border-white/5">
-                  <img src={product.images.primary} alt={product.nameEn} className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                  <Image 
+                    src={product.images.primary} 
+                    alt={product.nameEn} 
+                    fill
+                    sizes="64px"
+                    className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
+                  />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">

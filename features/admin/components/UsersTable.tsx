@@ -27,8 +27,8 @@ interface UsersTableProps {
   isLoading: boolean;
   page: number;
   onPageChange: (page: number) => void;
-  onToggleStatus: (id: string, isActive: boolean) => Promise<any>;
-  onUpdate: (id: string, data: { fullName?: string; phone?: string }) => Promise<any>;
+  onToggleStatus: (id: string, isActive: boolean) => Promise<void>;
+  onUpdate: (id: string, data: { fullName?: string; phone?: string }) => Promise<{ success: boolean; error?: string }>;
 }
 
 /** Skeleton para la tabla mientras carga */

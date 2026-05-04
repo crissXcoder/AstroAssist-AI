@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useForm, UseFormReturn } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
 import { CreateCustomerDto } from '../schemas/create-customer.schema';
 import { useGeo } from '@/features/auth/hooks/useGeo';
@@ -55,14 +55,17 @@ export const CreateCustomerForm: React.FC<CreateCustomerFormProps> = ({
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     trigger,
     formState: { errors },
   } = form;
 
-  const selectedProvince = watch('province');
-  const selectedCanton = watch('canton');
+  const selectedProvince = useWatch({ control: form.control, name: 'province' });
+  const selectedCanton = useWatch({ control: form.control, name: 'canton' });
+  const fullNameWatch = useWatch({ control: form.control, name: 'fullName' });
+  const cedulaWatch = useWatch({ control: form.control, name: 'cedula' });
+  const emailWatch = useWatch({ control: form.control, name: 'email' });
+  const districtWatch = useWatch({ control: form.control, name: 'district' });
 
   const nextStep = async () => {
     type FieldName = keyof CreateCustomerDto;
@@ -188,7 +191,7 @@ export const CreateCustomerForm: React.FC<CreateCustomerFormProps> = ({
               <Label className="text-zinc-300">Distrito</Label>
               <Combobox
                 options={districts.map((d) => ({ label: d.name, value: d.id }))}
-                value={watch('district')}
+                value={districtWatch}
                 onChange={(val) => setValue('district', val)}
                 disabled={!selectedCanton || loadingDistricts}
                 placeholder="Distrito"
@@ -232,9 +235,9 @@ export const CreateCustomerForm: React.FC<CreateCustomerFormProps> = ({
                 <CheckCircle2 className="w-4 h-4" /> Resumen
               </h4>
               <div className="text-xs text-zinc-400 space-y-1">
-                <p>Nombre: {watch('fullName')}</p>
-                <p>Cédula: {watch('cedula')}</p>
-                <p>Correo: {watch('email')}</p>
+                <p>Nombre: {fullNameWatch}</p>
+                <p>Cédula: {cedulaWatch}</p>
+                <p>Correo: {emailWatch}</p>
               </div>
             </div>
           </div>

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { X, Maximize2, Camera, Telescope, MapPin, ArrowUpRight } from "lucide-react";
 import { SectionContainer, SectionHeader } from "@/shared/components/ui/section";
 import { Badge } from "@/shared/components/ui/badge";
@@ -79,12 +80,13 @@ export function Gallery() {
   const t = useTranslations().gallery;
   const [selectedImage, setSelectedImage] = useState<typeof galleryData[0] | null>(null);
 
-  // Close modal on Escape
-  if (typeof window !== 'undefined') {
-    window.onkeydown = (e) => {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSelectedImage(null);
     };
-  }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <SectionContainer id="gallery" delay={0.3} className="py-32 relative overflow-hidden bg-surface-container-lowest">
@@ -124,10 +126,13 @@ export function Gallery() {
                 onClick={() => setSelectedImage(img)}
               >
                 {/* Image with extreme slow scale on hover */}
-                <img 
+                <Image 
                   src={img.src} 
                   alt={img.title} 
-                  className="w-full h-full object-cover opacity-70 group-hover/card:opacity-100 group-hover/card:scale-110 transition-all duration-[2s] ease-out will-change-transform"
+                  fill
+                  priority={i < 2}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  className="object-cover opacity-70 group-hover/card:opacity-100 group-hover/card:scale-110 transition-all duration-[2s] ease-out will-change-transform"
                 />
                 
                 {/* Dark overlay that fades away slightly */}
@@ -184,10 +189,12 @@ export function Gallery() {
             >
               {/* Image Side */}
               <div className="w-full md:w-3/4 h-64 md:h-full relative bg-background/40 flex items-center justify-center p-4">
-                 <img 
+                 <Image 
                    src={selectedImage.src} 
                    alt={selectedImage.title}
-                   className="w-full h-full object-contain rounded-xl shadow-2xl"
+                   fill
+                   sizes="(max-width: 1200px) 100vw, 75vw"
+                   className="object-contain rounded-xl shadow-2xl"
                  />
               </div>
               

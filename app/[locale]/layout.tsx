@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { TanStackProvider } from "@/shared/providers/tanstack-provider";
 import { AuthProvider } from "@/features/auth";
 import { getDictionary, Locale } from "@/lib/i18n";
@@ -11,7 +12,6 @@ import { ThemeProvider } from "@/shared/providers/theme-provider";
 import "../globals.css";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata, Viewport } from "next";
-import "reflect-metadata";
 
 
 const geistSans = Geist({

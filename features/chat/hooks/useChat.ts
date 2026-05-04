@@ -22,9 +22,9 @@ export function useChat() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        setMessages(parsed.map((m: any) => ({ ...m, createdAt: new Date(m.createdAt) })));
+        setMessages(parsed.map((m: Message) => ({ ...m, createdAt: new Date(m.createdAt) })));
       } catch (e) {
-        console.error("Failed to parse chat history");
+        console.error("Failed to parse chat history", e);
       }
     } else {
       setMessages([
@@ -88,8 +88,8 @@ export function useChat() {
       };
 
       setMessages(prev => [...prev, assistantMessage]);
-    } catch (err: any) {
-      const errorMessage = err.message || 'Error de conexión';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Error de conexión';
       setError(errorMessage);
       console.error("🔴 AI Chat Error:", err);
       

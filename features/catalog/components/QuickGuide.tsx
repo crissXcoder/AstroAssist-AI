@@ -84,7 +84,6 @@ interface ContextDescProps {
 }
 
 function ContextDescription({ level, goal, sky, locale }: ContextDescProps) {
-  const hasAll = level && goal && sky;
   if (!level && !goal && !sky) return null;
 
   const levelLabels: Record<RecommendedLevel, Record<"en" | "es", string>> = {

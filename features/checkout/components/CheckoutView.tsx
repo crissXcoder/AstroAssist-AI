@@ -13,7 +13,7 @@ import { ShoppingBag, ArrowLeft, Truck, CreditCard } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/shared/utils/cn";
 
-import { CheckoutStep, CheckoutDraft } from "../types";
+import { CheckoutStep, CheckoutDraft, CheckoutData } from "../types";
 import { saveOrder } from "../utils/order-utils";
 
 export function CheckoutView() {
@@ -28,7 +28,7 @@ export function CheckoutView() {
   const t = useTranslations();
   const locale = useLocale();
 
-  const handleNextStep = (data?: any) => {
+  const handleNextStep = (data?: CheckoutData) => {
     if (step === "shipping") {
       setCheckoutData(prev => ({ ...prev, ...data }));
       setStep("payment");
@@ -36,9 +36,9 @@ export function CheckoutView() {
     else if (step === "payment") {
       // Create final draft
       const finalDraft: CheckoutDraft = {
-        shippingAddress: data.shippingAddress || checkoutData.shippingAddress || null,
-        paymentMethod: data.paymentMethod || checkoutData.paymentMethod || "credit_card",
-        shippingMethod: data.shippingMethod || checkoutData.shippingMethod || "standard",
+        shippingAddress: data?.shippingAddress || checkoutData.shippingAddress || null,
+        paymentMethod: data?.paymentMethod || checkoutData.paymentMethod || "credit_card",
+        shippingMethod: data?.shippingMethod || checkoutData.shippingMethod || "standard",
         items,
         summary
       };

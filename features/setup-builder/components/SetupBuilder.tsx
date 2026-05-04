@@ -83,28 +83,28 @@ export function SetupBuilder() {
             {currentStep === 0 && (
               <ExperienceStep 
                 value={preferences.experience} 
-                onChange={(v: any) => updatePreference('experience', v)} 
+                onChange={(v) => updatePreference('experience', v)} 
                 t={t.step_experience} 
               />
             )}
             {currentStep === 1 && (
               <BudgetStep 
                 value={preferences.budget} 
-                onChange={(v: any) => updatePreference('budget', v)} 
+                onChange={(v) => updatePreference('budget', v)} 
                 t={t.step_budget} 
               />
             )}
             {currentStep === 2 && (
               <GoalStep 
                 value={preferences.goal} 
-                onChange={(v: any) => updatePreference('goal', v)} 
+                onChange={(v) => updatePreference('goal', v)} 
                 t={t.step_goal} 
               />
             )}
             {currentStep === 3 && (
               <EnvironmentStep 
                 value={preferences.environment} 
-                onChange={(v: any) => updatePreference('environment', v)} 
+                onChange={(v) => updatePreference('environment', v)} 
                 t={t.step_environment} 
               />
             )}

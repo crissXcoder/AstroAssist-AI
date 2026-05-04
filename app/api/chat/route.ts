@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { GeminiClient } from '@/features/chat/services/gemini-client';
 import { detectIntent, getProductContext, getSetupContext } from '@/features/chat/utils/ai-logic';
+import { ChatMessage, GeminiContent } from '@/features/chat/types/chat.types';
 
 export async function POST(req: Request) {
   try {
@@ -33,8 +34,8 @@ export async function POST(req: Request) {
     const productContext = getProductContext(intent, lastUserMessage);
     const setupContext = getSetupContext(lastUserMessage);
 
-    const history = messages.slice(-10); 
-    const contents = history.map((m: any) => ({
+    const history: ChatMessage[] = messages.slice(-10); 
+    const contents: GeminiContent[] = history.map((m: ChatMessage) => ({
       role: m.role === 'assistant' ? 'model' : 'user',
       parts: [{ text: m.content }]
     }));
@@ -90,11 +91,12 @@ Debes responder usando EXACTAMENTE estas secciones en este orden:
       status: 'online'
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("🌌 [API/Chat] Error Fatal:", error);
+    const errorMessage = error instanceof Error ? error.message : "Error inesperado en el servidor de AstroAssist.";
     return NextResponse.json({ 
       role: 'assistant', 
-      content: "Error inesperado en el servidor de AstroAssist.",
+      content: errorMessage,
       status: 'offline',
       isError: true
     }, { status: 500 });

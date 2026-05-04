@@ -6,7 +6,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
 import { Input } from "@/shared/components/ui/input";
 import { useTranslations } from "@/shared/providers/i18n-provider";
-import { CheckoutStep, PaymentMethod, ShippingMethod } from "../types";
+import { CheckoutStep, PaymentMethod, ShippingMethod, CheckoutData } from "../types";
 import { 
   ArrowRight, 
   ArrowLeft, 
@@ -27,7 +27,7 @@ import { cn } from "@/shared/utils/cn";
  */
 interface CheckoutFormProps {
   step: CheckoutStep;
-  onNext: (data: any) => void;
+  onNext: (data: CheckoutData) => void;
   onPrev: () => void;
   shippingMethod: ShippingMethod;
   setShippingMethod: (method: ShippingMethod) => void;

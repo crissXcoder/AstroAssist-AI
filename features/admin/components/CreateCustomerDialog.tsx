@@ -15,7 +15,7 @@ import { CreateCustomerDto } from '../schemas/create-customer.schema';
 import type { CreateCustomerPayload } from '../types/admin.types';
 
 interface CreateCustomerDialogProps {
-  onCreateCustomer: (payload: CreateCustomerPayload) => Promise<any>;
+  onCreateCustomer: (payload: CreateCustomerPayload) => Promise<void>;
 }
 
 /**
@@ -65,8 +65,10 @@ export const CreateCustomerDialog: React.FC<CreateCustomerDialogProps> = ({ onCr
     try {
       await onCreateCustomer(payload);
       setIsSuccess(true);
-    } catch (error: any) {
-      setServerError(error?.response?.data?.message || 'Error al crear el cliente.');
+    } catch (err: unknown) {
+      const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message 
+        || 'Error al crear el cliente.';
+      setServerError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }

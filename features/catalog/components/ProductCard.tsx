@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from "framer-motion";
+import Image from "next/image";
 import { ShoppingCart, ArrowRight, Zap } from "lucide-react";
-import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
 import { useCart } from "@/features/cart";
 import Link from "next/link";
@@ -112,10 +112,12 @@ export function CatalogProductCard({
           style={{ transform: "translateZ(20px)" }}
         >
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-surface-container-low z-10" />
-          <img
+          <Image
             src={product.images.primary}
             alt={name}
-            className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
           />
 
           {/* Level badge — top left */}

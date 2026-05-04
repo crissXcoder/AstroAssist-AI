@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { productService } from "@/features/catalog/services/productService";
 import { ProductDetailView } from "@/features/catalog/components/detail/ProductDetailView";
-import { Locale } from "@/lib/i18n";
 
 interface ProductPageProps {
   params: Promise<{

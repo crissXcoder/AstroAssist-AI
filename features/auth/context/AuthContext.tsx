@@ -4,7 +4,6 @@ import React, {
   createContext, 
   useContext, 
   useEffect, 
-  useState, 
   useCallback,
   useMemo
 } from 'react';
@@ -85,19 +84,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [authChannel, pathname, router, queryClient]);
 
-  const login = async (payload: LoginPayload) => {
+  const login = useCallback(async (payload: LoginPayload) => {
     const response = await AuthService.login(payload);
     queryClient.setQueryData(['auth', 'session'], response);
     authChannel?.postMessage({ type: 'LOGIN' });
     router.push('/');
-  };
+  }, [queryClient, authChannel, router]);
 
-  const register = async (payload: RegisterPayload) => {
+  const register = useCallback(async (payload: RegisterPayload) => {
     const response = await AuthService.register(payload);
     queryClient.setQueryData(['auth', 'session'], response);
     authChannel?.postMessage({ type: 'LOGIN' });
     router.push('/');
-  };
+  }, [queryClient, authChannel, router]);
 
   const refreshUser = useCallback(async () => {
     await refetch();

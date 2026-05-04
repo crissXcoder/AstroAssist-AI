@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Star, Telescope, Camera } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Star, Camera } from "lucide-react";
 import Link from "next/link";
 import type { CuratedSetup } from "@/features/catalog";
 import { getSetupProducts } from "@/features/catalog/services/recommendationEngine";
@@ -98,10 +99,12 @@ export function SetupCard({ setup, index, locale }: SetupCardProps) {
                   className="w-10 h-10 rounded-full overflow-hidden bg-surface-container border-2 border-surface-container-low shrink-0 shadow-lg"
                   style={{ zIndex: allImages.length - i }}
                 >
-                  <img
+                  <Image
                     src={p.images.primary}
                     alt={locale === "en" ? p.nameEn : p.nameEs}
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                    fill
+                    sizes="40px"
+                    className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                   />
                 </div>
               ))}

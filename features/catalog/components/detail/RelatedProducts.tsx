@@ -5,7 +5,7 @@ import { Product } from "../../types";
 import { CatalogProductCard } from "../ProductCard";
 import { useTranslations } from "@/shared/providers/i18n-provider";
 import { getRelatedProducts } from "../../services/recommendationEngine";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import Link from "next/link";
@@ -17,12 +17,9 @@ interface RelatedProductsProps {
 
 export function RelatedProducts({ product, locale }: RelatedProductsProps) {
   const t = useTranslations();
-  const [related, setRelated] = useState<Product[]>([]);
-
-  useEffect(() => {
-    // We use the enhanced recommendation logic
-    const results = getRelatedProducts(product, 3);
-    setRelated(results);
+  
+  const related = useMemo(() => {
+    return getRelatedProducts(product, 3);
   }, [product]);
 
   if (related.length === 0) return null;

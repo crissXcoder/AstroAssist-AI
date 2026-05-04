@@ -1,10 +1,12 @@
 import { LucideIcon, Telescope, Wallet, Target, Map } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/shared/utils/cn";
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
 import { SectionHeader } from "@/shared/components/ui/section";
 import { BuySetupButton } from "@/features/cart/components/BuySetupButton";
-import { Product } from "@/features/catalog/types";
+import { SetupPreferences, RecommendationResultData } from "../services/engine";
+import { I18nDictionary } from "@/lib/i18n";
 
 interface OptionCardProps {
   id: string;
@@ -45,8 +47,33 @@ function OptionCard({ title, description, icon: Icon, selected, onClick }: Optio
   );
 }
 
+// Props interfaces for each step to ensure strict translation mapping
+interface ExperienceStepProps {
+  value: SetupPreferences['experience'] | null;
+  onChange: (value: SetupPreferences['experience']) => void;
+  t: I18nDictionary['setup_builder']['step_experience'];
+}
+
+interface BudgetStepProps {
+  value: SetupPreferences['budget'] | null;
+  onChange: (value: SetupPreferences['budget']) => void;
+  t: I18nDictionary['setup_builder']['step_budget'];
+}
+
+interface GoalStepProps {
+  value: SetupPreferences['goal'] | null;
+  onChange: (value: SetupPreferences['goal']) => void;
+  t: I18nDictionary['setup_builder']['step_goal'];
+}
+
+interface EnvironmentStepProps {
+  value: SetupPreferences['environment'] | null;
+  onChange: (value: SetupPreferences['environment']) => void;
+  t: I18nDictionary['setup_builder']['step_environment'];
+}
+
 // Experience Step
-export function ExperienceStep({ value, onChange, t }: any) {
+export function ExperienceStep({ value, onChange, t }: ExperienceStepProps) {
   return (
     <div className="flex flex-col space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 w-full">
       <SectionHeader 
@@ -66,7 +93,7 @@ export function ExperienceStep({ value, onChange, t }: any) {
 }
 
 // Budget Step
-export function BudgetStep({ value, onChange, t }: any) {
+export function BudgetStep({ value, onChange, t }: BudgetStepProps) {
   return (
     <div className="flex flex-col space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 w-full">
       <SectionHeader 
@@ -86,7 +113,7 @@ export function BudgetStep({ value, onChange, t }: any) {
 }
 
 // Goal Step
-export function GoalStep({ value, onChange, t }: any) {
+export function GoalStep({ value, onChange, t }: GoalStepProps) {
   return (
     <div className="flex flex-col space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 w-full">
       <SectionHeader 
@@ -106,7 +133,7 @@ export function GoalStep({ value, onChange, t }: any) {
 }
 
 // Environment Step
-export function EnvironmentStep({ value, onChange, t }: any) {
+export function EnvironmentStep({ value, onChange, t }: EnvironmentStepProps) {
   return (
     <div className="flex flex-col space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 w-full">
       <SectionHeader 
@@ -125,8 +152,14 @@ export function EnvironmentStep({ value, onChange, t }: any) {
   );
 }
 
+interface RecommendationResultProps {
+  data: RecommendationResultData;
+  onRestart: () => void;
+  locale: "en" | "es";
+}
+
 // Recommendation Result Step
-export function RecommendationResult({ data, onRestart, locale }: { data: any, onRestart: () => void, locale: "en" | "es" }) {
+export function RecommendationResult({ data, onRestart, locale }: RecommendationResultProps) {
   const reasoning = locale === "en" ? data.reasoningEn : data.reasoningEs;
   const title = locale === "en" ? "Your Perfect Setup" : "Tu Setup Perfecto";
   const restartBtn = locale === "en" ? "Start Over" : "Empezar de Nuevo";
@@ -156,10 +189,16 @@ export function RecommendationResult({ data, onRestart, locale }: { data: any, o
             <span className="w-8 h-px bg-primary/30" /> {mainTitle}
           </h3>
           <div className="grid grid-cols-1 gap-4">
-            {data.mainItems.map((item: any) => (
+            {data.mainItems.map((item) => (
               <Card key={item.id} variant="compact">
                 <div className="w-20 h-20 rounded-lg overflow-hidden bg-background shrink-0 relative border border-white/5">
-                  <img src={item.images.primary} alt={item.nameEn} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                  <Image 
+                    src={item.images.primary} 
+                    alt={item.nameEn} 
+                    fill
+                    sizes="80px"
+                    className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
+                  />
                 </div>
                 <div>
                   <h4 className="text-title-md font-bold text-text-main tracking-tight">{locale === "en" ? item.nameEn : item.nameEs}</h4>
@@ -178,10 +217,16 @@ export function RecommendationResult({ data, onRestart, locale }: { data: any, o
               <span className="w-8 h-px bg-primary/30" /> {accTitle}
             </h3>
             <div className="grid grid-cols-1 gap-4">
-              {data.accessories.map((item: any) => (
+              {data.accessories.map((item) => (
                 <Card key={item.id} variant="compact">
                   <div className="w-20 h-20 rounded-lg overflow-hidden bg-background shrink-0 relative border border-white/5">
-                    <img src={item.images.primary} alt={item.nameEn} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                    <Image 
+                      src={item.images.primary} 
+                      alt={item.nameEn} 
+                      fill
+                      sizes="80px"
+                      className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
+                    />
                   </div>
                   <div>
                     <h4 className="text-title-md font-bold text-text-main tracking-tight">{locale === "en" ? item.nameEn : item.nameEs}</h4>
@@ -213,3 +258,4 @@ export function RecommendationResult({ data, onRestart, locale }: { data: any, o
     </div>
   );
 }
+

@@ -411,6 +411,48 @@
     "no_order_found": "Pedido no encontrado",
     "no_order_desc": "Lo sentimos, no pudimos encontrar los detalles de tu expedición astronómica.",
     "view_catalog": "Ver Catálogo",
-    "order_summary": "Detalles de la Orden"
+    "order_summary": "Detalles de la Orden",
+    "confirmation": {
+      "processing": {
+        "title": "Verificando Telemetría",
+        "message": "Sincronizando los detalles de tu expedición con nuestra base de datos estelar..."
+      },
+      "error": {
+        "title": "Señal Perdida",
+        "message": "No pudimos localizar los datos de tu pedido. Puede que la señal haya sido interceptada por una anomalía espacial.",
+        "browse_catalog": "Volver al Catálogo",
+        "home": "Regresar al Inicio"
+      },
+      "success": {
+        "title": "¡Expedición Confirmada!",
+        "message": "Tu equipo ha sido reservado. Hemos enviado el manifiesto de carga a"
+      },
+      "order_details": {
+        "title": "Manifiesto de Pedido",
+        "status": "Estado",
+        "subtotal": "Subtotal de Ópticas",
+        "shipping": "Logística Asegurada",
+        "total": "Inversión Total",
+        "shipping_address": "Punto de Entrega",
+        "payment_method": "Sistema de Pago",
+        "delivery_est": "Ventana de Entrega Est."
+      },
+      "actions": {
+        "email_sent": {
+          "title": "Confirmación Enviada",
+          "message": "Revisa tu bandeja de entrada para el recibo detallado y la guía de inicio rápido."
+        },
+        "next_steps": {
+          "title": "Próximos Pasos",
+          "message": "Nuestro equipo está calibrando tu equipo. Recibirás un enlace de telemetría cuando sea enviado."
+        },
+        "continue_shopping": "Explorar más Ópticas"
+      },
+      "support": {
+        "title": "¿Necesitas Asistencia?",
+        "message": "Nuestros especialistas en hardware están en órbita para ayudarte con cualquier duda técnica.",
+        "share": "Compartir Configuración"
+      }
+    }
   }
 }

@@ -20,7 +20,7 @@ export function ProductGrid({ products, locale, isFiltered }: ProductGridProps) 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 min-h-[40vh]">
       <AnimatePresence mode="popLayout">
-        {products.map(({ product, score, matchReasons }, index) => (
+        {products.map(({ product, score }, index) => (
           <motion.div
             key={product.id}
             layout
@@ -46,7 +46,7 @@ export function ProductGrid({ products, locale, isFiltered }: ProductGridProps) 
           animate={{ opacity: 1, y: 0 }}
           className="col-span-1 md:col-span-2 lg:col-span-3 flex flex-col items-center justify-center py-32 text-center"
         >
-          <div className="w-14 h-14 rounded-full bg-white/[0.03] border border-white/[0.06] flex items-center justify-center mb-6">
+          <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6">
             <Search className="w-6 h-6 text-neutral-600" />
           </div>
           <h3 className="text-lg font-semibold text-neutral-300 mb-2">{emptyTitle}</h3>

@@ -20,11 +20,31 @@ export interface District {
   zipCode?: string;
 }
 
+interface RawGeoResponse<T> {
+  data: T[];
+}
+
+interface RawProvince {
+  idProvincia: number;
+  descripcion: string;
+}
+
+interface RawCanton {
+  idCanton: number;
+  descripcion: string;
+  idProvincia: number;
+}
+
+interface RawDistrict {
+  idDistrito: number;
+  descripcion: string;
+  idCanton: number;
+}
+
 export const GeoService = {
   async getProvinces(): Promise<Province[]> {
-    const { data } = await axios.get(`${GEO_API_URL}/provincias`);
-    // The API returns { data: [...], ... }
-    return data.data.map((p: any) => ({
+    const { data } = await axios.get<RawGeoResponse<RawProvince>>(`${GEO_API_URL}/provincias`);
+    return data.data.map((p) => ({
       id: String(p.idProvincia),
       name: p.descripcion
     }));
@@ -32,8 +52,8 @@ export const GeoService = {
 
   async getCantons(provinceId: string): Promise<Canton[]> {
     if (!provinceId) return [];
-    const { data } = await axios.get(`${GEO_API_URL}/provincias/${provinceId}/cantones`);
-    return data.data.map((c: any) => ({
+    const { data } = await axios.get<RawGeoResponse<RawCanton>>(`${GEO_API_URL}/provincias/${provinceId}/cantones`);
+    return data.data.map((c) => ({
       id: String(c.idCanton),
       name: c.descripcion,
       provinceId: String(c.idProvincia)
@@ -42,8 +62,8 @@ export const GeoService = {
 
   async getDistricts(provinceId: string, cantonId: string): Promise<District[]> {
     if (!provinceId || !cantonId) return [];
-    const { data } = await axios.get(`${GEO_API_URL}/cantones/${cantonId}/distritos`);
-    return data.data.map((d: any) => ({
+    const { data } = await axios.get<RawGeoResponse<RawDistrict>>(`${GEO_API_URL}/cantones/${cantonId}/distritos`);
+    return data.data.map((d) => ({
       id: String(d.idDistrito),
       name: d.descripcion,
       cantonId: String(d.idCanton)

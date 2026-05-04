@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingCart, Plus, Check } from "lucide-react";
+import { ShoppingCart, Check } from "lucide-react";
 import { useState } from "react";
 import { Product } from "@/features/catalog/types";
 import { useCart } from "@/features/cart/hooks/useCart";

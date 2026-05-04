@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/shared/utils/cn";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Sparkles, Orbit, Zap, Globe, ArrowRight } from "lucide-react";
 import { SectionContainer, SectionHeader } from "@/shared/components/ui/section";
 import { Badge } from "@/shared/components/ui/badge";
@@ -111,10 +112,12 @@ export function CosmicInsights() {
                     }}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <img 
+                    <Image 
                       src={item.image} 
                       alt={item.title} 
-                      className="w-full h-full object-cover mix-blend-screen"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 25vw"
+                      className="object-cover mix-blend-screen"
                     />
                     {/* Aggressive gradient masking for premium storytelling depth */}
                     <div className={cn(

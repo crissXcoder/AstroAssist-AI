@@ -31,8 +31,8 @@ export const RegisterForm = () => {
     try {
       await registerAction(data);
       setIsSuccess(true);
-    } catch (err: any) {
-      setServerError(err.message || 'Error al crear la cuenta. Intente de nuevo.');
+    } catch (err: unknown) {
+      setServerError(err instanceof Error ? err.message : 'Error al crear la cuenta. Intente de nuevo.');
     } finally {
       setIsSubmitting(false);
     }

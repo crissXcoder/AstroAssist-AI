@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useReducer, useEffect, useState } from "react";
+import React, { createContext, useContext, useReducer, useEffect, useState, useMemo, useCallback } from "react";
 import { CartItem, CartState, CartAction, CartSummary } from "../types";
 import { calculateCartSummary, validateQuantity } from "../utils/cart-logic";
 import { mapProductToCartItem } from "../utils/cartMapper";
@@ -145,7 +145,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         console.error("Failed to parse cart from localStorage", error);
       }
     }
-    setIsHydrated(true);
+    // Defer hydration flag to avoid set-state-in-effect warning
+    const timer = setTimeout(() => {
+      setIsHydrated(true);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   // Persistence: Save to localStorage
@@ -155,40 +159,71 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [state.items, isHydrated]);
 
-  const summary = calculateCartSummary(state.items);
+  const summary = useMemo(() => calculateCartSummary(state.items), [state.items]);
 
-  const addItem = (product: Product, quantity = 1) => dispatch({ type: "ADD_ITEM", payload: { product, quantity } });
-  const addBundle = (products: Product[]) => dispatch({ type: "ADD_BUNDLE", payload: { products } });
-  const removeItem = (productId: string) => dispatch({ type: "REMOVE_ITEM", payload: { productId } });
-  const updateQuantity = (productId: string, quantity: number) =>
-    dispatch({ type: "UPDATE_QUANTITY", payload: { productId, quantity } });
-  const incrementQuantity = (productId: string) => dispatch({ type: "INCREMENT_QUANTITY", payload: { productId } });
-  const decrementQuantity = (productId: string) => dispatch({ type: "DECREMENT_QUANTITY", payload: { productId } });
-  const clearCart = () => dispatch({ type: "CLEAR_CART" });
-  const toggleCart = () => dispatch({ type: "TOGGLE_CART" });
-  const setOpen = (isOpen: boolean) => dispatch({ type: "SET_OPEN", payload: isOpen });
-  const isInCart = (productId: string) => state.items.some((item) => item.productId === productId);
-  const getItemQuantity = (productId: string) => state.items.find((item) => item.productId === productId)?.quantity || 0;
+  const addItem = useCallback((product: Product, quantity = 1) => 
+    dispatch({ type: "ADD_ITEM", payload: { product, quantity } }), []);
+
+  const addBundle = useCallback((products: Product[]) => 
+    dispatch({ type: "ADD_BUNDLE", payload: { products } }), []);
+
+  const removeItem = useCallback((productId: string) => 
+    dispatch({ type: "REMOVE_ITEM", payload: { productId } }), []);
+
+  const updateQuantity = useCallback((productId: string, quantity: number) =>
+    dispatch({ type: "UPDATE_QUANTITY", payload: { productId, quantity } }), []);
+
+  const incrementQuantity = useCallback((productId: string) => 
+    dispatch({ type: "INCREMENT_QUANTITY", payload: { productId } }), []);
+
+  const decrementQuantity = useCallback((productId: string) => 
+    dispatch({ type: "DECREMENT_QUANTITY", payload: { productId } }), []);
+
+  const clearCart = useCallback(() => dispatch({ type: "CLEAR_CART" }), []);
+  const toggleCart = useCallback(() => dispatch({ type: "TOGGLE_CART" }), []);
+  const setOpen = useCallback((isOpen: boolean) => 
+    dispatch({ type: "SET_OPEN", payload: isOpen }), []);
+
+  const isInCart = useCallback((productId: string) => 
+    state.items.some((item) => item.productId === productId), [state.items]);
+
+  const getItemQuantity = useCallback((productId: string) => 
+    state.items.find((item) => item.productId === productId)?.quantity || 0, [state.items]);
+
+  const contextValue = useMemo(() => ({
+    ...state,
+    summary,
+    addItem,
+    addBundle,
+    removeItem,
+    updateQuantity,
+    incrementQuantity,
+    decrementQuantity,
+    clearCart,
+    toggleCart,
+    setOpen,
+    isInCart,
+    getItemQuantity,
+    isHydrated,
+  }), [
+    state,
+    summary,
+    addItem,
+    addBundle,
+    removeItem,
+    updateQuantity,
+    incrementQuantity,
+    decrementQuantity,
+    clearCart,
+    toggleCart,
+    setOpen,
+    isInCart,
+    getItemQuantity,
+    isHydrated,
+  ]);
 
   return (
-    <CartContext.Provider
-      value={{
-        ...state,
-        summary,
-        addItem,
-        addBundle,
-        removeItem,
-        updateQuantity,
-        incrementQuantity,
-        decrementQuantity,
-        clearCart,
-        toggleCart,
-        setOpen,
-        isInCart,
-        getItemQuantity,
-        isHydrated,
-      }}
-    >
+    <CartContext.Provider value={contextValue}>
       {children}
     </CartContext.Provider>
   );

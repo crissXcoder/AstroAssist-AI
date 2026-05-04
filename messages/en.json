@@ -411,6 +411,48 @@
     "no_order_found": "Order Not Found",
     "no_order_desc": "We're sorry, we couldn't find the details for your astronomical expedition.",
     "view_catalog": "View Catalog",
-    "order_summary": "Order Details"
+    "order_summary": "Order Details",
+    "confirmation": {
+      "processing": {
+        "title": "Verifying Telemetry",
+        "message": "Synchronizing your expedition details with our stellar database..."
+      },
+      "error": {
+        "title": "Signal Lost",
+        "message": "We couldn't locate your order data. The signal might have been intercepted by a spatial anomaly.",
+        "browse_catalog": "Back to Catalog",
+        "home": "Return Home"
+      },
+      "success": {
+        "title": "Expedition Confirmed!",
+        "message": "Your gear has been reserved. We've sent the cargo manifest to"
+      },
+      "order_details": {
+        "title": "Order Manifest",
+        "status": "Status",
+        "subtotal": "Optics Subtotal",
+        "shipping": "Insured Logistics",
+        "total": "Total Investment",
+        "shipping_address": "Delivery Point",
+        "payment_method": "Payment System",
+        "delivery_est": "Est. Delivery Window"
+      },
+      "actions": {
+        "email_sent": {
+          "title": "Confirmation Sent",
+          "message": "Check your inbox for the detailed receipt and quick start guide."
+        },
+        "next_steps": {
+          "title": "Next Steps",
+          "message": "Our team is currently calibrating your equipment. You'll receive a telemetry link when it ships."
+        },
+        "continue_shopping": "Explore more Optics"
+      },
+      "support": {
+        "title": "Need Assistance?",
+        "message": "Our hardware specialists are in orbit to help you with any technical questions.",
+        "share": "Share Configuration"
+      }
+    }
   }
 }

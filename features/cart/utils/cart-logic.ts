@@ -11,7 +11,7 @@ export function calculateItemSubtotal(price: number, quantity: number): number {
  * Validates and sanitizes a quantity value.
  * Ensures it's a positive integer, defaults to 1 if invalid.
  */
-export function validateQuantity(quantity: any): number {
+export function validateQuantity(quantity: unknown): number {
   if (quantity === null || quantity === undefined) return 1;
   
   const parsed = typeof quantity === "number" ? quantity : parseInt(String(quantity), 10);

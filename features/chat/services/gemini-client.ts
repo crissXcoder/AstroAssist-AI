@@ -1,12 +1,6 @@
 import { GoogleGenAI } from '@google/genai';
 
-export type GeminiStatus = 'online' | 'error_auth' | 'error_quota' | 'error_model' | 'offline';
-
-export interface GeminiResponse {
-  content: string;
-  status: GeminiStatus;
-  errorDetail?: string;
-}
+import { GeminiContent, GeminiResponse } from '../types/chat.types';
 
 export class GeminiClient {
   private genAI: GoogleGenAI;
@@ -20,7 +14,7 @@ export class GeminiClient {
     this.modelName = modelName;
   }
 
-  async generate(prompt: string, contents: any[], systemInstruction: string): Promise<GeminiResponse> {
+  async generate(prompt: string, contents: GeminiContent[], systemInstruction: string): Promise<GeminiResponse> {
     try {
       console.log(`🌌 [GeminiClient] Llamando a ${this.modelName}...`);
       console.log(`📝 [GeminiClient] Prompt length: ${prompt.length}, History turns: ${contents.length}`);
@@ -48,13 +42,13 @@ export class GeminiClient {
         status: 'online'
       };
 
-    } catch (error: any) {
-      const errorMsg = error.message || String(error);
+    } catch (error: unknown) {
+      const errorMsg = error instanceof Error ? error.message : String(error);
       console.error(`❌ [GeminiClient] Error detectado:`, errorMsg);
 
       // Log full error for server-side debugging
-      if (error.response) {
-        console.error("📄 [GeminiClient] Error Details:", JSON.stringify(error.response, null, 2));
+      if (typeof error === 'object' && error !== null && 'response' in error) {
+        console.error("📄 [GeminiClient] Error Details:", JSON.stringify((error as { response: unknown }).response, null, 2));
       }
 
       // Handle specific API errors from @google/genai

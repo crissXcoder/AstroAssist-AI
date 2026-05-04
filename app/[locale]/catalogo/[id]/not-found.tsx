@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
 import { useTranslations, useLocale } from "@/shared/providers/i18n-provider";
@@ -46,21 +47,49 @@ export default function ProductNotFound() {
 
       {/* Atmospheric Star Field Effect */}
       <div className="absolute inset-0 pointer-events-none opacity-40">
-        {[...Array(20)].map((_, i) => (
-          <div 
-            key={i}
-            className="absolute bg-white rounded-full animate-pulse"
-            style={{
-              width: Math.random() * 3 + "px",
-              height: Math.random() * 3 + "px",
-              top: Math.random() * 100 + "%",
-              left: Math.random() * 100 + "%",
-              animationDelay: Math.random() * 5 + "s",
-              animationDuration: Math.random() * 3 + 2 + "s"
-            }}
-          />
-        ))}
+        <StarFieldInner count={20} />
       </div>
     </div>
+  );
+}
+
+
+function StarFieldInner({ count }: { count: number }) {
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const starData = useMemo(() => {
+    return [...Array(count)].map(() => ({
+      width: Math.random() * 3 + "px",
+      height: Math.random() * 3 + "px",
+      top: Math.random() * 100 + "%",
+      left: Math.random() * 100 + "%",
+      delay: Math.random() * 5 + "s",
+      duration: Math.random() * 3 + 2 + "s"
+    }));
+  }, [count]);
+
+  if (!mounted) return null;
+
+  return (
+    <>
+      {starData.map((star, i) => (
+        <div 
+          key={i}
+          className="absolute bg-white rounded-full animate-pulse"
+          style={{
+            width: star.width,
+            height: star.height,
+            top: star.top,
+            left: star.left,
+            animationDelay: star.delay,
+            animationDuration: star.duration
+          }}
+        />
+      ))}
+    </>
   );
 }

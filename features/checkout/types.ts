@@ -15,6 +15,12 @@ export interface ShippingAddress {
   notes?: string;
 }
 
+export interface CheckoutData {
+  shippingAddress: ShippingAddress;
+  paymentMethod: PaymentMethod;
+  shippingMethod: ShippingMethod;
+}
+
 export interface CheckoutDraft {
   shippingAddress: ShippingAddress | null;
   paymentMethod: PaymentMethod;

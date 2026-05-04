@@ -22,7 +22,7 @@ interface ConfirmationPageProps {
   }>;
 }
 
-export default async function ConfirmationPage({ params, searchParams }: ConfirmationPageProps) {
+export default async function ConfirmationPage({ searchParams }: ConfirmationPageProps) {
   const { orderId } = await searchParams;
 
   return (

@@ -1,83 +1,123 @@
 "use client";
 
-import { SectionContainer, SectionHeader } from "@/shared/components/ui/section";
-import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
-import { Avatar, AvatarFallback } from "@/shared/components/ui/avatar";
-import { MessageSquareQuote } from "lucide-react";
-import { motion } from "framer-motion";
-import { STAGGER_CONTAINER, FADE_IN_UP } from "@/shared/utils/motion";
-import { Badge } from "@/shared/components/ui/badge";
+import { motion, Variants } from "framer-motion";
 import { useTranslations } from "@/shared/providers/i18n-provider";
+import { Star, Quote, Sparkles } from "lucide-react";
+
+const testimonials = [
+  {
+    id: 1,
+    name: "Alex Rivera",
+    role: "Astro-Photographer",
+    quote: "The AI recommendation engine found exactly the mount I needed for my specific telescope. Incredible precision.",
+    stars: 5,
+    avatar: "https://i.pravatar.cc/150?u=alex"
+  },
+  {
+    id: 2,
+    name: "Sarah Chen",
+    role: "Deep Space Observer",
+    quote: "AstroAssist turned a complex gear upgrade into a seamless 5-minute process. The best tool in the hobby.",
+    stars: 5,
+    avatar: "https://i.pravatar.cc/150?u=sarah"
+  },
+  {
+    id: 3,
+    name: "Marcus Thorne",
+    role: "Planetary Specialist",
+    quote: "Finally, a platform that understands that every astrophotographer has unique needs. Premium experience.",
+    stars: 5,
+    avatar: "https://i.pravatar.cc/150?u=marcus"
+  }
+];
 
 export function Testimonials() {
-  const t = useTranslations().testimonials;
-  const reviews = [
-    {
-      name: t.items[0].name,
-      role: t.items[0].role,
-      text: t.items[0].text,
-      initials: t.items[0].initials
-    },
-    {
-      name: t.items[1].name,
-      role: t.items[1].role,
-      text: t.items[1].text,
-      initials: t.items[1].initials
-    },
-    {
-      name: t.items[2].name,
-      role: t.items[2].role,
-      text: t.items[2].text,
-      initials: t.items[2].initials
+  const t = useTranslations();
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
     }
-  ];
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
 
   return (
-    <SectionContainer delay={0.1} className="py-24 border-t border-border/50 dark:border-white/5 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
-      <div className="container px-4 md:px-6 mx-auto relative z-10">
-        <SectionHeader 
-          badgeText={t.badge}
-          badgeIcon={<MessageSquareQuote className="w-4 h-4 mr-2" />}
-          titlePart1={t.title_part1}
-          titlePart2={t.title_part2}
-          description={t.description}
-          descriptionClassName="max-w-[700px]"
-        />
+    <section className="py-32 relative overflow-hidden">
+      {/* Decorative blurred orbit */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] aspect-square border border-white/5 rounded-full pointer-events-none -rotate-12" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] aspect-square border border-white/5 rounded-full pointer-events-none rotate-12" />
+
+      <div className="container px-6 mx-auto relative z-10">
+        <div className="flex flex-col items-center text-center mb-20 space-y-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-4"
+          >
+            <Sparkles className="w-3 h-3" />
+            <span>{t.testimonials.badge}</span>
+          </motion.div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-text-main tracking-tight">
+            {t.testimonials.title_part1} <span className="text-primary">{t.testimonials.title_part2}</span>
+          </h2>
+          <p className="text-text-soft text-lg max-w-2xl">
+            {t.testimonials.description}
+          </p>
+        </div>
 
         <motion.div 
-          variants={STAGGER_CONTAINER} initial="initial" whileInView="animate" viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {reviews.map((review, i) => (
-            <motion.div key={i} variants={FADE_IN_UP} className="h-full">
-              <Card variant="testimonial" className="gap-0!">
-                {/* Decorative inner glow */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                
-                <CardHeader className="flex flex-row items-center gap-4 mb-6 relative z-10 p-0 space-y-0">
-                  <Avatar className="w-12 h-12 border border-primary/20 bg-primary/5 ring-1 ring-primary/5 group-hover:scale-110 transition-transform duration-500 shadow-xl shadow-primary/5">
-                    <AvatarFallback className="bg-transparent text-primary font-bold text-label-md">{review.initials}</AvatarFallback>
-                  </Avatar>
-                  <div className="flex flex-col">
-                    <h4 className="text-title-md font-semibold text-text-main group-hover:text-primary transition-colors">{review.name}</h4>
-                    <p className="text-label-sm text-primary uppercase tracking-widest font-bold">{review.role}</p>
-                  </div>
-                </CardHeader>
+          {testimonials.map((testimonial) => (
+            <motion.div 
+              key={testimonial.id}
+              variants={itemVariants}
+              className="group relative p-8 rounded-[2.5rem] bg-surface-container/30 border border-white/5 backdrop-blur-xl hover:bg-surface-container/50 transition-all duration-500"
+            >
+              <Quote className="absolute top-8 right-8 w-10 h-10 text-primary/10 group-hover:text-primary/20 transition-colors" />
+              
+              <div className="flex gap-1 mb-6">
+                {[...Array(testimonial.stars)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-secondary text-secondary" />
+                ))}
+              </div>
 
-                <CardContent className="relative z-10 p-0 flex-1">
-                  <p className="text-body-sm text-text-soft italic leading-relaxed font-light">
-                    "{review.text}"
-                  </p>
-                </CardContent>
-
-                {/* Bottom accent */}
-                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-primary/20 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center" />
-              </Card>
+              <p className="text-cosmic-200 italic mb-10 leading-relaxed text-lg">&quot;{testimonial.quote}&quot;</p>
+              
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors">
+                  <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <h4 className="text-text-main font-bold text-sm tracking-tight">{testimonial.name}</h4>
+                  <p className="text-primary text-[11px] uppercase font-black tracking-widest">{testimonial.role}</p>
+                </div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
       </div>
-    </SectionContainer>
+    </section>
   );
 }

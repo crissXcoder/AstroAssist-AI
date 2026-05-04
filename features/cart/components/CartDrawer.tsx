@@ -5,7 +5,6 @@ import { useTranslations, useLocale } from "@/shared/providers/i18n-provider";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
 import { QuantitySelector } from "./QuantitySelector";
-import { calculateItemSubtotal } from "../utils/cart-logic";
 import { Button } from "@/shared/components/ui/button";
 import { formatCurrency } from "@/shared/utils/currency";
 import { ScrollArea } from "@/shared/components/ui/scroll-area";

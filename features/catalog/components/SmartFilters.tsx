@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { X, SlidersHorizontal, Search } from "lucide-react";
-import { Badge } from "@/shared/components/ui/badge";
 import type { CatalogFilters, ProductCategory } from "@/features/catalog";
 import type { UseCatalogFiltersReturn } from "@/features/catalog/hooks/useCatalogFilters";
 
