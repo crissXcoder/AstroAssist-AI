@@ -1,5 +1,5 @@
-import { RegisterDto } from '@shared/dto/register.dto';
-import { LoginDto } from '@shared/dto/login.dto';
+import { RegisterDto } from '@/src/types/dtos/register.dto';
+import { LoginDto } from '@/src/types/dtos/login.dto';
 
 /**
  * Estructura estándar de respuesta del servidor.

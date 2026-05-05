@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { classValidatorResolver } from "@hookform/resolvers/class-validator";
-import { LoginDto } from "@shared/dto/login.dto";
+import { LoginDto } from "@/src/types/dtos/login.dto";
 import { useAuth } from "@/features/auth";
 import {
   Card,

@@ -3,7 +3,7 @@
 import React from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
-import { RegisterDto } from '@shared/dto/register.dto';
+import { RegisterDto } from '@/src/types/dtos/register.dto';
 import { useGeo } from '@/features/auth/hooks/useGeo';
 import { Input } from '@/shared/components/ui/input';
 import { Button } from '@/shared/components/ui/button';

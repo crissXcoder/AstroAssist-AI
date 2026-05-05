@@ -95,6 +95,7 @@ export default async function RootLayout({
           attribute="class"
           defaultTheme="dark"
           enableSystem={true}
+          disableTransitionOnChange
         >
           {/* Global Cinematic Background System */}
           <div className="fixed inset-0 z-[-1] pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(98,87,244,0.08),transparent_80%)]" />
