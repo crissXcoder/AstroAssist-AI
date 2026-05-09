@@ -3,12 +3,7 @@
     "home": "Inicio",
     "technology": "Tecnología",
     "optics": "Sistema Óptico",
-    "community": "Comunidad",
-    "login": "Entrar",
-    "register": "Registrarse",
-    "profile": "Mi Perfil",
-    "logout": "Cerrar Sesión",
-    "admin": "Panel Admin"
+    "community": "Comunidad"
   },
   "hero": {
     "badge": "ASTROASSIST",

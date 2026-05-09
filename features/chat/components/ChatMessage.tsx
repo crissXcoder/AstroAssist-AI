@@ -122,9 +122,9 @@ export function ChatMessage({ message }: { message: Message }) {
                     }
                     
                     return (
-                      <p key={i} className="mb-4 last:mb-0 text-body-sm leading-relaxed text-text-soft/90 tracking-tight pl-3 border-l-2 border-primary/20 ml-1">
+                      <div key={i} className="mb-4 last:mb-0 text-body-sm leading-relaxed text-text-soft/90 tracking-tight pl-3 border-l-2 border-primary/20 ml-1">
                         {renderTextWithProducts(cleanPart)}
-                      </p>
+                      </div>
                     );
                   })}
                 </div>
@@ -132,9 +132,9 @@ export function ChatMessage({ message }: { message: Message }) {
             }
             
             return (
-              <p className="mb-4 last:mb-0 text-body-sm leading-relaxed text-text-soft/90 tracking-tight">
+              <div className="mb-4 last:mb-0 text-body-sm leading-relaxed text-text-soft/90 tracking-tight">
                 {renderTextWithProducts(text)}
-              </p>
+              </div>
             );
           },
           ul: ({ children }) => <ul className="space-y-2 mb-4 list-none">{children}</ul>,

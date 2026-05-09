@@ -3,12 +3,7 @@
     "home": "Home",
     "technology": "Technology",
     "optics": "Optical System",
-    "community": "Community",
-    "login": "Sign In",
-    "register": "Sign Up",
-    "profile": "My Profile",
-    "logout": "Logout",
-    "admin": "Admin Panel"
+    "community": "Community"
   },
   "hero": {
     "badge": "ASTROASSIST",
