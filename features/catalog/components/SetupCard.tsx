@@ -96,7 +96,7 @@ export function SetupCard({ setup, index, locale }: SetupCardProps) {
               {allImages.map((p, i) => (
                 <div
                   key={p.id}
-                  className="w-10 h-10 rounded-full overflow-hidden bg-surface-container border-2 border-surface-container-low shrink-0 shadow-lg"
+                  className="relative w-10 h-10 rounded-full overflow-hidden bg-surface-container border-2 border-surface-container-low shrink-0 shadow-lg"
                   style={{ zIndex: allImages.length - i }}
                 >
                   <Image

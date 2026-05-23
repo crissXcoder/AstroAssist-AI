@@ -30,6 +30,7 @@ function scoreProduct(product: Product, filters: CatalogFilters): ScoredProduct 
   if (filters.search) {
     const q = filters.search.toLowerCase();
     const searchable = [
+      product.id,
       product.nameEn,
       product.nameEs,
       product.descriptionEn,
