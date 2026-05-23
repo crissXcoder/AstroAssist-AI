@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { TanStackProvider } from "@/shared/providers/tanstack-provider";
-import { AuthProvider } from "@/features/auth";
+
 import { getDictionary, Locale } from "@/lib/i18n";
 import { Footer } from "@/features/landing/components/Footer";
 import { CartProvider } from "@/features/cart";
@@ -95,6 +95,7 @@ export default async function RootLayout({
           attribute="class"
           defaultTheme="dark"
           enableSystem={true}
+          disableTransitionOnChange
         >
           {/* Global Cinematic Background System */}
           <div className="fixed inset-0 z-[-1] pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(98,87,244,0.08),transparent_80%)]" />
@@ -102,7 +103,6 @@ export default async function RootLayout({
           
           <I18nProvider dictionary={dictionary} locale={locale as Locale}>
             <TanStackProvider>
-              <AuthProvider>
                 <CartProvider>
                   <Navbar />
                   <CartDrawer />
@@ -110,7 +110,6 @@ export default async function RootLayout({
                   <Footer />
                   <FloatingChat />
                 </CartProvider>
-              </AuthProvider>
             </TanStackProvider>
           </I18nProvider>
         </ThemeProvider>

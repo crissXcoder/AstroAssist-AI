@@ -1,30 +1,26 @@
 import {
   IsEmail,
-  IsNotEmpty,
   IsString,
   MinLength,
+  IsDateString,
   IsOptional,
   Matches,
-  IsDateString,
+  IsNotEmpty,
 } from 'class-validator';
 
 /**
- * DTO class-validator para formulario de crear cliente en admin.
- * Alineado con CreateUserByAdminDto del backend.
- * Usado con @hookform/resolvers/class-validator.
+ * DTO para el registro de cliente (Costa Rica focus)
+ * Copia local para el Frontend.
  */
-export class CreateCustomerDto {
-  @IsEmail({}, { message: 'El correo electrónico no es válido' })
-  @IsNotEmpty({ message: 'El correo es obligatorio' })
+export class RegisterDto {
+  @IsEmail(undefined, { message: 'Debe ser un correo electrónico válido' })
+  @IsNotEmpty({ message: 'El correo electrónico es obligatorio' })
   email!: string;
 
   @IsString()
   @MinLength(8, { message: 'La contraseña debe tener al menos 8 caracteres' })
+  @IsNotEmpty({ message: 'La contraseña es obligatoria' })
   password!: string;
-
-  @IsString()
-  @IsNotEmpty({ message: 'La confirmación de contraseña es requerida' })
-  confirmPassword!: string;
 
   @IsString()
   @IsNotEmpty({ message: 'La cédula es obligatoria' })
@@ -35,7 +31,7 @@ export class CreateCustomerDto {
   @IsNotEmpty({ message: 'El nombre completo es obligatorio' })
   fullName!: string;
 
-  @IsDateString({}, { message: 'Fecha de nacimiento inválida' })
+  @IsDateString(undefined, { message: 'Fecha de nacimiento inválida' })
   @IsNotEmpty({ message: 'La fecha de nacimiento es obligatoria' })
   birthDate!: string;
 
@@ -43,7 +39,6 @@ export class CreateCustomerDto {
   @IsNotEmpty({ message: 'El teléfono es obligatorio' })
   phone!: string;
 
-  // ── Dirección ──
   @IsString()
   @IsNotEmpty({ message: 'La provincia es obligatoria' })
   province!: string;
@@ -57,7 +52,7 @@ export class CreateCustomerDto {
   district!: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'La localidad es obligatoria' })
+  @IsNotEmpty({ message: 'La localidad/ciudad es obligatoria' })
   town!: string;
 
   @IsString()
@@ -67,4 +62,8 @@ export class CreateCustomerDto {
   @IsString()
   @IsOptional()
   postalCode?: string;
+
+  @IsString()
+  @IsNotEmpty({ message: 'Confirmar la contraseña es obligatorio' })
+  confirmPassword!: string;
 }
