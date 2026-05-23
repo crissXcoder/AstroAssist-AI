@@ -1,14 +1,14 @@
 {
   "hero": {
-    "background": "https://i.ibb.co/NgYcMxtM/image.png",
+    "background": "https://i.ibb.co/hJhMxKn7/photo-1462331940025-496dfbfc7564.avif",
     "dashboard": "https://images.unsplash.com/photo-1543722530-d2c3201371e7?q=80&w=2500&auto=format&fit=crop"
   },
   "gallery": {
-    "img1": "https://i.ibb.co/KxNyT1hw/image.png",
-    "img2": "https://i.ibb.co/FLmZ912y/image.png",
-    "img3": "https://i.ibb.co/qYYXp5Zc/image.png",
+    "img1": "https://i.ibb.co/bMs0bhMM/M42252-BM43-NEBULOSAORIONYMARIANBNORION20-X6-A25-M0-W0-SWH95-APO252-BIMX294252-BUVIR252-BCC.webp",
+    "img2": "https://i.ibb.co/C5n8KZRD/cumulo-de-las-pleyades-como-localizarlo-en-el-cielo-nocturno-1761254131902-1024.webp",
+    "img3": "https://i.ibb.co/SkrRwKB/ON4-LWGFFEAYM3-TB4-YNX3-EPQAHA.webp",
     "img4": "https://images.unsplash.com/photo-1543722530-d2c3201371e7?q=80&w=800&auto=format&fit=crop",
-    "img5": "https://i.ibb.co/Ngk4SCV8/image.png",
+    "img5": "https://i.ibb.co/v7p3kg7/gettyimages-1170047942-612x612.jpg",
     "img6": "https://imgs.search.brave.com/LdRuaplO4bbceaK0JcJntjm4_TCgAin1njzGycoaEtw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wbmcu/cG5ndHJlZS5jb20v/cG5nLXZlY3Rvci8y/MDI0MDkxMy9vdXJt/aWQvcG5ndHJlZS1s/dW5hci1zdXJmYWNl/LXBuZy1pbWFnZV8x/MzU1ODcyMi5wbmc",
     "img7": "https://imgs.search.brave.com/WgJsTnKG48uIe9ejdLN7i999_-e03W5k6Y5sjjy53Cg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9hcGkvbWVk/aWEvc21hbGwvNzE0/NzA5OTg0L3N0b2Nr/LXBob3RvLXBhcnRp/YWwtc29sYXItZWNs/aXBzZS1maXJzdC1z/ZWNvbmQtY29udGFj/dHMtc3VuLXNlZW4t/c29sYXItZmlsdGVy"
   },
@@ -19,11 +19,11 @@
     "item4": "https://i.ibb.co/gFL3Dwb5/image.png"
   },
   "products": {
-    "celestron-130slt": "https://i.ibb.co/bgxKwG6y/image.png",
-    "sw-eq6r": "https://i.ibb.co/BKZkdQbj/image.png",
-    "zwo-533mc": "https://i.ibb.co/k61Kp1jd/image.png",
-    "celestron-edge": "https://i.ibb.co/1f4Zcdqk/91030-xlt-edgehd8-large-1.jpg",
-    "zwo-eaf": "https://i.ibb.co/QFpPK6LH/image.png",
+    "celestron-130slt": "https://i.ibb.co/GfSxFWZS/Celestron-Nex-Star-130-SLT.webp",
+    "sw-eq6r": "https://i.ibb.co/V4jBrH4/SW0396-1x1200-1.webp",
+    "zwo-533mc": "https://i.ibb.co/B5W2GyNW/asi533mc-p-1.webp",
+    "celestron-edge": "https://i.ibb.co/Z6qjhgNk/91030-xlt-edgehd8-large-1.webp",
+    "zwo-eaf": "https://i.ibb.co/TM2V6JXJ/ZWO-Electronic-Automatic-Focuser-EAF-Standard-5-V.webp",
     "optolong-lpro": "https://imgs.search.brave.com/koROv4oldKmlv8wvHrXYE4ug_vMMlSxjbINHt9yLpGQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/dGVzdGFyLmNvbS5h/dS9jZG4vc2hvcC9w/cm9kdWN0cy9MLWVY/dHJlbWUtU0FJLXNo/YXJwZW4tRGVOb2lz/ZUFJLWRlbm9pc2Uu/cG5nP3Y9MTYxOTMz/OTU1NCZ3aWR0aD0x/MjE0"
   }
 }
